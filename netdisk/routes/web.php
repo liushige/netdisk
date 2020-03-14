@@ -16,3 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//后台登录路由
+Route::get('admin/login','Admin\LoginController@login');
+
+//后台验证码路由
+Route::get('admin/code','Admin\LoginController@code');
+
+//处理后台登录的路由
+Route::post('admin/dologin','Admin\LoginController@doLogin');
