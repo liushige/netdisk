@@ -34,6 +34,10 @@
         <div id="darkbannerwrap"></div>
 
         <form method="post" class="layui-form" action="{{ url('admin/dologin') }}">
+
+            {{--//解决419报错--}}
+            {{ csrf_field() }}
+
             <input name="username" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
             <hr class="hr15">
             <input name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">

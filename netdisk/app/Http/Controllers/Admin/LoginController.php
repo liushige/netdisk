@@ -41,6 +41,8 @@ class LoginController extends Controller
             'password.between'=>'密码长度要求4-18位之间',
             'password.alpha_num'=>'密码要求包含数字、字母'
         ];
+
+//        用validator门面进行后台表单验证
         $validator = Validator::make($input,$rule,$msg);
 
         if ($validator->fails()) {
