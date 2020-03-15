@@ -70,19 +70,29 @@ class LoginController extends Controller
         session()->put('user',$user);
 //        5.跳转到后台index页面
         return redirect('admin/index');
-
     }
-
-//      加密算法MD5，Hash（65bit每次生成的都不一样），Encrypted
+    //加密算法MD5，Hash（65bit每次生成的都不一样），Encrypted
     public function lock(){
          $str = '123456';
          $en_str = 'eyJpdiI6ImJoWUo3bmx2UkxvM1BXYStpckVzblE9PSIsInZhbHVlIjoieEFVS0ZuN01OUHdzL2U2TGQycW1FUT09IiwibWFjIjoiODU3OWIzMzgxNzlkODBmNjQ3MTlhZjg1NzgxMmU4OTg0NThiYjE3NDk1YTBiMzVmYTE2ZGI3ZTMxNzM3NzUzMyJ9';
          $crypt_str = Crypt::encrypt($str);
          return $crypt_str;
     }
-//      返回后台首页
+    //返回后台首页
     public function index(){
         return view('admin.index');
     }
+    //返回后台首页中的欢迎页
+    public function welcome(){
+        return view('admin.welcome');
+    }
 
+    //返回后台退出登录页面
+    public function logout()
+    {
+//    1.清空session
+        session()->flush();
+//    2.重定向到登录页面
+        return redirect('admin/login');
+    }
 }

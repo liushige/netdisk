@@ -31,3 +31,9 @@ Route::get('admin/encrypt','Admin\LoginController@lock');
 
 //后台首页路由
 Route::get('admin/index','Admin\LoginController@index');
+
+//后台欢迎页路由
+Route::get('admin/welcome','Admin\LoginController@welcome');
+
+//后台退出登录路由
+Route::get('admin/logout','Admin\LoginController@logout');
