@@ -8,26 +8,24 @@
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-    <link rel="stylesheet" href="{{asset('admin/css/font.css')}}">
-    <link rel="stylesheet" href="{{asset('admin/css/login.css')}}">
-    <link rel="stylesheet" href="{{asset('admin/css/xadmin.css')}}">
-    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script src="{{asset('admin/lib/layui/layui.js')}}" charset="utf-8"></script>
-    <!--[if lt IE 9]>
-      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    @include('admin/public/styles')
+    @include('admin/public/script')
+
 </head>
 <body class="login-bg">
     
     <div class="login layui-anim layui-anim-up">
         <div class="message">吉大教务网盘后台管理系统1.0</div>
-        @if ($errors->any())
+        @if (!empty($errors))
             <div class="alert alert-danger">
                 <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
+                    @if(is_object($errors))
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    @else
+                        <li>{{ $errors }}</li>
+                    @endif
                 </ul>
             </div>
         @endif

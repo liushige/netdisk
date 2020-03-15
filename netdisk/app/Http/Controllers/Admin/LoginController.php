@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Model\User;
 use Illuminate\Http\Request;
 use App\Org\code\Code;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Crypt;
 
 class LoginController extends Controller
 {
@@ -50,7 +52,37 @@ class LoginController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
+//        3.验证此用户是否存在（验证码、用户名、密码）
+        if(strtolower($input['code']) != strtolower(session()->get('code'))){
+            return redirect('admin/login')->with('errors','验证码错误');
+        }
 
+        $user = User::where('user_name',$input['username'])->first();
+
+        if(!$user){
+            return redirect('admin/login')->with('errors','用户名错误');
+        }
+
+        if($input['password'] != Crypt::decrypt($user->user_pass)){
+            return redirect('admin/login')->with('errors','密码错误');
+        }
+//        4.保存用户信息到session
+        session()->put('user',$user);
+//        5.跳转到后台index页面
+        return redirect('admin/index');
 
     }
+
+//      加密算法MD5，Hash（65bit每次生成的都不一样），Encrypted
+    public function lock(){
+         $str = '123456';
+         $en_str = 'eyJpdiI6ImJoWUo3bmx2UkxvM1BXYStpckVzblE9PSIsInZhbHVlIjoieEFVS0ZuN01OUHdzL2U2TGQycW1FUT09IiwibWFjIjoiODU3OWIzMzgxNzlkODBmNjQ3MTlhZjg1NzgxMmU4OTg0NThiYjE3NDk1YTBiMzVmYTE2ZGI3ZTMxNzM3NzUzMyJ9';
+         $crypt_str = Crypt::encrypt($str);
+         return $crypt_str;
+    }
+//      返回后台首页
+    public function index(){
+        return view('admin.index');
+    }
+
 }

@@ -25,3 +25,9 @@ Route::get('admin/code','Admin\LoginController@code');
 
 //处理后台登录的路由
 Route::post('admin/dologin','Admin\LoginController@doLogin');
+
+//加密路由lock
+Route::get('admin/encrypt','Admin\LoginController@lock');
+
+//后台首页路由
+Route::get('admin/index','Admin\LoginController@index');
