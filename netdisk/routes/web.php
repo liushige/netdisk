@@ -13,27 +13,39 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+
+//无需中间件配置组
+Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
+    //后台登录路由
+    Route::get('login','LoginController@login');
+
+    //后台验证码路由
+    Route::get('code','LoginController@code');
+
+    //处理后台登录的路由
+    Route::post('dologin','LoginController@doLogin');
+
+    //加密路由lock
+    Route::get('encrypt','LoginController@lock');
 });
 
-//后台登录路由
-Route::get('admin/login','Admin\LoginController@login');
 
-//后台验证码路由
-Route::get('admin/code','Admin\LoginController@code');
+//配置中间件，路由分组
+Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'isLogin'],function(){
+    //后台首页路由
+    Route::get('index','LoginController@index');
 
-//处理后台登录的路由
-Route::post('admin/dologin','Admin\LoginController@doLogin');
+    //后台欢迎页路由
+    Route::get('welcome','LoginController@welcome');
 
-//加密路由lock
-Route::get('admin/encrypt','Admin\LoginController@lock');
+    //后台退出登录路由
+    Route::get('logout','LoginController@logout');
 
-//后台首页路由
-Route::get('admin/index','Admin\LoginController@index');
+    //后台用户相关路由模块
+    Route::resource('user','UserController');
+});
 
-//后台欢迎页路由
-Route::get('admin/welcome','Admin\LoginController@welcome');
-
-//后台退出登录路由
-Route::get('admin/logout','Admin\LoginController@logout');
