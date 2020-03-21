@@ -15,10 +15,22 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-        return view('admin.user.list');
+//        1.获取提取的请求参数
+//        $input = $request->all();
+//        dd($input);
+        $user = User::orderBy('user_id','asc')
+            ->where(function ($query) use ($request){
+                $username = $request->input('username');
+                if(!empty($username)){
+                    $query->where('user_name','like','%'.$username.'%');
+                }
+            })
+            ->paginate($request->input('num')?$request->input('num'):5);
+//        $user = User::get();
+//        $user = User::paginate(2);
+        return view('admin.user.list',compact('user','request'));
     }
 
     /**
@@ -86,7 +98,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+
+        return view('admin.user.edit',compact('user'));
     }
 
     /**
@@ -98,7 +112,29 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+//        1.根据ID获取要修改的记录
+        $user = User::find($id);
+//        2.获取要修改的其他信息
+        $useremail = $request->input('email');
+        $username = $request->input('username');
+        $userpass = $request->input('pass');
+//        3.修改数据库中相应值
+        $user->user_email = $useremail;
+        $user->user_name = $username;
+        $user->user_pass = Crypt::encrypt($userpass);
+
+//        给到前台作为修改编辑页面未改动时的原密码展示
+//        $pass = Crypt::decrypt($user->user_pass);
+
+        $res = $user->save();
+
+        if($res){
+            $data = 0;
+        }else{
+            $data = 1;
+        }
+
+        return $data;
     }
 
     /**

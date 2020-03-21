@@ -25,20 +25,22 @@
                         <label for="L_email" class="layui-form-label">
                             <span class="x-red">*</span>邮箱</label>
                         <div class="layui-input-inline">
-                            <input type="text" id="L_email" name="email" required="" lay-verify="email" autocomplete="off" class="layui-input"></div>
+                            <input type="hidden" name="uid" value="{{ $user->user_id }}">
+                            <input type="text" id="L_email" name="email" value="{{ $user->user_email }}" required="" lay-verify="email" autocomplete="off" class="layui-input"></div>
                         <div class="layui-form-mid layui-word-aux">
                             <span class="x-red">*</span>将会成为您唯一的登入名</div></div>
                     <div class="layui-form-item">
                         <label for="L_username" class="layui-form-label">
                             <span class="x-red">*</span>姓名</label>
                         <div class="layui-input-inline">
-                            <input type="text" id="L_username" name="username" required="" lay-verify="nikename" autocomplete="off" class="layui-input"></div>
+                            <input type="text" id="L_username" name="username" value="{{ $user->user_name }}" required="" lay-verify="nikename" autocomplete="off" class="layui-input"></div>
                     </div>
                     <div class="layui-form-item">
                         <label for="L_pass" class="layui-form-label">
                             <span class="x-red">*</span>密码</label>
                         <div class="layui-input-inline">
-                            <input type="password" id="L_pass" name="pass" required="" lay-verify="pass" autocomplete="off" class="layui-input"></div>
+                            {{--value="{{ \Illuminate\Support\Facades\Crypt::decrypt($user->user_pass) }}"--}}
+                            <input type="password" id="L_pass" name="pass"  required="" lay-verify="pass" autocomplete="off" class="layui-input"></div>
                         <div class="layui-form-mid layui-word-aux">6到16个字符</div></div>
                     <div class="layui-form-item">
                         <label for="L_repass" class="layui-form-label">
@@ -48,7 +50,7 @@
                     </div>
                     <div class="layui-form-item">
                         <label for="L_repass" class="layui-form-label"></label>
-                        <button class="layui-btn" lay-filter="add" lay-submit="">添加</button></div>
+                        <button class="layui-btn" lay-filter="edit" lay-submit="">修改</button></div>
                 </form>
             </div>
         </div>
@@ -74,12 +76,13 @@
                 });
 
                 //监听提交
-                form.on('submit(add)', function(data) {
+                form.on('submit(edit)', function(data) {
+                    var uid = $("input[name='uid']").val();
                     //发异步，把数据提交给php
                     $.ajax({
-                        type:'POST',
+                        type:'PUT',
                         dataType:'json',
-                        url:'/admin/user',
+                        url:'/admin/user/'+uid,
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
@@ -87,7 +90,7 @@
                         success:function (data) {
                             // 弹层提示添加成功，并刷新父页面
                             if (data == 0){
-                                layer.alert("添加成功", {
+                                layer.alert("修改成功", {
                                         icon: 6
                                     },
                                     function() {
@@ -98,7 +101,7 @@
                                         xadmin.father_reload();
                                     });
                             } else {
-                                layer.alert("添加失败", {
+                                layer.alert("修改失败", {
                                     icon: 5
                                 });
                             }
