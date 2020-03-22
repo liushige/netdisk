@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="x-admin-sm">
+<html class="x-admin-sm" xmlns:float="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="UTF-8">
         <title>后台用户列表页面</title>
@@ -34,8 +34,8 @@
                             <form class="layui-form layui-col-space5" method="get" action="{{ url('admin/user') }}">
                                 <div class="layui-inline layui-show-xs-block">
                                     <select name="num" lay-verify="">
-                                        <option value="5" @if($request->input('num')==5)    selected    @endif>每页五条记录</option>
-                                        <option value="10" @if($request->input('num')==10)    selected    @endif>每页十条记录</option>
+                                        <option value="10" @if($request->input('num')==10)    selected    @endif>每页10条记录</option>
+                                        <option value="20" @if($request->input('num')==20)    selected    @endif>每页20条记录</option>
                                     </select>
                                 </div>
                                 {{--<div class="layui-inline layui-show-xs-block">--}}
@@ -55,7 +55,6 @@
                         <div class="layui-card-header">
                             <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
                             <button class="layui-btn" onclick="xadmin.open('添加用户','{{ url('admin/user/create') }}',600,400)"><i class="layui-icon"></i>添加</button>
-                            <span class="x-right" style="line-height:40px">共有数据：88 条</span>
                         </div>
                         <div class="layui-card-body layui-table-body layui-table-main">
                             <table class="layui-table layui-form">
@@ -93,21 +92,15 @@
                                       </a>
                                     </td>
                                   </tr>
-                                  @endforeach
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
                         <div class="layui-card-body ">
                             <div class="page">
-                                {{--<div>--}}
-                                  {{--<a class="prev" href="">&lt;&lt;</a>--}}
-                                  {{--<a class="num" href="">1</a>--}}
-                                  {{--<span class="current">2</span>--}}
-                                  {{--<a class="num" href="">3</a>--}}
-                                  {{--<a class="num" href="">489</a>--}}
-                                  {{--<a class="next" href="">&gt;&gt;</a>--}}
-                                {{--</div>--}}
-                                {!! $user->appends($request->all())->render() !!}
+                                <div class="layui-inline layui-show-xs-block"> {!! $user->appends($request->all())->render() !!} </div>
+                                {{--{!! $user->total() !!}--}}
+                                <div class="layui-inline layui-show-xs-block">共有 {!! count($user) !!} 条记录</div>
                             </div>
                         </div>
                     </div>
@@ -118,7 +111,7 @@
     <script>
       layui.use(['laydate','form'], function(){
         var laydate = layui.laydate;
-        var  form = layui.form;
+          var  form = layui.form;
 
 
         // 监听全选
@@ -198,7 +191,7 @@
             }
         });
   
-        layer.confirm('确认要删除'+ids.toString()+'吗？',function(index){
+        layer.confirm('确认要删除吗？',function(index){
             $.get('/admin/user/del',{'ids':ids},function (data) {
                 if(data==0){
                     //捉到所有被选中的，发异步进行删除

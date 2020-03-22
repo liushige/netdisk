@@ -27,7 +27,7 @@ class UserController extends Controller
                     $query->where('user_name','like','%'.$username.'%');
                 }
             })
-            ->paginate($request->input('num')?$request->input('num'):5);
+            ->paginate($request->input('num')?$request->input('num'):10);
 //        $user = User::get();
 //        $user = User::paginate(2);
         return view('admin.user.list',compact('user','request'));

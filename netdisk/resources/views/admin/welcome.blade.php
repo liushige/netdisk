@@ -17,8 +17,9 @@
                 <div class="layui-col-md12">
                     <div class="layui-card">
                         <div class="layui-card-body ">
-                            <blockquote class="layui-elem-quote">欢迎$input['user']->user_name：
-                                <span class="x-red">test</span>！当前时间:echo date(‘Y-m-d’, time())
+                            <blockquote class="layui-elem-quote">欢迎
+                                <span class="x-red">这里得找到当前登录对象的名字 </span>!  <br> 当前时间
+                                <span class="x-red">{{ Carbon\Carbon::now()->toDateTimeString() }}</span>
                             </blockquote>
                         </div>
                     </div>
@@ -178,12 +179,12 @@
                                 <tbody>
                                     <tr>
                                         <th>版权所有</th>
-                                        <td>xuebingsi(xuebingsi)
-                                            <a href="http://x.xuebingsi.com/" target="_blank">访问官网</a></td>
+                                        <td> 2020 吉林大学
+                                            <a href="http://www.jlu.edu.cn/" target="_blank">访问官网</a></td>
                                     </tr>
                                     <tr>
                                         <th>开发者</th>
-                                        <td>马志斌(113664000@qq.com)</td></tr>
+                                        <td>刘俊龙(liushige1997@gmail.com)</td></tr>
                                 </tbody>
                             </table>
                         </div>
