@@ -3,7 +3,7 @@
     
     <head>
         <meta charset="UTF-8">
-        <title>添加页面</title>
+        <title>后台添加页面</title>
         <meta name="renderer" content="webkit">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">

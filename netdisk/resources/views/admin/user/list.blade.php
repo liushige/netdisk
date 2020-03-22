@@ -2,9 +2,10 @@
 <html class="x-admin-sm">
     <head>
         <meta charset="UTF-8">
-        <title>后台用户添加页面</title>
+        <title>后台用户列表页面</title>
         <meta name="renderer" content="webkit">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        {{--<meta name="csrf-token" content="{{ csrf_token() }}">--}}
         <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
         @include('admin/public/styles')
         <script type="text/javascript" src="{{url('admin/lib/layui/layui.js')}}" charset="utf-8"></script>
@@ -34,7 +35,6 @@
                                 <div class="layui-inline layui-show-xs-block">
                                     <select name="num" lay-verify="">
                                         <option value="5" @if($request->input('num')==5)    selected    @endif>每页五条记录</option>
-                                        {{--<option value="021" disabled>上海（禁用效果）</option>--}}
                                         <option value="10" @if($request->input('num')==10)    selected    @endif>每页十条记录</option>
                                     </select>
                                 </div>
@@ -55,6 +55,7 @@
                         <div class="layui-card-header">
                             <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
                             <button class="layui-btn" onclick="xadmin.open('添加用户','{{ url('admin/user/create') }}',600,400)"><i class="layui-icon"></i>添加</button>
+                            <span class="x-right" style="line-height:40px">共有数据：88 条</span>
                         </div>
                         <div class="layui-card-body layui-table-body layui-table-main">
                             <table class="layui-table layui-form">
@@ -73,7 +74,7 @@
                                 @foreach($user as $v)
                                   <tr>
                                     <td>
-                                      <input type="checkbox" name="id" value="1"   lay-skin="primary">
+                                      <input type="checkbox" lay-skin="primary" value="{{ $v->user_id }}">
                                     </td>
                                     <td>{{ $v->user_id }}</td>
                                     <td>{{ $v->user_name }}</td>
@@ -87,7 +88,7 @@
                                       <a title="修改"  onclick="xadmin.open('修改','{{ url('admin/user/'.$v->user_id.'/edit') }}',600,400)" href="javascript:;">
                                         <i class="layui-icon">&#xe642;</i>
                                       </a>
-                                      <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+                                      <a title="删除" onclick="member_del(this,'{{ $v->user_id }}')" href="javascript:;">
                                         <i class="layui-icon">&#xe640;</i>
                                       </a>
                                     </td>
@@ -171,9 +172,17 @@
       /*用户-删除*/
       function member_del(obj,id){
           layer.confirm('确认要删除吗？',function(index){
-              //发异步删除数据
-              $(obj).parents("tr").remove();
-              layer.msg('已删除!',{icon:1,time:1000});
+              $.post('/admin/user/'+id,{"_method":"delete","_token":"{{ csrf_token() }}"},function (data) {
+                    if(data==0){
+                        //发异步删除数据
+                        $(obj).parents("tr").remove();
+                        layer.msg('已删除!',{icon:6,time:1000});
+                    }else{
+                        layer.msg('已删除!',{icon:5,time:1000});
+                    }
+              })
+
+
           });
       }
 
@@ -183,16 +192,22 @@
         var ids = [];
 
         // 获取选中的id 
-        $('tbody input').each(function(index, el) {
+        $('tbody input').not('.header').each(function(index, el) {
             if($(this).prop('checked')){
                ids.push($(this).val())
             }
         });
   
-        layer.confirm('确认要删除吗？'+ids.toString(),function(index){
-            //捉到所有被选中的，发异步进行删除
-            layer.msg('删除成功', {icon: 1});
-            $(".layui-form-checked").not('.header').parents('tr').remove();
+        layer.confirm('确认要删除'+ids.toString()+'吗？',function(index){
+            $.get('/admin/user/del',{'ids':ids},function (data) {
+                if(data==0){
+                    //捉到所有被选中的，发异步进行删除
+                    $(".layui-form-checked").not('.header').parents('tr').remove();
+                    layer.msg('删除成功', {icon: 6});
+                }else{
+                    layer.msg('删除失败', {icon: 6});
+                }
+            });
         });
       }
     </script>

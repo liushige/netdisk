@@ -145,6 +145,37 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $res = $user->delete();
+        if($res){
+            $data = 0;
+        }else{
+            $data = 1;
+        }
+        return $data;
+    }
+
+
+    /**
+     * 执行批量删除操作
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function delAll(Request $request)
+    {
+        $input = $request->input('ids');
+//        $user = User::find($input);
+//        dd($input);
+
+        $res = User::destroy($input);
+
+        if($res){
+            $data = 0;
+        }else{
+            $data = 1;
+        }
+        return $data;
+
     }
 }
