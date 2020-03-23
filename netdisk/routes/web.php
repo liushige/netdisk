@@ -48,5 +48,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'isLogin'],fu
     //后台用户相关路由模块
     Route::get('user/del','UserController@delAll');
     Route::resource('user','UserController');
+
+    //后台角色模块路由
+    Route::get('role/del','RoleController@delAll');
+    Route::resource('role','RoleController');
 });
 

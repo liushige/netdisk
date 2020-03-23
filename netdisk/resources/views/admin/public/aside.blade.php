@@ -29,6 +29,26 @@
 
             <li>
                 <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="角色管理">&#xe6b8;</i>
+                    <cite>角色管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a onclick="xadmin.add_tab('角色列表','{{ url('admin/role') }}')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>角色列表</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('添加角色','{{ url('admin/role/create') }}')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>添加角色</cite></a>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li>
+                <a href="javascript:;">
                     <i class="iconfont left-nav-li" lay-tips="订单管理">&#xe723;</i>
                     <cite>订单管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i></a>
