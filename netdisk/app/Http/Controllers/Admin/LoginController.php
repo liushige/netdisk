@@ -83,7 +83,7 @@ class LoginController extends Controller
         return view('admin.index');
     }
     //返回后台首页中的欢迎页
-    public function welcome(){
+    public function welcome(R){
         return view('admin.welcome');
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Model\Permission;
 use App\Model\Role;
 use Illuminate\Http\Request;
 
@@ -163,6 +164,59 @@ class RoleController extends Controller
             $data = 1;
         }
         return $data;
+
+    }
+
+    /**
+     * 获取角色授权的页面
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function auth($id)
+    {
+//        1.获取当前角色
+        $role = Role::find($id);
+//        2.获取全部权限列表
+        $pre = Permission::get();
+//        3.获取当前用户所拥有的权限
+        $role_pre = $role->permission;
+//        4.当前角色拥有的权限ID
+        $pre_ids = [];
+        foreach ($role_pre as $v){
+            $pre_ids[] = $v->pre_id;
+        }
+        return view('admin.role.auth',compact('role','pre','pre_ids'));
+    }
+
+    /**
+     * 执行角色授权操作
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function doAuth(Request $request)
+    {
+//        1.获取前台参数
+        $input = $request->except('_token');
+//        dd($input);
+//        2.删除role_permission表的原有权限
+        \DB::table('role_permission')->where('role_id',$input['role_id'])->delete();
+//        3.存入前台勾选的角色权限记录
+        if(!empty($input['pre_id'])){
+            foreach ($input['pre_id'] as $v){
+                \DB::table('role_permission')->insert(['role_id'=>$input['role_id'],'pre_id'=>$v]);
+            }
+        }
+//        重定向是一条路由，用'.'。
+        return redirect('admin/role');
+
+//        if($res){
+//            $data = 0;
+//        }else{
+//            $data = 1;
+//        }
+//        return $data;
 
     }
 }

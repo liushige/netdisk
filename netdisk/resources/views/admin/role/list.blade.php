@@ -72,6 +72,9 @@
                                     <td>{{ $v->role_name }}</td>
                                     <td>{{ $v->role_description }}</td>
                                     <td class="td-manage">
+                                      <a title="授权" href="{{ url('admin/role/'.$v->role_id.'/auth') }}">
+                                          <i class="layui-icon">&#xe612;</i>
+                                      </a>
                                       <a title="修改"  onclick="xadmin.open('修改','{{ url('admin/role/'.$v->role_id.'/edit') }}',600,400)" href="javascript:;">
                                         <i class="layui-icon">&#xe642;</i>
                                       </a>

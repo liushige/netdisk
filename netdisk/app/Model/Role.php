@@ -14,4 +14,9 @@ class Role extends Model
     public $guarded = [];
 //    4.是否维护created_at和update_at字段
     public $timestamps = false;
+
+//    5.添加动态属性，关联权限模型
+    public function permission(){
+        return $this->belongsToMany('App\Model\Permission','role_permission','role_id','pre_id');
+    }
 }
