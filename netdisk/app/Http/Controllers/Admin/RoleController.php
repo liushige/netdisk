@@ -137,8 +137,16 @@ class RoleController extends Controller
     public function destroy($id)
     {
         $role = Role::find($id);
-        $res = $role->delete();
-        if($res){
+//        $res1 = 1;
+//        $res2 = 1;
+//        if(is_array($role)){
+//            foreach ($role->role_id as $v){
+//                $res1 = \DB::table('role_permission')->where('role_id',$v)->delete();
+//            }
+//        }
+        $res1 = \DB::table('role_permission')->where('role_id',$role->role_id)->delete();
+        $res2 = $role->delete();
+        if($res1 and $res2){
             $data = 0;
         }else{
             $data = 1;
@@ -210,13 +218,6 @@ class RoleController extends Controller
         }
 //        重定向是一条路由，用'.'。
         return redirect('admin/role');
-
-//        if($res){
-//            $data = 0;
-//        }else{
-//            $data = 1;
-//        }
-//        return $data;
 
     }
 }

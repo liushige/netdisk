@@ -18,7 +18,7 @@
                     <div class="layui-card">
                         <div class="layui-card-body ">
                             <blockquote class="layui-elem-quote">欢迎
-                                <span class="x-red">这里得找到当前登录对象的名字{{ $user->user_name }} </span>!  <br> 当前时间
+                                <span class="x-red">这里得找到当前登录对象的名字</span>!  <br> 当前时间
                                 <span class="x-red">{{ Carbon\Carbon::now()->toDateTimeString() }}</span>
                             </blockquote>
                         </div>
