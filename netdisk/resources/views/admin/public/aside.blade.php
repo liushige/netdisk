@@ -13,11 +13,6 @@
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>用户列表</cite></a>
                     </li>
-                    {{--<li>--}}
-                        {{--<a onclick="xadmin.add_tab('会员列表(动态表格)','member-list1.html',true)">--}}
-                            {{--<i class="iconfont">&#xe6a7;</i>--}}
-                            {{--<cite>会员列表(动态表格)</cite></a>--}}
-                    {{--</li>--}}
                     <li>
                         <a onclick="xadmin.add_tab('添加用户','{{ url('admin/user/create') }}')">
                             <i class="iconfont">&#xe6a7;</i>
@@ -42,6 +37,27 @@
                         <a onclick="xadmin.add_tab('添加角色','{{ url('admin/role/create') }}')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>添加角色</cite></a>
+                    </li>
+
+                </ul>
+            </li>
+
+
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="权限管理">&#xe6b8;</i>
+                    <cite>权限管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a onclick="xadmin.add_tab('权限列表','{{ url('admin/permission') }}')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>权限列表</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('权限添加','{{ url('admin/permission/create') }}')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>权限添加</cite></a>
                     </li>
 
                 </ul>

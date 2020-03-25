@@ -2,7 +2,7 @@
 <html class="x-admin-sm" xmlns:float="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="UTF-8">
-        <title>后台角色列表页面</title>
+        <title>后台权限列表页面</title>
         <meta name="renderer" content="webkit">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         {{--<meta name="csrf-token" content="{{ csrf_token() }}">--}}
@@ -31,7 +31,7 @@
                 <div class="layui-col-md12">
                     <div class="layui-card">
                         <div class="layui-card-body ">
-                            <form class="layui-form layui-col-space5" method="get" action="{{ url('admin/role') }}">
+                            <form class="layui-form layui-col-space5" method="get" action="{{ url('admin/permission') }}">
                                 <div class="layui-inline layui-show-xs-block">
                                     <select name="num" lay-verify="">
                                         <option value="10" @if($request->input('num')==10)    selected    @endif>每页10条记录</option>
@@ -39,7 +39,7 @@
                                     </select>
                                 </div>
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input type="text" name="rolename"  value="{{ $request->input('rolename') }}" placeholder="请输入角色名" autocomplete="off" class="layui-input">
+                                    <input type="text" name="prename"  value="{{ $request->input('pre_name') }}" placeholder="请输入权限名" autocomplete="off" class="layui-input">
                                 </div>
                                 <div class="layui-inline layui-show-xs-block">
                                     <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
@@ -48,7 +48,7 @@
                         </div>
                         <div class="layui-card-header">
                             <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-                            <button class="layui-btn" onclick="xadmin.open('添加用户','{{ url('admin/role/create') }}',600,400)"><i class="layui-icon"></i>添加</button>
+                            <button class="layui-btn" onclick="xadmin.open('添加权限','{{ url('admin/permission/create') }}',600,400)"><i class="layui-icon"></i>添加</button>
                         </div>
                         <div class="layui-card-body layui-table-body layui-table-main">
                             <table class="layui-table layui-form">
@@ -58,27 +58,29 @@
                                       <input type="checkbox" lay-filter="checkall" name="" lay-skin="primary">
                                     </th>
                                     <th>ID</th>
-                                    <th>角色名</th>
-                                    <th>角色描述</th>
+                                    <th>权限名</th>
+                                    <th>权限描述</th>
+                                    <th>权限路由</th>
                                     <th>操作</th></tr>
                                 </thead>
                                 <tbody>
-                                @foreach($role as $v)
+                                @foreach($permission as $v)
                                   <tr>
                                     <td>
-                                      <input type="checkbox" lay-skin="primary" value="{{ $v->role_id }}">
+                                      <input type="checkbox" lay-skin="primary" value="{{ $v->pre_id }}">
                                     </td>
-                                    <td>{{ $v->role_id }}</td>
-                                    <td>{{ $v->role_name }}</td>
-                                    <td>{{ $v->role_description }}</td>
+                                    <td>{{ $v->pre_id }}</td>
+                                    <td>{{ $v->pre_name }}</td>
+                                    <td>{{ $v->pre_description }}</td>
+                                    <td>{{ $v->pre_url }}</td>
                                     <td class="td-manage">
-                                      <a title="授权" href="{{ url('admin/role/'.$v->role_id.'/auth') }}">
-                                          <i class="layui-icon">&#xe612;</i>
-                                      </a>
-                                      <a title="修改"  onclick="xadmin.open('修改','{{ url('admin/role/'.$v->role_id.'/edit') }}',600,400)" href="javascript:;">
+                                      {{--<a title="授权" href="{{ url('admin/role/'.$v->role_id.'/auth') }}">--}}
+                                          {{--<i class="layui-icon">&#xe612;</i>--}}
+                                      {{--</a>--}}
+                                      <a title="修改"  onclick="xadmin.open('修改','{{ url('admin/permission/'.$v->pre_id.'/edit') }}',600,400)" href="javascript:;">
                                         <i class="layui-icon">&#xe642;</i>
                                       </a>
-                                      <a title="删除" onclick="member_del(this,'{{ $v->role_id }}')" href="javascript:;">
+                                      <a title="删除" onclick="member_del(this,'{{ $v->pre_id }}')" href="javascript:;">
                                         <i class="layui-icon">&#xe640;</i>
                                       </a>
                                     </td>
@@ -89,8 +91,8 @@
                         </div>
                         <div class="layui-card-body ">
                             <div class="page">
-                                <div class="layui-inline layui-show-xs-block"> {!! $role->appends($request->all())->render() !!} </div>
-                                <div class="layui-inline layui-show-xs-block">共有 {!! $role->total() !!} 条记录</div>
+                                <div class="layui-inline layui-show-xs-block"> {!! $permission->appends($request->all())->render() !!} </div>
+                                <div class="layui-inline layui-show-xs-block">共有 {!! $permission->total() !!} 条记录</div>
                             </div>
                         </div>
                     </div>
@@ -132,13 +134,13 @@
       /*角色-删除*/
       function member_del(obj,id){
           layer.confirm('确认要删除吗？',function(index){
-              $.post('/admin/role/'+id,{"_method":"delete","_token":"{{ csrf_token() }}"},function (data) {
+              $.post('/admin/permission/'+id,{"_method":"delete","_token":"{{ csrf_token() }}"},function (data) {
                     if(data==0){
                         //发异步删除数据
                         $(obj).parents("tr").remove();
-                        layer.msg('已删除!',{icon:6,time:1000});
+                        layer.msg('删除成功!',{icon:6,time:1000});
                     }else{
-                        layer.msg('已删除!',{icon:5,time:1000});
+                        layer.msg('删除失败!',{icon:5,time:1000});
                     }
               })
 
