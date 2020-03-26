@@ -35,7 +35,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 
 
 //配置中间件，路由分组
-Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'isLogin'],function(){
+Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['isLogin','isPermission']],function(){
     //后台首页模块路由
     Route::get('index','LoginController@index');
     //后台欢迎页路由
@@ -61,3 +61,5 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'isLogin'],fu
 
 });
 
+//中间件IsPermission访问无效提示页面
+Route::get('noaccess','Admin\LoginController@noAccess');

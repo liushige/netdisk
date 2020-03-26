@@ -95,4 +95,12 @@ class LoginController extends Controller
 //    2.重定向到登录页面
         return redirect('admin/login');
     }
+
+    //中间件IsPermission控制“用户无相关路由访问权限时提醒”处理
+    public function noAccess()
+    {
+//    获取无权错误提醒
+        return view('tip.noaccess');
+    }
+
 }
