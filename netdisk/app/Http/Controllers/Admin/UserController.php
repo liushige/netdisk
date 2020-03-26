@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 //use App\User;
+use App\Model\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use App\Model\User;
@@ -146,8 +147,9 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
-        $res = $user->delete();
-        if($res){
+        $res1 = \DB::table('adminuser_role')->where('user_id',$user->user_id)->delete();
+        $res2 = $user->delete();
+        if($res1 and $res2){
             $data = 0;
         }else{
             $data = 1;
@@ -176,6 +178,52 @@ class UserController extends Controller
             $data = 1;
         }
         return $data;
+
+    }
+
+    /**
+     * 获取用户授权（角色）的页面
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function auth($id)
+    {
+//        1.获取当前角色
+        $user = User::find($id);
+//        2.获取全部角色列表
+        $role = Role::get();
+//        3.获取当前用户所拥有的角色
+        $user_role = $user->role;
+//        4.当前角色拥有的权限ID
+        $role_ids = [];
+        foreach ($user_role as $v){
+            $role_ids[] = $v->role_id;
+        }
+        return view('admin.user.auth',compact('user','role','role_ids'));
+    }
+
+    /**
+     * 执行用户授权（角色）操作
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function doAuth(Request $request)
+    {
+//        1.获取前台参数
+        $input = $request->except('_token');
+//        dd($input);
+//        2.删除adminuser_role表的原有权限
+        \DB::table('adminuser_role')->where('user_id',$input['user_id'])->delete();
+//        3.存入前台勾选的用户权限记录
+        if(!empty($input['role_id'])){
+            foreach ($input['role_id'] as $v){
+                \DB::table('adminuser_role')->insert(['user_id'=>$input['user_id'],'role_id'=>$v]);
+            }
+        }
+//        重定向是一条路由，用'.'。
+        return redirect('admin/user');
 
     }
 }

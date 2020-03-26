@@ -81,9 +81,9 @@
                                     <td class="td-status">
                                       <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
                                     <td class="td-manage">
-                                      {{--<a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">--}}
-                                        {{--<i class="layui-icon">&#xe601;</i>--}}
-                                      {{--</a>--}}
+                                      <a title="授予角色" href="{{ url('admin/user/'.$v->user_id.'/auth') }}">
+                                          <i class="layui-icon">&#xe612;</i>
+                                      </a>
                                       <a title="修改"  onclick="xadmin.open('修改','{{ url('admin/user/'.$v->user_id.'/edit') }}',600,400)" href="javascript:;">
                                         <i class="layui-icon">&#xe642;</i>
                                       </a>
@@ -168,9 +168,9 @@
                     if(data==0){
                         //发异步删除数据
                         $(obj).parents("tr").remove();
-                        layer.msg('已删除!',{icon:6,time:1000});
+                        layer.msg('删除成功!',{icon:6,time:1000});
                     }else{
-                        layer.msg('已删除!',{icon:5,time:1000});
+                        layer.msg('删除失败!',{icon:5,time:1000});
                     }
               })
 
@@ -197,7 +197,7 @@
                     $(".layui-form-checked").not('.header').parents('tr').remove();
                     layer.msg('删除成功', {icon: 6});
                 }else{
-                    layer.msg('删除失败', {icon: 6});
+                    layer.msg('删除失败', {icon: 5});
                 }
             });
         });

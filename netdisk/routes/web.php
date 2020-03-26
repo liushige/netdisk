@@ -36,16 +36,16 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 
 //配置中间件，路由分组
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'isLogin'],function(){
-    //后台首页路由
+    //后台首页模块路由
     Route::get('index','LoginController@index');
-
     //后台欢迎页路由
     Route::get('welcome','LoginController@welcome');
-
     //后台退出登录路由
     Route::get('logout','LoginController@logout');
 
-    //后台用户相关路由模块
+    //后台用户模块路由
+    Route::get('user/{id}/auth','UserController@auth');
+    Route::post('user/doauth','UserController@doAuth');
     Route::get('user/del','UserController@delAll');
     Route::resource('user','UserController');
 
@@ -55,7 +55,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'isLogin'],fu
     Route::get('role/del','RoleController@delAll');
     Route::resource('role','RoleController');
 
-    //后台角色模块路由
+    //后台权限模块路由
     Route::get('permission/del','PermissionController@delAll');
     Route::resource('permission','PermissionController');
 

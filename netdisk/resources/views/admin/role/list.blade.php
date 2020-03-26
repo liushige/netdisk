@@ -136,9 +136,9 @@
                     if(data==0){
                         //发异步删除数据
                         $(obj).parents("tr").remove();
-                        layer.msg('已删除!',{icon:6,time:1000});
+                        layer.msg('删除成功!',{icon:6,time:1000});
                     }else{
-                        layer.msg('已删除!',{icon:5,time:1000});
+                        layer.msg('删除失败!',{icon:5,time:1000});
                     }
               })
 
@@ -165,7 +165,7 @@
                     $(".layui-form-checked").not('.header').parents('tr').remove();
                     layer.msg('删除成功', {icon: 6});
                 }else{
-                    layer.msg('删除失败', {icon: 6});
+                    layer.msg('删除失败', {icon: 5});
                 }
             });
         });

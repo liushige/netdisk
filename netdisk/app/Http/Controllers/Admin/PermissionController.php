@@ -127,10 +127,10 @@ class PermissionController extends Controller
         $permission = Permission::find($id);
         $res1 = \DB::table('role_permission')->where('pre_id',$permission->pre_id)->delete();
         $res2 = $permission->delete();
-        if($res1 or $res2){
-            $data = 1;
-        }else{
+        if($res1 and $res2){
             $data = 0;
+        }else{
+            $data = 1;
         }
         return $data;
     }

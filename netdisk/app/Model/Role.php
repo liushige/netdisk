@@ -19,4 +19,9 @@ class Role extends Model
     public function permission(){
         return $this->belongsToMany('App\Model\Permission','role_permission','role_id','pre_id');
     }
+
+//    6.添加动态属性，关联用户模型
+    public function user(){
+        return $this->belongsToMany('App\Model\User','adminuser_role','role_id','user_id');
+    }
 }

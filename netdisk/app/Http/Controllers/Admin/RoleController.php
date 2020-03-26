@@ -145,8 +145,9 @@ class RoleController extends Controller
 //            }
 //        }
         $res1 = \DB::table('role_permission')->where('role_id',$role->role_id)->delete();
-        $res2 = $role->delete();
-        if($res1 and $res2){
+        $res2 = \DB::table('adminuser_role')->where('role_id',$role->role_id)->delete();
+        $res3 = $role->delete();
+        if($res1 and $res2 and $res3){
             $data = 0;
         }else{
             $data = 1;
@@ -187,7 +188,7 @@ class RoleController extends Controller
         $role = Role::find($id);
 //        2.获取全部权限列表
         $pre = Permission::get();
-//        3.获取当前用户所拥有的权限
+//        3.获取当前角色所拥有的权限
         $role_pre = $role->permission;
 //        4.当前角色拥有的权限ID
         $pre_ids = [];

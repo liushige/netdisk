@@ -25,26 +25,26 @@
                         　　　　{{session('msg')}}
                         　　</div>
                 @endif
-                <form class="layui-form" action="{{ url('admin/role/doauth') }}" method="post" >
+                <form class="layui-form" action="{{ url('admin/user/doauth') }}" method="post" >
                     {{ csrf_field() }}
                     <div class="layui-form-item">
                         <label for="L_username" class="layui-form-label">
-                            <span class="x-red">*</span>角色名</label>
+                            <span class="x-red">*</span>用户名</label>
                         <div class="layui-input-inline" style="width: 400px" >
                             {{--绑定角色id传回后台--}}
-                            <input type="hidden" name="role_id" value="{{ $role->role_id }}">
-                            <input type="text" id="L_rolename" name="role_name" value="{{ $role->role_name }}" required="" lay-verify="rolename" autocomplete="off" class="layui-input"></div>
+                            <input type="hidden" name="user_id" value="{{ $user->user_id }}">
+                            <input type="text" id="L_username" name="user_name" value="{{ $user->user_name }}" required="" lay-verify="username" autocomplete="off" class="layui-input"></div>
                     </div>
 
                     <div class="layui-form-item">
                         <label for="L_username" class="layui-form-label">
-                            <span class="x-red">*</span>请选择权限</label>
+                            <span class="x-red">*</span>请选择角色</label>
                         <div class="layui-input-inline" style="width: 500px">
-                            @foreach($pre as $v)
-                                @if(in_array($v->pre_id,$pre_ids))
-                                    <input type="checkbox" name="pre_id[]" value="{{ $v->pre_id }}" title="{{ $v->pre_name }}" checked>
+                            @foreach($role as $v)
+                                @if(in_array($v->role_id,$role_ids))
+                                    <input type="checkbox" name="role_id[]" value="{{ $v->role_id }}" title="{{ $v->role_name }}" checked>
                                 @else
-                                    <input type="checkbox" name="pre_id[]" value="{{ $v->pre_id }}" title="{{ $v->pre_name }}" >
+                                    <input type="checkbox" name="role_id[]" value="{{ $v->role_id }}" title="{{ $v->role_name }}" >
                                  @endif
                               @endforeach
                         </div>
@@ -71,7 +71,7 @@
 
                 //自定义验证规则
                 form.verify({
-                    rolename: function(value) {
+                    username: function(value) {
                         if (value.length > 30) {
                             return '角色名最多得50个字符';
                         }

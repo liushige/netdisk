@@ -131,7 +131,7 @@
       });
 
 
-      /*角色-删除*/
+      /*权限-删除*/
       function member_del(obj,id){
           layer.confirm('确认要删除吗？',function(index){
               $.post('/admin/permission/'+id,{"_method":"delete","_token":"{{ csrf_token() }}"},function (data) {
@@ -143,8 +143,6 @@
                         layer.msg('删除失败!',{icon:5,time:1000});
                     }
               })
-
-
           });
       }
 
@@ -167,7 +165,7 @@
                     $(".layui-form-checked").not('.header').parents('tr').remove();
                     layer.msg('删除成功', {icon: 6});
                 }else{
-                    layer.msg('删除失败', {icon: 6});
+                    layer.msg('删除失败', {icon: 5});
                 }
             });
         });
