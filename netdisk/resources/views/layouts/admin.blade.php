@@ -52,6 +52,9 @@
 <style id="theme_style"></style>
 <!-- 右侧主体结束 -->
 <!-- 中部结束 -->
+<!-- 底部开始 -->
+@include('admin.public.footer')
+<!-- 底部结束 -->
 <script>//百度统计可去掉
     var _hmt = _hmt || []; (function() {
         var hm = document.createElement("script");
