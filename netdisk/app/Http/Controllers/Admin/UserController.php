@@ -168,8 +168,18 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
-        $res1 = \DB::table('adminuser_role')->where('user_id',$user->user_id)->delete();
-        $res2 = $user->delete();
+        $res1 = 1;
+        $res2 = 1;
+        if(is_array($id)){
+            foreach ($user as $v){
+                $res1 = \DB::table('adminuser_role')->where('user_id',$v->user_id)->delete() and $res1;
+                $res2 = $v->delete() and $res2;
+            }
+        }else{
+            $res1 = \DB::table('adminuser_role')->where('user_id',$user->user_id)->delete();
+            $res2 = $user->delete();
+        }
+
         if($res1 and $res2){
             $data = 0;
         }else{
