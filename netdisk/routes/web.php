@@ -40,8 +40,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['isLogin','i
     Route::get('index','LoginController@index');
     //后台欢迎页路由
     Route::get('welcome','LoginController@welcome');
-    //后台退出登录路由
-    Route::get('logout','LoginController@logout');
 
     //后台用户模块路由
     Route::get('user/{id}/auth','UserController@auth');
@@ -62,4 +60,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['isLogin','i
 });
 
 //中间件IsPermission访问无效提示页面
-Route::get('noaccess','Admin\LoginController@noAccess');
+Route::get('admin/noaccess','Admin\LoginController@noAccess');
+//后台退出登录路由
+Route::get('admin/logout','Admin\LoginController@logout');

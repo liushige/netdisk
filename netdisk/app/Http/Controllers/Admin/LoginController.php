@@ -68,9 +68,13 @@ class LoginController extends Controller
         }
 //        4.保存用户信息到session
         session()->put('user',$user);
-//        5.跳转到后台index页面
-        return redirect('admin/index');
+//        5.从session中获取当前用户，传回前台
+        $currentUser = User::find(session()->get('user')->user_id);
+//        6.跳转到后台index页面
+//        return redirect('admin/index',compact('user'));
+        return view('admin/index',compact('currentUser'));
     }
+
     //加密算法MD5，Hash（65bit每次生成的都不一样），Encrypted
     public function lock(){
          $str = '123456';

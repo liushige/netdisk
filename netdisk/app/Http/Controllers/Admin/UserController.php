@@ -88,7 +88,28 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+//        1.获取当前用户拥有的所有权限
+//        $user = User::find(session()->get('user')->user_id);
+        $user = User::find($id);
+        $role = $user->role;
+
+//        $roles放用户拥有所有角色的name集合
+        $roles = [];
+        foreach ($role as $r){
+            $roles[] = $r->role_name;
+        }
+//        $pres放用户拥有所有权限的name集合(可能存在重复权限)
+        $pres = [];
+        foreach ($role as $v){
+            $ps = $v->permission;
+            foreach ($ps as $p){
+                $pres[] = $p->pre_name;
+            }
+        }
+//        2.权限去重
+        $pres = array_unique($pres);
+
+        return view('admin.user.show',compact('user','roles','pres'));
     }
 
     /**

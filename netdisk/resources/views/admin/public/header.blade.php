@@ -30,15 +30,15 @@
     </ul>
     <ul class="layui-nav right" lay-filter="">
         <li class="layui-nav-item">
-            <a href="javascript:;">admin</a>
+            <a href="javascript:;">{{ $currentUser->user_name }}</a>
             <dl class="layui-nav-child">
                 <!-- 二级菜单 -->
                 <dd>
-                    <a onclick="xadmin.open('个人信息','http://www.baidu.com')">个人信息</a></dd>
+                    <a onclick="xadmin.open('个人信息','{{ url('admin/user/'.$currentUser->user_id) }}',452,565)" >@method('get')个人信息</a></dd>
                 <dd>
-                    <a onclick="xadmin.open('切换帐号','http://www.baidu.com')">切换帐号</a></dd>
+                    <a onclick="xadmin.open('修改信息','{{ url('admin/user/'.$currentUser->user_id.'/edit') }}',600,400)">修改信息</a></dd>
                 <dd>
-                    <a href="logout">退出</a></dd>
+                    <a href="logout">退出登录</a></dd>
             </dl>
         </li>
         <li class="layui-nav-item to-index">

@@ -38,10 +38,7 @@ class IsPermission
             //满足条件，给予权限
             return $next($request);
         }else{
-            return redirect('noaccess');
+            return redirect('admin/noaccess');
         }
-//        5.
-
-
     }
 }

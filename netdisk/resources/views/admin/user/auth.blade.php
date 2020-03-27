@@ -33,7 +33,7 @@
                         <div class="layui-input-inline" style="width: 400px" >
                             {{--绑定角色id传回后台--}}
                             <input type="hidden" name="user_id" value="{{ $user->user_id }}">
-                            <input type="text" id="L_username" name="user_name" value="{{ $user->user_name }}" required="" lay-verify="username" autocomplete="off" class="layui-input"></div>
+                            <input type="text" readonly="readonly" id="L_username" name="user_name" value="{{ $user->user_name }}" required="" lay-verify="username" autocomplete="off" class="layui-input"></div>
                     </div>
 
                     <div class="layui-form-item">
