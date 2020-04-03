@@ -17,6 +17,12 @@ use Illuminate\Support\Facades\Route;
 //    return view('welcome');
 //});
 
+//前台VIP用户模块路由
+    Route::get('vip/vipUser/del','Vip\VipController@delAll');
+    Route::resource('vip/vipUser','Vip\VipController');
+
+
+
 
 //无需中间件配置组
 Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
@@ -60,6 +66,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['isLogin','i
 });
 
 //中间件IsPermission访问无效提示页面
-Route::get('admin/noaccess','Admin\LoginController@noAccess');
+    Route::get('admin/noaccess','Admin\LoginController@noAccess');
 //后台退出登录路由
-Route::get('admin/logout','Admin\LoginController@logout');
+    Route::get('admin/logout','Admin\LoginController@logout');
