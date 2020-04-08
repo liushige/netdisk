@@ -4,7 +4,7 @@
         <ul id="nav">
             <li>
                 <a href="javascript:;">
-                    <i class="iconfont left-nav-li" lay-tips="管理员管理">&#xe6b8;</i>
+                    <i class="iconfont left-nav-li" lay-tips="管理员管理">&#xe726;</i>
                     <cite>管理员管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
@@ -24,7 +24,7 @@
 
             <li>
                 <a href="javascript:;">
-                    <i class="iconfont left-nav-li" lay-tips="角色管理">&#xe6b8;</i>
+                    <i class="iconfont left-nav-li" lay-tips="角色管理">&#xe732;</i>
                     <cite>角色管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
@@ -44,7 +44,7 @@
 
             <li>
                 <a href="javascript:;">
-                    <i class="iconfont left-nav-li" lay-tips="权限管理">&#xe6b8;</i>
+                    <i class="iconfont left-nav-li" lay-tips="权限管理">&#xe82b;</i>
                     <cite>权限管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
