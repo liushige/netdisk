@@ -31,7 +31,7 @@
                 <div class="layui-col-md12">
                     <div class="layui-card">
                         <div class="layui-card-body ">
-                            <form class="layui-form layui-col-space5" method="get" action="{{ url('admin/user') }}">
+                            <form class="layui-form layui-col-space5" method="get" action="{{ url('vip/vipUser') }}">
                                 <div class="layui-inline layui-show-xs-block">
                                     <select name="num" lay-verify="">
                                         <option value="10" @if($request->input('num')==10)    selected    @endif>每页10条记录</option>
