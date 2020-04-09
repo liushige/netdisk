@@ -175,6 +175,9 @@ class UserController extends Controller
                 $res2 = $v->delete() and $res2;
             }
         }else{
+//            if(!empty(\DB::table('adminuser_role')->where('user_id',$user->user_id)->get())){
+//
+//            }
             $res1 = \DB::table('adminuser_role')->where('user_id',$user->user_id)->delete();
             $res2 = $user->delete();
         }

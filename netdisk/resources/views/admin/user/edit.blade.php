@@ -41,7 +41,7 @@
                         <div class="layui-input-inline">
                             {{--value="{{ \Illuminate\Support\Facades\Crypt::decrypt($user->user_pass) }}"--}}
                             <input type="password" id="L_pass" name="pass"  required="" lay-verify="pass" autocomplete="off" class="layui-input"></div>
-                        <div class="layui-form-mid layui-word-aux">6到16个字符</div></div>
+                        <div class="layui-form-mid layui-word-aux">6到16位</div></div>
                     <div class="layui-form-item">
                         <label for="L_repass" class="layui-form-label">
                             <span class="x-red">*</span>确认密码</label>
@@ -67,7 +67,7 @@
                             return '昵称至少得5个字符啊';
                         }
                     },
-                    pass: [/(.+){6,12}$/, '密码必须6到12位'],
+                    pass: [/(.+){6,16}$/, '密码必须6到16位'],
                     repass: function(value) {
                         if ($('#L_pass').val() != $('#L_repass').val()) {
                             return '两次密码不一致';

@@ -55,7 +55,7 @@
                     },
                     roledescription: function(value) {
                         if (value.length > 100) {
-                            return '角色描述最多个字符';
+                            return '角色描述最多100个字符';
                         }
                     }
                 });

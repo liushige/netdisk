@@ -44,7 +44,7 @@
                             <span class="x-red">*</span>密码</label>
                         <div class="layui-input-inline">
                             <input type="password" id="L_pass" name="pass" required="" lay-verify="pass" autocomplete="off" class="layui-input"></div>
-                        <div class="layui-form-mid layui-word-aux">6到16个字符</div></div>
+                        <div class="layui-form-mid layui-word-aux">6到16位</div></div>
                     <div class="layui-form-item">
                         <label for="L_repass" class="layui-form-label">
                             <span class="x-red">*</span>确认密码</label>
@@ -56,7 +56,7 @@
                             <span class="x-red">*</span>是否激活</label>
                         <div class="layui-input-inline">
                             <input type="text" id="L_active" name="active" required="" autocomplete="off" class="layui-input"></div>
-                        <div class="layui-form-mid layui-word-aux">请填0或1（0：激活，1：不激活）</div></div>
+                        <div class="layui-form-mid layui-word-aux">请填0或1（0：未激活，1：已激活）</div></div>
                     <div class="layui-form-item">
                         <label for="L_repass" class="layui-form-label"></label>
                         <button class="layui-btn" lay-filter="add" lay-submit="">添加</button></div>
@@ -76,7 +76,7 @@
                             return '昵称至少得5个字符';
                         }
                     },
-                    pass: [/(.+){6,12}$/, '密码必须6到12位'],
+                    pass: [/(.+){6,16}$/, '密码必须6到16位'],
                     repass: function(value) {
                         if ($('#L_pass').val() != $('#L_repass').val()) {
                             return '两次密码不一致';
