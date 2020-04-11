@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+ <head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <!-- 引入页面描述和关键字模板 --> 
+  <title>搜索结果 - 云悦读</title> 
+  <!-- 网站图标 --> 
+  <link rel="shortcut icon" href="images/favicon.ico" /> 
+  <!-- 禁止浏览器初始缩放 --> 
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" /> 
+  <!-- 引入主题样式表 --> 
+  <link rel="stylesheet" type="text/css" href="css/style.css" /> 
+  <!-- 引入主题响应式样式表--> 
+  <link rel="stylesheet" type="text/css" href="css/responsive.css" /> 
+  <!-- 引入自定义样式表 --> 
+  <link rel="stylesheet" type="text/css" href="css/custom.css" />  
+  <!-- 引入字体样式表--> 
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.css" media="all" /> 
+
+  <style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style> 
+  <script type="text/javascript" src="js/jquery.min.js?ver=4.3.6"></script> 
+
+  <script type="text/javascript" src="js/lazyload.js"></script> 
+  <!-- IE Fix for HTML5 Tags --> 
+  <!--[if lt IE 9]>
+<script src="js/html5.js"></script>
+<script src="js/css3-mediaqueries.js"></script>
+<script src="js/PIE_IE678.js"></script>
+<link rel="stylesheet" type="text/css" href="css/iefix.css"  media="all" />
+<![endif]--> 
+  <!--[if IE 7]>
+<link rel="stylesheet" type="text/css" href="css/font-awesome-ie7.min.css"  media="all" />
+<![endif]--> 
+  <!--[if IE 6]>
+<script src="js/kill-IE6.js"></script>
+<![endif]--> 
+ </head> 
+ <body id="wrap" class="search search-results"> 
+  <!-- Nav --> 
+  <!-- Moblie nav--> 
+  <div id="body-container"> 
+   <aside id="navmenu-mobile"> 
+    <div id="navmenu-mobile-wraper"> 
+     <div class="mobile-login-field"> 
+      <div id="login-box-mobile"> 
+       <div class="login-box-mobile-form"> 
+        <button data-sign="0" class="btn btn-primary user-login">登录</button> 
+        <button data-sign="1" class="btn btn-success user-reg">注册</button> 
+       </div> 
+      </div> 
+     </div> 
+     <ul id="menu-mobile" class="menu-mobile">
+      <li id="menu-item-4324" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-4324"><a href="http://www.iydu.net">首页</a></li> 
+      <li id="menu-item-4316" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-4316"><a href="http://www.iydu.net/deepreading">深阅读</a> 
+       <ul class="sub-menu"> 
+        <li id="menu-item-4317" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4317"><a href="lists.blade.php?talk">七嘴八舌</a></li>
+        <li id="menu-item-4320" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4320"><a href="lists.blade.php?prose">心灵花园</a></li>
+        <li id="menu-item-4318" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4318"><a href="lists.blade.php?history">史海拾贝</a></li>
+        <li id="menu-item-4321" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4321"><a href="lists.blade.php?read">读书书语</a></li>
+        <li id="menu-item-4322" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4322"><a href="lists.blade.php?science">鲜活科学</a></li>
+        <li id="menu-item-4421" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4421"><a target="_blank" href="http://btmovie.net/category/appreciation">光影赏析</a></li> 
+       </ul> </li> 
+      <li id="menu-item-4305" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-4305"><a href="http://www.iydu.net/shallowreading">浅阅读</a> 
+       <ul class="sub-menu"> 
+        <li id="menu-item-4314" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4314"><a href="http://www.iydu.net/shallowreading/vision">新视野</a></li> 
+        <li id="menu-item-4315" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4315"><a href="http://www.iydu.net/shallowreading/phenomena">浮世绘</a></li> 
+       </ul> </li> 
+      <li id="menu-item-4302" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4302"><a href="http://www.iydu.net/series">强文连载</a></li> 
+      <li id="menu-item-4304" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-4304"><a href="http://www.iydu.net/interest">有料</a> 
+       <ul class="sub-menu"> 
+        <li id="menu-item-4311" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4311"><a href="http://www.iydu.net/interest/encouragement">能量加油站</a></li> 
+        <li id="menu-item-4310" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4310"><a href="http://www.iydu.net/interest/humorous">冷笑话精选</a></li> 
+       </ul> </li> 
+      <li id="menu-item-5019" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5019"><a target="_blank" href="http://qianshao.iydu.net">钱哨</a></li> 
+      <li id="menu-item-5018" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5018"><a href="http://www.iydu.net/liuyan">留言簿</a></li> 
+     </ul>
+    </div> 
+   </aside> 
+   <!-- /.Moblie nav --> 
+   <section id="content-container" style="background:#f1f4f9; "> 
+    <header class="header-wrap" id="nav-scroll"> 
+     <div class="nav-wrap"> 
+      <div class="logo-title"> 
+       <a href="http://www.iydu.net" alt="云悦读" title="云悦读"> 云悦读 </a> 
+      </div> 
+      <!-- Toggle menu --> 
+      <div class="toggle-menu"> 
+       <i class="fa fa-bars"></i> 
+      </div> 
+      <!-- /.Toggle menu --> 
+      <!-- Search button --> 
+      <div class="search-btn-click"> 
+       <i class="fa fa-search"></i> 
+       <div class="header-search-slide"> 
+        <form method="get" id="searchform-slide" class="searchform" action="http://www.iydu.net" role="search"> 
+         <input type="search" class="field" name="s" value="" placeholder="Search" required="" /> 
+        </form> 
+       </div> 
+      </div> 
+      <!-- /.Search button --> 
+      <!-- Login status --> 
+      <div id="login-reg"> 
+       <span data-sign="0" id="user-login" class="user-login ie_pie only-login"> 登录</span> 
+      </div> 
+      <!-- /.Login status --> 
+      <!-- Focus us --> 
+      <div id="focus-us">
+        关注我们
+       <div id="focus-slide" class="ie_pie"> 
+        <div class="focus-title">
+         关注我们
+        </div> 
+        <p class="focus-content"> <a href="http://weibo.com/iydu" target="_blank" class="sinaweibo"><span><i class="fa fa-weibo"></i>新浪微博</span></a> <a href="http://t.qq.com/iydu_net" target="_blank" class="sinaweibo"><span><i class="fa fa-tencent-weibo"></i>腾讯微博</span></a> </p> 
+        <div class="focus-title">
+         联系我们
+        </div> 
+        <p class="focus-content" style="line-height: 20px;margin-bottom: 10px;"> <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=55002834&amp;site=qq&amp;menu=yes" target="_blank" class="qq"><span><i class="fa fa-qq"></i>QQ</span></a> <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=RnNzdnZ0fnVyBjc3aCUpKw" target="_blank"><span><i class="fa fa-envelope"></i>发送邮件</span></a> 
+         <!-- 可删除 --> <a target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=5be294c49da03845dbea3c774294f7da4c2cc682cf43f98c543118c1193403f6"><i class="fa fa-users">&nbsp;&nbsp;</i>加入QQ群</a> 
+         <!-- 删除截止 --> </p> 
+        <div class="focus-title">
+         订阅本站
+         <i class="fa fa-rss"></i>
+        </div> 
+        <p class="focus-content"> <input type="text" name="rss" class="rss" value="http://www.iydu.net/feed" /> </p> 
+        <p class="focus-content">订阅到： <a rel="external nofollow" target="_blank" href="http://xianguo.com/subscribe?url=http://www.iydu.net/feed">鲜果</a> <a rel="external nofollow" target="_blank" href="http://reader.youdao.com/b.do?keyfrom=bookmarklet&amp;url=http://www.iydu.net/feed">有道</a> <a rel="external nofollow" target="_blank" href="http://feedly.com/index.html#subscription%2Ffeed%2Fhttp://www.iydu.net/feed">Feedly</a></p> 
+        <form action="http://list.qq.com/cgi-bin/qf_compose_send" target="_blank" method="post"> 
+         <input type="hidden" name="t" value="qf_booked_feedback" /> 
+         <input type="hidden" name="id" value="http://list.qq.com/cgi-bin/qf_invite?id=a14dea03f30a87ef45020939d38f0a063282dd05c2349cc2" /> 
+         <input type="email" name="to" id="to" class="focus-email" placeholder="输入邮箱,订阅本站" required="" /> 
+         <input type="submit" class="focus-email-submit" value="订阅" /> 
+        </form> 
+       </div> 
+      </div> 
+      <!-- /.Focus us --> 
+      <!-- Menu Items Begin --> 
+      <nav id="primary-navigation" class="site-navigation primary-navigation " role="navigation"> 
+       <div class="menu-%e9%a1%b6%e9%83%a8%e8%8f%9c%e5%8d%95-container">
+        <ul id="menu-%e9%a1%b6%e9%83%a8%e8%8f%9c%e5%8d%95" class="nav-menu">
+         <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-4324"><a href="http://www.iydu.net">首页</a></li> 
+         <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-4316"><a href="http://www.iydu.net/deepreading">深阅读</a> 
+          <ul class="sub-menu"> 
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4317"><a href="lists.blade.php?talk">七嘴八舌</a></li>
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4320"><a href="lists.blade.php?prose">心灵花园</a></li>
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4318"><a href="lists.blade.php?history">史海拾贝</a></li>
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4321"><a href="lists.blade.php?read">读书书语</a></li>
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4322"><a href="lists.blade.php?science">鲜活科学</a></li>
+           <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4421"><a target="_blank" href="http://btmovie.net/category/appreciation">光影赏析</a></li> 
+          </ul> </li> 
+         <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-4305"><a href="http://www.iydu.net/shallowreading">浅阅读</a> 
+          <ul class="sub-menu"> 
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4314"><a href="http://www.iydu.net/shallowreading/vision">新视野</a></li> 
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4315"><a href="http://www.iydu.net/shallowreading/phenomena">浮世绘</a></li> 
+          </ul> </li> 
+         <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4302"><a href="http://www.iydu.net/series">强文连载</a></li> 
+         <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-4304"><a href="http://www.iydu.net/interest">有料</a> 
+          <ul class="sub-menu"> 
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4311"><a href="http://www.iydu.net/interest/encouragement">能量加油站</a></li> 
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4310"><a href="http://www.iydu.net/interest/humorous">冷笑话精选</a></li> 
+          </ul> </li> 
+         <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5019"><a target="_blank" href="http://qianshao.iydu.net">钱哨</a></li> 
+         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5018"><a href="http://www.iydu.net/liuyan">留言簿</a></li> 
+        </ul>
+       </div> 
+      </nav> 
+      <!-- Menu Items End --> 
+     </div> 
+     <div class="clr"></div> 
+     <div class="site_loading"></div> 
+    </header> 
+    <div class="hidefixnav"></div> 
+    <!-- End Nav --> 
+    <script type="text/javascript">
+	$('.site_loading').animate({'width':'33%'},50);  //第一个进度节点
+</script>
+    <div class="breadcrumbs"> 
+     <div class="container clr"> 
+      <div class="header-search"> 
+       <form method="get" id="searchform" class="searchform" action="http://www.iydu.net" role="search"> 
+        <input type="search" class="field" name="s" value="" id="s" placeholder="Search" required="" /> 
+        <button type="submit" class="submit" id="searchsubmit"><i class="fa fa-search"></i></button> 
+       </form> 
+      </div> 
+      <div id="breadcrumbs">
+       <h1> <i class="fa fa-search"></i> 网站搜索 </h1> 
+       <div class="breadcrumbs-text">
+         626 个搜索结果... 
+       </div> 
+      </div> 
+     </div> 
+    </div>
+    <!-- Header Banner --> 
+    <!-- /.Header Banner --> 
+    <!-- Main Wrap --> 
+    <div id="main-wrap"> 
+     <div id="home-blog-wrap" class="container two-col-container"> 
+      <div id="main-wrap-left"> 
+       <div class="bloglist-container clr"> 
+        <article class="home-blog-entry col span_1 clr"> 
+         <a href="http://www.iydu.net/4964.html" title="进入射程的 Papi 酱" class="fancyimg home-blog-entry-thumb"> 
+          <div class="thumb-img"> 
+           <img src="http://www.iydu.net/wp-content/uploads/2016/04/papi.jpg?imageView2/1/w/375/h/250/q/100" alt="进入射程的 Papi 酱" /> 
+           <span><i class="fa fa-pencil"></i></span> 
+          </div> </a> 
+         <div class="home-blog-entry-text clr"> 
+          <h3> <a href="http://www.iydu.net/4964.html" title="进入射程的 Papi 酱">进入射程的 P<span style="color:#f00;font-weight:bold">a</span>pi 酱</a> </h3> 
+          <!-- Post meta --> 
+          <div class="meta"> 
+           <span class="postlist-meta-cat"><i class="fa fa-bookmark"></i><a href="lists.blade.php?talk" rel="category tag">七嘴八舌</a></span>
+           <span class="postlist-meta-time"><i class="fa fa-calendar"></i>6个月前 (04-20)</span> 
+           <span class="postlist-meta-views"><i class="fa fa-fire"></i>浏览: 48</span> 
+           <span class="postlist-meta-comments"><i class="fa fa-comments"></i><a href="http://www.iydu.net/4964.html#comments"><span>评论: </span>0</a></span> 
+          </div> 
+          <!-- /.Post meta --> 
+          <p> 靴子落地，P<span style="color:#f00;font-weight:bold">a</span>pi 酱因其自制节目含有粗口、低俗等内容遭广电下发整改通知，去除违禁内容，修改后方可上线。 权力之手对于创作的干涉与阉割，我历来都是反对的。每个人都可以对 P<span style="color:#f00;font-weight:bold">a</span>pi 酱有着自己的好恶，有关注或不关注的选择自由，任何欢迎这种“禁令”的人，都构成了孕育“禁令”的土壤。更可悲的是，权力在帮你选择精神产品，你连独立思考、自由选择的空间都没有。 要知道，在上个月，共青团中央官微连续发文力赞 P<a rel="nofollow" class="more-link" style="text-decoration:none;" href="http://www.iydu.net/4964.html"></a> </p> 
+         </div> 
+         <div class="clear"></div> 
+        </article> 
+        <article class="home-blog-entry col span_1 clr"> 
+         <a href="http://www.iydu.net/4897.html" title="出租司机给我上的MBA课" class="fancyimg home-blog-entry-thumb"> 
+          <div class="thumb-img"> 
+           <img src="http://www.iydu.net/wp-content/themes/tinection/images/random/25.jpg?imageView2/1/w/375/h/250/q/100" alt="出租司机给我上的MBA课" /> 
+           <span><i class="fa fa-pencil"></i></span> 
+          </div> </a> 
+         <div class="home-blog-entry-text clr"> 
+          <h3> <a href="http://www.iydu.net/4897.html" title="出租司机给我上的MBA课">出租司机给我上的MB<span style="color:#f00;font-weight:bold">A</span>课</a> </h3> 
+          <!-- Post meta --> 
+          <div class="meta"> 
+           <span class="postlist-meta-cat"><i class="fa fa-bookmark"></i><a href="lists.blade.php?prose" rel="category tag">心灵花园</a></span>
+           <span class="postlist-meta-time"><i class="fa fa-calendar"></i>7个月前 (03-18)</span> 
+           <span class="postlist-meta-views"><i class="fa fa-fire"></i>浏览: 44</span> 
+           <span class="postlist-meta-comments"><i class="fa fa-comments"></i><a href="http://www.iydu.net/4897.html#comments"><span>评论: </span>0</a></span> 
+          </div> 
+          <!-- /.Post meta --> 
+          <p> 我要从徐家汇赶去机场，于是匆匆结束了一个会议，在美罗大厦前搜索出租车。一辆大众发现了我，非常专业的径直停在我的面前。 这一停，有了后面这个让我深感震撼的故事，像上了一堂生动的 MB<span style="color:#f00;font-weight:bold">A</span> 案例课。 “去哪里……好的，机场。我在徐家汇就喜欢做美罗大厦的生意。这里我只做两个地方。美罗大厦，均瑶大厦。你知道吗？接到你之前，我在美罗大厦门口兜了两圈，终于被我看到你了！从写字楼里出来的，肯定去的不近！” “哦？<a rel="nofollow" class="more-link" style="text-decoration:none;" href="http://www.iydu.net/4897.html"></a> </p> 
+         </div> 
+         <div class="clear"></div> 
+        </article> 
+        <div id="loopad" class="container"> 
+        </div> 
+        <article class="home-blog-entry col span_1 clr"> 
+         <a href="http://www.iydu.net/4879.html" title="今夜我不关心AI，我只关心人类" class="fancyimg home-blog-entry-thumb"> 
+          <div class="thumb-img"> 
+           <img src="http://www.iydu.net/wp-content/uploads/2016/03/aetmlyd.jpg?imageView2/1/w/375/h/250/q/100" alt="今夜我不关心AI，我只关心人类" /> 
+           <span><i class="fa fa-pencil"></i></span> 
+          </div> </a> 
+         <div class="home-blog-entry-text clr"> 
+          <h3> <a href="http://www.iydu.net/4879.html" title="今夜我不关心AI，我只关心人类">今夜我不关心<span style="color:#f00;font-weight:bold">A</span>I，我只关心人类</a> </h3> 
+          <!-- Post meta --> 
+          <div class="meta"> 
+           <span class="postlist-meta-cat"><i class="fa fa-bookmark"></i><a href="lists.blade.php?talk" rel="category tag">七嘴八舌</a></span>
+           <span class="postlist-meta-time"><i class="fa fa-calendar"></i>7个月前 (03-11)</span> 
+           <span class="postlist-meta-views"><i class="fa fa-fire"></i>浏览: 22</span> 
+           <span class="postlist-meta-comments"><i class="fa fa-comments"></i><a href="http://www.iydu.net/4879.html#comments"><span>评论: </span>0</a></span> 
+          </div> 
+          <!-- /.Post meta --> 
+          <p> 下面这幅图来自西班牙阿尔塔米拉岩洞的壁画，绘制者是公元前3万年到1万年的原始人。每次看这头野牛，都让我心头涌起难以名状的感动，身心摇撼。在二三十个世纪之前，文明曙光初现，一群朝不保夕、饮毛茹血的人类先民，在火光摇曳的岩洞，寥寥几笔就能勾勒出那么神全气足的一头野牛来。经历了数万年之后，我也依然能从这张岩画里看出野牛生机和力量，依然能看出人类和世界上一切物种的不同之处——观察、思考以及表达。 而一台电<a rel="nofollow" class="more-link" style="text-decoration:none;" href="http://www.iydu.net/4879.html"></a> </p> 
+         </div> 
+         <div class="clear"></div> 
+        </article> 
+        <article class="home-blog-entry col span_1 clr"> 
+         <a href="http://www.iydu.net/4753.html" title="小A养花记" class="fancyimg home-blog-entry-thumb"> 
+          <div class="thumb-img"> 
+           <img src="http://www.iydu.net/wp-content/themes/tinection/images/random/21.jpg?imageView2/1/w/375/h/250/q/100" alt="小A养花记" /> 
+           <span><i class="fa fa-pencil"></i></span> 
+          </div> </a> 
+         <div class="home-blog-entry-text clr"> 
+          <h3> <a href="http://www.iydu.net/4753.html" title="小A养花记">小<span style="color:#f00;font-weight:bold">A</span>养花记</a> </h3> 
+          <!-- Post meta --> 
+          <div class="meta"> 
+           <span class="postlist-meta-cat"><i class="fa fa-bookmark"></i><a href="lists.blade.php?prose" rel="category tag">心灵花园</a></span>
+           <span class="postlist-meta-time"><i class="fa fa-calendar"></i>9个月前 (01-02)</span> 
+           <span class="postlist-meta-views"><i class="fa fa-fire"></i>浏览: 10</span> 
+           <span class="postlist-meta-comments"><i class="fa fa-comments"></i><a href="http://www.iydu.net/4753.html#comments"><span>评论: </span>0</a></span> 
+          </div> 
+          <!-- /.Post meta --> 
+          <p> 小<span style="color:#f00;font-weight:bold">A</span>今天收到了两个茶杯盆栽，其中一个她很喜欢，麻色尼龙绳的杯垫上放置表面有裂纹的蓝灰色上釉茶杯，茶杯里的黑色土壤上铺着白色细砂，凸出凹下形成一圈圈圆形的环状图案。中间的植物是一颗长得像大树的小树，有模有样。茶杯只有拳头大，如果没有参照物体，还以为盆栽有多大呢。这不是成品，是朋友自己搭配起来的，说来送盆栽的这位朋友也是很有想法，做什么事情都如同她的穿衣风格一样混搭，但往往很出效果。 另外一个也类似，<a rel="nofollow" class="more-link" style="text-decoration:none;" href="http://www.iydu.net/4753.html"></a> </p> 
+         </div> 
+         <div class="clear"></div> 
+        </article> 
+        <article class="home-blog-entry col span_1 clr"> 
+         <a href="http://www.iydu.net/4590.html" title="古巴：一个刚可以上Facebook和Twitter的国家" class="fancyimg home-blog-entry-thumb"> 
+          <div class="thumb-img"> 
+           <img src="http://www.iydu.net/wp-content/uploads/2015/10/1.jpg?imageView2/1/w/375/h/250/q/100" alt="古巴：一个刚可以上Facebook和Twitter的国家" /> 
+           <span><i class="fa fa-pencil"></i></span> 
+          </div> </a> 
+         <div class="home-blog-entry-text clr"> 
+          <h3> <a href="http://www.iydu.net/4590.html" title="古巴：一个刚可以上Facebook和Twitter的国家">古巴：一个刚可以上F<span style="color:#f00;font-weight:bold">a</span>cebook和Twitter的国家</a> </h3> 
+          <!-- Post meta --> 
+          <div class="meta"> 
+           <span class="postlist-meta-cat"><i class="fa fa-bookmark"></i><a href="http://www.iydu.net/shallowreading/vision" rel="category tag">新视野</a></span> 
+           <span class="postlist-meta-time"><i class="fa fa-calendar"></i>1年前 (2015-10-12)</span> 
+           <span class="postlist-meta-views"><i class="fa fa-fire"></i>浏览: 8</span> 
+           <span class="postlist-meta-comments"><i class="fa fa-comments"></i><a href="http://www.iydu.net/4590.html#comments"><span>评论: </span>0</a></span> 
+          </div> 
+          <!-- /.Post meta --> 
+          <p> 周末一大早，家住瓜纳哈伊的路易斯便开车朝距离小镇一小时车程的古巴首都哈瓦那市区的米拉马尔商业中心赶去，那里每天都聚集着大量和路易斯一样、专程跑来上网的人。很多人都是第一次上网。 今年7月初，古巴政府终于在全国范围内开放了35个公共无线上网点，古巴人开始慢慢重启与世界的联系。 这些无线网点分布在哈瓦那、卡马圭等16个大城市的公园和商业中心，米拉马尔就是其中一个。古巴人能通过连接此公共wifi网络浏览<a rel="nofollow" class="more-link" style="text-decoration:none;" href="http://www.iydu.net/4590.html"></a> </p> 
+         </div> 
+         <div class="clear"></div> 
+        </article> 
+        <article class="home-blog-entry col span_1 clr"> 
+         <a href="http://www.iydu.net/3993.html" title="简约之美：GOLLA Original 14寸电脑包" class="fancyimg home-blog-entry-thumb"> 
+          <div class="thumb-img"> 
+           <img src="http://www.iydu.net/wp-content/uploads/2014/10/1.jpg?imageView2/1/w/375/h/250/q/100" alt="简约之美：GOLLA Original 14寸电脑包" /> 
+           <span><i class="fa fa-plus"></i></span> 
+          </div> </a> 
+         <div class="home-blog-entry-text clr"> 
+          <h3> <a href="http://www.iydu.net/3993.html" title="简约之美：GOLLA Original 14寸电脑包">简约之美：GOLL<span style="color:#f00;font-weight:bold">A</span> Origin<span style="color:#f00;font-weight:bold">a</span>l 14寸电脑包</a> </h3> 
+          <!-- Post meta --> 
+          <div class="meta"> 
+           <span class="postlist-meta-cat"><i class="fa fa-bookmark"></i><a href="http://www.iydu.net/shopping" rel="category tag">有品</a></span> 
+           <span class="postlist-meta-time"><i class="fa fa-calendar"></i>2年前 (2014-10-08)</span> 
+           <span class="postlist-meta-views"><i class="fa fa-fire"></i>浏览: 42</span> 
+           <span class="postlist-meta-comments"><i class="fa fa-comments"></i><a href="http://www.iydu.net/3993.html#comments"><span>评论: </span>0</a></span> 
+          </div> 
+          <!-- /.Post meta --> 
+          <p> 拿到 GOLL<span style="color:#f00;font-weight:bold">A</span> ORIGIN<span style="color:#f00;font-weight:bold">A</span>L 系列的电脑包第一印象就是简约。不得不说，市场上撞色款包包越来越多，但是纯色系却越来越少，而对于每天都会如影随形的小物件之一，当然希望颜色和样式都百搭。GOLL<span style="color:#f00;font-weight:bold">A</span> ORIGIN<span style="color:#f00;font-weight:bold">A</span>L 系列的电脑包有三款色：木炭黑、琥珀红、青松绿，都是文艺青年青睐的色调。其中，琥珀红这款绝对是吸引小姑娘的利器。 在细节上，GOLL<span style="color:#f00;font-weight:bold">A</span> ORIGIN<span style="color:#f00;font-weight:bold">A</span>L 包包上橘色的拉锁、手提处搭配的皮<a rel="nofollow" class="more-link" style="text-decoration:none;" href="http://www.iydu.net/3993.html"></a> </p> 
+         </div> 
+         <div class="clear"></div> 
+        </article> 
+        <article class="home-blog-entry col span_1 clr"> 
+         <a href="http://www.iydu.net/3205.html" title="10岁的Facebook所面对的两个世界" class="fancyimg home-blog-entry-thumb"> 
+          <div class="thumb-img"> 
+           <img src="http://www.iydu.net/wp-content/themes/tinection/images/random/5.jpg?imageView2/1/w/375/h/250/q/100" alt="10岁的Facebook所面对的两个世界" /> 
+           <span><i class="fa fa-pencil"></i></span> 
+          </div> </a> 
+         <div class="home-blog-entry-text clr"> 
+          <h3> <a href="http://www.iydu.net/3205.html" title="10岁的Facebook所面对的两个世界">10岁的F<span style="color:#f00;font-weight:bold">a</span>cebook所面对的两个世界</a> </h3> 
+          <!-- Post meta --> 
+          <div class="meta"> 
+           <span class="postlist-meta-cat"><i class="fa fa-bookmark"></i><a href="http://www.iydu.net/shallowreading/vision" rel="category tag">新视野</a></span> 
+           <span class="postlist-meta-time"><i class="fa fa-calendar"></i>3年前 (2014-02-08)</span> 
+           <span class="postlist-meta-views"><i class="fa fa-fire"></i>浏览: 100</span> 
+           <span class="postlist-meta-comments"><i class="fa fa-comments"></i><a href="http://www.iydu.net/3205.html#comments"><span>评论: </span>0</a></span> 
+          </div> 
+          <!-- /.Post meta --> 
+          <p> 马克 扎克伯格（M<span style="color:#f00;font-weight:bold">a</span>rk Zuckerberg）在F<span style="color:#f00;font-weight:bold">a</span>cebook 创建10周年的感言里说：目前F<span style="color:#f00;font-weight:bold">a</span>cebook连接了世界上1/3的人口，未来的10年它有义务连接剩下的2/3；他还说现在社交网络的主要功能是分享信息，接下来的10年，社交网络将帮人们回答一些提问，并解决一些“更复杂”的问题。 “被F<span style="color:#f00;font-weight:bold">a</span>cebook连接的世界” v.s “未被F<span style="color:#f00;font-weight:bold">a</span>cebook连接的世界”，已经成为我们观察这个世界时一种<a rel="nofollow" class="more-link" style="text-decoration:none;" href="http://www.iydu.net/3205.html"></a> </p> 
+         </div> 
+         <div class="clear"></div> 
+        </article> 
+        <article class="home-blog-entry col span_1 clr"> 
+         <a href="http://www.iydu.net/3172.html" title="AV为什么会是中国的禁忌？" class="fancyimg home-blog-entry-thumb"> 
+          <div class="thumb-img"> 
+           <img src="http://www.iydu.net/wp-content/themes/tinection/images/random/32.jpg?imageView2/1/w/375/h/250/q/100" alt="AV为什么会是中国的禁忌？" /> 
+           <span><i class="fa fa-pencil"></i></span> 
+          </div> </a> 
+         <div class="home-blog-entry-text clr"> 
+          <h3> <a href="http://www.iydu.net/3172.html" title="AV为什么会是中国的禁忌？"><span style="color:#f00;font-weight:bold">A</span>V为什么会是中国的禁忌？</a> </h3> 
+          <!-- Post meta --> 
+          <div class="meta"> 
+           <span class="postlist-meta-cat"><i class="fa fa-bookmark"></i><a href="lists.blade.php?talk" rel="category tag">七嘴八舌</a></span>
+           <span class="postlist-meta-time"><i class="fa fa-calendar"></i>3年前 (2014-01-23)</span> 
+           <span class="postlist-meta-views"><i class="fa fa-fire"></i>浏览: 185</span> 
+           <span class="postlist-meta-comments"><i class="fa fa-comments"></i><a href="http://www.iydu.net/3172.html#comments"><span>评论: </span>0</a></span> 
+          </div> 
+          <!-- /.Post meta --> 
+          <p> 各地的堂会、夜店，凡有女优到场，风流总能惊动世人。尤其一些网络公司好这口，从去年的苍井空老师，到近日的泷泽萝拉、波多野结衣，都为公司年会站过台。这些平时以交尾、闹春示人的主儿，一旦到公共场合，摇身一变，就成了清纯开屏的孔雀。只是那些网络宅男，被眼前杏脸桃腮的烟火肉身，闹腾得星眼朦胧、血脉贲张。让微博江湖、酒肆茶馆里，平添了不少笑谈夜话。 常上网的人，对日本<span style="color:#f00;font-weight:bold">A</span>V文化的流行多有了解，据说日本<span style="color:#f00;font-weight:bold">A</span>V占到世<a rel="nofollow" class="more-link" style="text-decoration:none;" href="http://www.iydu.net/3172.html"></a> </p> 
+         </div> 
+         <div class="clear"></div> 
+        </article> 
+        <article class="home-blog-entry col span_1 clr"> 
+         <a href="http://www.iydu.net/2579.html" title="一个凶残的APP：我要早睡" class="fancyimg home-blog-entry-thumb"> 
+          <div class="thumb-img"> 
+           <img src="http://www.iydu.net/wp-content/uploads/2013/10/06-52-34-6-179x300.jpg?imageView2/1/w/375/h/250/q/100" alt="一个凶残的APP：我要早睡" /> 
+           <span><i class="fa fa-pencil"></i></span> 
+          </div> </a> 
+         <div class="home-blog-entry-text clr"> 
+          <h3> <a href="http://www.iydu.net/2579.html" title="一个凶残的APP：我要早睡">一个凶残的<span style="color:#f00;font-weight:bold">A</span>PP：我要早睡</a> </h3> 
+          <!-- Post meta --> 
+          <div class="meta"> 
+           <span class="postlist-meta-cat"><i class="fa fa-bookmark"></i><a href="http://www.iydu.net/shallowreading/vision" rel="category tag">新视野</a></span> 
+           <span class="postlist-meta-time"><i class="fa fa-calendar"></i>3年前 (2013-10-12)</span> 
+           <span class="postlist-meta-views"><i class="fa fa-fire"></i>浏览: 190</span> 
+           <span class="postlist-meta-comments"><i class="fa fa-comments"></i><a href="http://www.iydu.net/2579.html#comments"><span>评论: </span>0</a></span> 
+          </div> 
+          <!-- /.Post meta --> 
+          <p> 某天，某网友在微博上晒图片，一阵哀嚎，哀叹自己居然被一个手机应用——我要早睡——鄙视了： 好难过 这个软件要逼我睡觉 然后一直提醒我 然后我点了开始早睡它就会把我所有的应用都锁住 然后……然后我决定放弃早睡 然后……它就自动发朋友圈了……我居然被一个软件鄙视了！ 什么样的人生会被一个应用给鄙视了？ 其实刚打开“我要早睡”应用的时候感觉这还是一个非常正常的应用，界面就像一个闹钟，可以设置早睡时间。<a rel="nofollow" class="more-link" style="text-decoration:none;" href="http://www.iydu.net/2579.html"></a> </p> 
+         </div> 
+         <div class="clear"></div> 
+        </article> 
+        <article class="home-blog-entry col span_1 clr"> 
+         <a href="http://www.iydu.net/2491.html" title="三星GALAXY Note 3体验报告" class="fancyimg home-blog-entry-thumb"> 
+          <div class="thumb-img"> 
+           <img src="http://www.iydu.net/wp-content/uploads/2013/09/125-300x176.jpg?imageView2/1/w/375/h/250/q/100" alt="三星GALAXY Note 3体验报告" /> 
+           <span><i class="fa fa-pencil"></i></span> 
+          </div> </a> 
+         <div class="home-blog-entry-text clr"> 
+          <h3> <a href="http://www.iydu.net/2491.html" title="三星GALAXY Note 3体验报告">三星G<span style="color:#f00;font-weight:bold">A</span>L<span style="color:#f00;font-weight:bold">A</span>XY Note 3体验报告</a> </h3> 
+          <!-- Post meta --> 
+          <div class="meta"> 
+           <span class="postlist-meta-cat"><i class="fa fa-bookmark"></i><a href="http://www.iydu.net/shallowreading/vision" rel="category tag">新视野</a></span> 
+           <span class="postlist-meta-time"><i class="fa fa-calendar"></i>3年前 (2013-09-27)</span> 
+           <span class="postlist-meta-views"><i class="fa fa-fire"></i>浏览: 201</span> 
+           <span class="postlist-meta-comments"><i class="fa fa-comments"></i><a href="http://www.iydu.net/2491.html#comments"><span>评论: </span>0</a></span> 
+          </div> 
+          <!-- /.Post meta --> 
+          <p> 三星电子最新一代旗舰产品G<span style="color:#f00;font-weight:bold">A</span>L<span style="color:#f00;font-weight:bold">A</span>XY Note 3（以下简称Note 3）现已发布及上市，三星Note 3依旧保持着最出色的硬件配置，而S Pen及更丰富的功能将保证这款机器依旧热销。请大家跟随下面的文字一起来对这部新手机进行一个直观的感受。 屏幕升级，背盖更有质感 三星Note系列开创了大屏智能手机的先河，用实际销量证明了移动互联生活下人们对于大屏幕设备的强烈需求。 说到此次的Note 3，它给<a rel="nofollow" class="more-link" style="text-decoration:none;" href="http://www.iydu.net/2491.html"></a> </p> 
+         </div> 
+         <div class="clear"></div> 
+        </article> 
+        <article class="home-blog-entry col span_1 clr"> 
+         <a href="http://www.iydu.net/2296.html" title="如果给你一个没有口袋的哆啦A梦，你还要吗" class="fancyimg home-blog-entry-thumb"> 
+          <div class="thumb-img"> 
+           <img src="http://www.iydu.net/wp-content/themes/tinection/images/random/28.jpg?imageView2/1/w/375/h/250/q/100" alt="如果给你一个没有口袋的哆啦A梦，你还要吗" /> 
+           <span><i class="fa fa-plus"></i></span> 
+          </div> </a> 
+         <div class="home-blog-entry-text clr"> 
+          <h3> <a href="http://www.iydu.net/2296.html" title="如果给你一个没有口袋的哆啦A梦，你还要吗">如果给你一个没有口袋的哆啦<span style="color:#f00;font-weight:bold">A</span>梦，你还要吗</a> </h3> 
+          <!-- Post meta --> 
+          <div class="meta"> 
+           <span class="postlist-meta-cat"><i class="fa fa-bookmark"></i><a href="lists.blade.php?prose" rel="category tag">心灵花园</a></span>
+           <span class="postlist-meta-time"><i class="fa fa-calendar"></i>3年前 (2013-09-08)</span> 
+           <span class="postlist-meta-views"><i class="fa fa-fire"></i>浏览: 91</span> 
+           <span class="postlist-meta-comments"><i class="fa fa-comments"></i><a href="http://www.iydu.net/2296.html#comments"><span>评论: </span>0</a></span> 
+          </div> 
+          <!-- /.Post meta --> 
+          <p> 和朋友坐在眉湖边吃着汉堡聊着天，我说我最想要的东西是哆啦<span style="color:#f00;font-weight:bold">A</span>梦的任意门，有了那扇门，从此天涯咫尺，再无别离。 “那我直接要哆啦<span style="color:#f00;font-weight:bold">A</span>梦~然后什么都有了！”朋友笑说。 于是开玩笑问她：“如果给你一个没有口袋的哆啦<span style="color:#f00;font-weight:bold">A</span>梦，你还要吗。” “哈哈，那就不要了。”回答的很干脆。 于是继续笑闹着，嘲笑着彼此的贪心，然后突然，就感到一些难过。 从小到大，一直习惯哆啦<span style="color:#f00;font-weight:bold">A</span>梦的陪伴。 他和大雄，静香，小夫，胖虎一起经历的那些<a rel="nofollow" class="more-link" style="text-decoration:none;" href="http://www.iydu.net/2296.html"></a> </p> 
+         </div> 
+         <div class="clear"></div> 
+        </article> 
+        <article class="home-blog-entry col span_1 clr"> 
+         <a href="http://www.iydu.net/2175.html" title="蜡笔小新、哆啦a梦、樱桃小丸子…那些我们抓不住的童年" class="fancyimg home-blog-entry-thumb"> 
+          <div class="thumb-img"> 
+           <img src="http://www.iydu.net/wp-content/uploads/2013/08/17-300x298.jpg?imageView2/1/w/375/h/250/q/100" alt="蜡笔小新、哆啦a梦、樱桃小丸子…那些我们抓不住的童年" /> 
+           <span><i class="fa fa-plus"></i></span> 
+          </div> </a> 
+         <div class="home-blog-entry-text clr"> 
+          <h3> <a href="http://www.iydu.net/2175.html" title="蜡笔小新、哆啦a梦、樱桃小丸子…那些我们抓不住的童年">蜡笔小新、哆啦<span style="color:#f00;font-weight:bold">a</span>梦、樱桃小丸子…那些我们抓不住的童年</a> </h3> 
+          <!-- Post meta --> 
+          <div class="meta"> 
+           <span class="postlist-meta-cat"><i class="fa fa-bookmark"></i><a href="lists.blade.php?prose" rel="category tag">心灵花园</a></span>
+           <span class="postlist-meta-time"><i class="fa fa-calendar"></i>3年前 (2013-08-23)</span> 
+           <span class="postlist-meta-views"><i class="fa fa-fire"></i>浏览: 224</span> 
+           <span class="postlist-meta-comments"><i class="fa fa-comments"></i><a href="http://www.iydu.net/2175.html#comments"><span>评论: </span>0</a></span> 
+          </div> 
+          <!-- /.Post meta --> 
+          <p> 云悦读：还记得那些曾经让我们开心、让我们感动的动漫人物吗？慢慢的我们长大了，走向社会了，在社会里不断打拼、奋斗，闲下来的时候，一回头，发现那些曾经的小伙伴还留在过去的时光里默默地注视着我们，但却发现我们自己很难再转过身去拥抱他们了…… 荏苒时光，匆匆过去。总会让我们遗忘些什么，失去些什么。所以，我们学了回忆，按下快门，定格住不愿丢失的美好。小小的镜头，其实承载着对于永远的莫大渴求。即使我们将那些回<a rel="nofollow" class="more-link" style="text-decoration:none;" href="http://www.iydu.net/2175.html"></a> </p> 
+         </div> 
+         <div class="clear"></div> 
+        </article> 
+        <article class="home-blog-entry col span_1 clr"> 
+         <a href="http://www.iydu.net/2090.html" title="inWatch智能腕表来袭" class="fancyimg home-blog-entry-thumb"> 
+          <div class="thumb-img"> 
+           <img src="http://www.iydu.net/wp-content/uploads/2013/08/60907229.jpg.450-300x224.jpg?imageView2/1/w/375/h/250/q/100" alt="inWatch智能腕表来袭" /> 
+           <span><i class="fa fa-plus"></i></span> 
+          </div> </a> 
+         <div class="home-blog-entry-text clr"> 
+          <h3> <a href="http://www.iydu.net/2090.html" title="inWatch智能腕表来袭">inW<span style="color:#f00;font-weight:bold">a</span>tch智能腕表来袭</a> </h3> 
+          <!-- Post meta --> 
+          <div class="meta"> 
+           <span class="postlist-meta-cat"><i class="fa fa-bookmark"></i><a href="http://www.iydu.net/shallowreading/vision" rel="category tag">新视野</a></span> 
+           <span class="postlist-meta-time"><i class="fa fa-calendar"></i>3年前 (2013-08-09)</span> 
+           <span class="postlist-meta-views"><i class="fa fa-fire"></i>浏览: 86</span> 
+           <span class="postlist-meta-comments"><i class="fa fa-comments"></i><a href="http://www.iydu.net/2090.html#comments"><span>评论: </span>0</a></span> 
+          </div> 
+          <!-- /.Post meta --> 
+          <p> 随着智能穿戴式设备开始兴起，越来越多的公司包括苹果、三星、索尼、英特尔等都已经或即将进入这个领域。作为中国的科技企业，能否给我们带来与众不同的产品？这一切，也许随着inW<span style="color:#f00;font-weight:bold">a</span>tch的到来而变得有些明朗。 8月8日北京，798艺术区，一款名为inW<span style="color:#f00;font-weight:bold">a</span>tch的智能腕表正式发布。 PingWest创始人骆轶航分享了在他眼中最理想的智能腕表。其中包含三点：第一，他认为智能腕表必须是一款独立的设备，不借助于智<a rel="nofollow" class="more-link" style="text-decoration:none;" href="http://www.iydu.net/2090.html"></a> </p> 
+         </div> 
+         <div class="clear"></div> 
+        </article> 
+        <article class="home-blog-entry col span_1 clr"> 
+         <a href="http://www.iydu.net/1799.html" title="新时髦：个人App" class="fancyimg home-blog-entry-thumb"> 
+          <div class="thumb-img"> 
+           <img src="images/100" alt="新时髦：个人App" /> 
+           <span><i class="fa fa-plus"></i></span> 
+          </div> </a> 
+         <div class="home-blog-entry-text clr"> 
+          <h3> <a href="http://www.iydu.net/1799.html" title="新时髦：个人App">新时髦：个人<span style="color:#f00;font-weight:bold">A</span>pp</a> </h3> 
+          <!-- Post meta --> 
+          <div class="meta"> 
+           <span class="postlist-meta-cat"><i class="fa fa-bookmark"></i><a href="http://www.iydu.net/shallowreading/vision" rel="category tag">新视野</a></span> 
+           <span class="postlist-meta-time"><i class="fa fa-calendar"></i>3年前 (2013-06-26)</span> 
+           <span class="postlist-meta-views"><i class="fa fa-fire"></i>浏览: 97</span> 
+           <span class="postlist-meta-comments"><i class="fa fa-comments"></i><a href="http://www.iydu.net/1799.html#comments"><span>评论: </span>0</a></span> 
+          </div> 
+          <!-- /.Post meta --> 
+          <p> 5年前，你细心地照料着自己的博客；3年后，逐渐向微博搬家；今天，如果你有一定的网络影响力，是不是该拥有一款专属自己的<span style="color:#f00;font-weight:bold">A</span>pp应用？答案当然是肯定的。韩寒的个人文字类<span style="color:#f00;font-weight:bold">A</span>pp《ONE&middot;一个》在IOS平台推出后，很快就登上<span style="color:#f00;font-weight:bold">A</span>pp store中国区免费榜首位的宝座，其安卓版本也于2012年11月28日发布；流行歌手曹方有自己的个人音乐类<span style="color:#f00;font-weight:bold">A</span>pp《浅彩虹》；被誉为娱乐圈“跨界女王”的董洁也推出个人<span style="color:#f00;font-weight:bold">A</span>pp，除了常<a rel="nofollow" class="more-link" style="text-decoration:none;" href="http://www.iydu.net/1799.html"></a> </p> 
+         </div> 
+         <div class="clear"></div> 
+        </article> 
+        <article class="home-blog-entry col span_1 clr"> 
+         <a href="http://www.iydu.net/1770.html" title="Facebook：“酷”才是核心" class="fancyimg home-blog-entry-thumb"> 
+          <div class="thumb-img"> 
+           <img src="http://www.iydu.net/wp-content/themes/tinection/images/random/38.jpg?imageView2/1/w/375/h/250/q/100" alt="Facebook：“酷”才是核心" /> 
+           <span><i class="fa fa-plus"></i></span> 
+          </div> </a> 
+         <div class="home-blog-entry-text clr"> 
+          <h3> <a href="http://www.iydu.net/1770.html" title="Facebook：“酷”才是核心">F<span style="color:#f00;font-weight:bold">a</span>cebook：“酷”才是核心</a> </h3> 
+          <!-- Post meta --> 
+          <div class="meta"> 
+           <span class="postlist-meta-cat"><i class="fa fa-bookmark"></i><a href="http://www.iydu.net/shallowreading/vision" rel="category tag">新视野</a></span> 
+           <span class="postlist-meta-time"><i class="fa fa-calendar"></i>3年前 (2013-06-24)</span> 
+           <span class="postlist-meta-views"><i class="fa fa-fire"></i>浏览: 57</span> 
+           <span class="postlist-meta-comments"><i class="fa fa-comments"></i><a href="http://www.iydu.net/1770.html#comments"><span>评论: </span>0</a></span> 
+          </div> 
+          <!-- /.Post meta --> 
+          <p> 低调而不失悬念的F<span style="color:#f00;font-weight:bold">a</span>cebook“6•21”产品发布会，大张旗鼓的酝酿出Inst<span style="color:#f00;font-weight:bold">a</span>gr<span style="color:#f00;font-weight:bold">a</span>m视频分享应用，让一些用户尖叫，也让另一些用户跌破眼镜。 我们亦不能忽视F<span style="color:#f00;font-weight:bold">a</span>cebook自“Home”发布之后所处的背景，它股价持续低迷，与HTC合作的“Home”濒临停产，更有甚者，将“F<span style="color:#f00;font-weight:bold">a</span>cebook是给老年人玩的”这番嘲讽推到了舆论的风口浪尖。(这个说法也并非离谱，根据市场调研公司Forrester的数据<a rel="nofollow" class="more-link" style="text-decoration:none;" href="http://www.iydu.net/1770.html"></a> </p> 
+         </div> 
+         <div class="clear"></div> 
+        </article> 
+       </div> 
+       <!-- pagination --> 
+       <div class="clear"></div> 
+       <div class="pagination"> 
+        <span class="pg-item pg-item-current"><span class="current">1</span></span>
+        <span class="pg-item"><a href="http://www.iydu.net/page/2?s=a" title="浏览第2页" class="navbutton">2</a></span>
+        <span class="pg-item"><a href="http://www.iydu.net/page/3?s=a" title="浏览第3页" class="navbutton">3</a></span>
+        <span class="pg-item"> ... </span>
+        <span class="pg-item"><a href="http://www.iydu.net/page/79?s=a" title="末页" class="navbutton">79</a></span>
+        <span class="pg-item pg-nav-item pg-next"><a href="http://www.iydu.net/page/2?s=a" title="下一页" class="navbutton">下一页</a></span> 
+       </div> 
+       <!-- /.pagination --> 
+      </div> 
+      <script type="text/javascript">
+	$('.site_loading').animate({'width':'55%'},50);  //第二个节点
+</script> 
+      <div id="sidebar" class="clr"> 
+       <div id="text-15" class="widget widget_text">
+        <h3><span class="widget-title">云悦读QQ空间</span></h3> 
+        <div class="textwidget">
+         <div align="center">
+          <a target="_blank" href="http://55002834.qzone.qq.com"><img id="previewImg" src="images/login-logo-black.32.png" /></a>
+         </div> 
+        </div> 
+       </div>
+       <div id="search-3" class="widget widget_search">
+        <h3><span class="widget-title">站内搜索</span></h3>
+        <form method="get" class="searchform themeform" action="http://www.iydu.net/"> 
+         <div> 
+          <input type="text" class="search" name="s" onblur="if(this.value=='')this.value='Search..';" onfocus="if(this.value=='Search..')this.value='';" value="Search.." maxlength="20" required="required" /> 
+         </div> 
+        </form>
+       </div> 
+       <div id="tinsubscribe-2" class="widget widget_tinsubscribe"> 
+        <h3><span class="widget-title">邮件订阅</span></h3> 
+        <span id="subscribe-span"> <input type="text" name="subscribe" id="subscribe" placeholder="yourname@domain.com" /><button id="subscribe" class="btn btn-success">订阅</button> <p id="subscribe-msg" style="display:none;margin-top:5px;margin-left:auto;margin-right:auto;font-size:12px;color:#f00;"></p> </span> 
+       </div> 
+       
+       <div id="tintagcloud-2" class="widget widget_tintagcloud"> 
+        <h3><span class="widget-title">标签云</span></h3> 
+        <aside class="tags">
+         <a href="http://www.iydu.net/tag/%e9%a5%ae%e9%a3%9f" class="tag-link-675" title="26个话题" style="font-size: 12px;">饮食</a> 
+         <a href="http://www.iydu.net/tag/%e9%9d%92%e6%98%a5" class="tag-link-355" title="20个话题" style="font-size: 12px;">青春</a> 
+         <a href="http://www.iydu.net/tag/%e9%9a%8f%e7%ac%94" class="tag-link-30" title="10个话题" style="font-size: 12px;">随笔</a> 
+         <a href="http://www.iydu.net/tag/%e9%98%85%e8%af%bb" class="tag-link-324" title="41个话题" style="font-size: 12px;">阅读</a> 
+         <a href="http://www.iydu.net/tag/%e8%bf%9e%e8%bd%bd" class="tag-link-936" title="52个话题" style="font-size: 12px;">连载</a> 
+         <a href="http://www.iydu.net/tag/%e8%b4%a2%e5%af%8c" class="tag-link-1011" title="7个话题" style="font-size: 12px;">财富</a> 
+         <a href="http://www.iydu.net/tag/%e8%af%bb%e5%90%8e%e6%84%9f" class="tag-link-211" title="28个话题" style="font-size: 12px;">读后感</a> 
+         <a href="http://www.iydu.net/tag/%e8%af%bb%e4%b9%a6" class="tag-link-1012" title="5个话题" style="font-size: 12px;">读书</a> 
+         <a href="http://www.iydu.net/tag/%e8%af%ad%e5%bd%95" class="tag-link-991" title="47个话题" style="font-size: 12px;">语录</a> 
+         <a href="http://www.iydu.net/tag/%e8%a7%86%e9%87%8e" class="tag-link-941" title="32个话题" style="font-size: 12px;">视野</a> 
+         <a href="http://www.iydu.net/tag/%e8%a7%82%e7%82%b9" class="tag-link-176" title="76个话题" style="font-size: 12px;">观点</a> 
+         <a href="http://www.iydu.net/tag/%e8%a7%81%e9%97%bb" class="tag-link-703" title="70个话题" style="font-size: 12px;">见闻</a> 
+         <a href="http://www.iydu.net/tag/%e8%81%8c%e5%9c%ba" class="tag-link-512" title="15个话题" style="font-size: 12px;">职场</a> 
+         <a href="http://www.iydu.net/tag/%e7%ab%a5%e5%b9%b4" class="tag-link-222" title="12个话题" style="font-size: 12px;">童年</a> 
+         <a href="http://www.iydu.net/tag/%e7%a7%bb%e5%8a%a8%e4%ba%92%e8%81%94%e7%bd%91" class="tag-link-120" title="12个话题" style="font-size: 12px;">移动互联网</a> 
+         <a href="http://www.iydu.net/tag/%e7%a7%91%e6%8a%80" class="tag-link-164" title="6个话题" style="font-size: 12px;">科技</a> 
+         <a href="http://www.iydu.net/tag/%e7%a7%91%e5%ad%a6" class="tag-link-585" title="17个话题" style="font-size: 12px;">科学</a> 
+         <a href="http://www.iydu.net/tag/%e7%a4%be%e4%bc%9a" class="tag-link-22" title="87个话题" style="font-size: 12px;">社会</a> 
+         <a href="http://www.iydu.net/tag/%e7%94%9f%e6%b4%bb" class="tag-link-140" title="90个话题" style="font-size: 12px;">生活</a> 
+         <a href="http://www.iydu.net/tag/%e7%88%b1%e6%83%85" class="tag-link-55" title="43个话题" style="font-size: 12px;">爱情</a> 
+         <a href="http://www.iydu.net/tag/%e6%bc%94%e8%ae%b2" class="tag-link-235" title="6个话题" style="font-size: 12px;">演讲</a> 
+         <a href="http://www.iydu.net/tag/%e6%b8%b8%e8%ae%b0" class="tag-link-937" title="11个话题" style="font-size: 12px;">游记</a> 
+         <a href="http://www.iydu.net/tag/%e6%ae%b5%e5%ad%90" class="tag-link-51" title="86个话题" style="font-size: 12px;">段子</a> 
+         <a href="http://www.iydu.net/tag/%e6%9d%82%e8%b0%88" class="tag-link-158" title="235个话题" style="font-size: 12px;">杂谈</a> 
+         <a href="http://www.iydu.net/tag/%e6%97%85%e8%a1%8c" class="tag-link-816" title="7个话题" style="font-size: 12px;">旅行</a> 
+         <a href="http://www.iydu.net/tag/%e6%96%87%e5%8c%96" class="tag-link-153" title="48个话题" style="font-size: 12px;">文化</a> 
+         <a href="http://www.iydu.net/tag/%e6%95%a3%e6%96%87" class="tag-link-934" title="35个话题" style="font-size: 12px;">散文</a> 
+         <a href="http://www.iydu.net/tag/%e6%95%99%e8%82%b2" class="tag-link-671" title="15个话题" style="font-size: 12px;">教育</a> 
+         <a href="http://www.iydu.net/tag/%e6%95%85%e4%ba%8b" class="tag-link-956" title="20个话题" style="font-size: 12px;">故事</a> 
+         <a href="http://www.iydu.net/tag/%e6%8a%80%e5%b7%a7" class="tag-link-976" title="5个话题" style="font-size: 12px;">技巧</a> 
+         <a href="http://www.iydu.net/tag/%e6%84%9f%e6%82%9f" class="tag-link-220" title="139个话题" style="font-size: 12px;">感悟</a> 
+         <a href="http://www.iydu.net/tag/%e6%83%85%e6%84%9f" class="tag-link-131" title="77个话题" style="font-size: 12px;">情感</a> 
+         <a href="http://www.iydu.net/tag/%e6%80%9d%e7%bb%aa" class="tag-link-988" title="8个话题" style="font-size: 12px;">思绪</a> 
+         <a href="http://www.iydu.net/tag/%e5%bf%83%e6%83%85" class="tag-link-178" title="10个话题" style="font-size: 12px;">心情</a> 
+         <a href="http://www.iydu.net/tag/%e5%bd%b1%e8%af%84" class="tag-link-95" title="150个话题" style="font-size: 12px;">影评</a> 
+         <a href="http://www.iydu.net/tag/%e5%a9%9a%e5%a7%bb" class="tag-link-348" title="11个话题" style="font-size: 12px;">婚姻</a> 
+         <a href="http://www.iydu.net/tag/%e5%9b%9e%e5%bf%86" class="tag-link-223" title="24个话题" style="font-size: 12px;">回忆</a> 
+         <a href="http://www.iydu.net/tag/%e5%95%86%e4%b8%9a" class="tag-link-917" title="8个话题" style="font-size: 12px;">商业</a> 
+         <a href="http://www.iydu.net/tag/%e5%8e%86%e5%8f%b2%e4%ba%ba%e7%89%a9" class="tag-link-173" title="64个话题" style="font-size: 12px;">历史人物</a> 
+         <a href="http://www.iydu.net/tag/%e5%8e%86%e5%8f%b2" class="tag-link-75" title="108个话题" style="font-size: 12px;">历史</a> 
+         <a href="http://www.iydu.net/tag/%e5%8a%b1%e5%bf%97" class="tag-link-299" title="7个话题" style="font-size: 12px;">励志</a> 
+         <a href="http://www.iydu.net/tag/%e5%89%a7%e8%af%84" class="tag-link-874" title="18个话题" style="font-size: 12px;">剧评</a> 
+         <a href="http://www.iydu.net/tag/%e5%86%b7%e7%ac%91%e8%af%9d" class="tag-link-46" title="86个话题" style="font-size: 12px;">冷笑话</a> 
+         <a href="http://www.iydu.net/tag/%e5%81%a5%e5%ba%b7" class="tag-link-581" title="21个话题" style="font-size: 12px;">健康</a> 
+         <a href="http://www.iydu.net/tag/%e4%ba%ba%e7%94%9f" class="tag-link-113" title="151个话题" style="font-size: 12px;">人生</a> 
+         <a href="http://www.iydu.net/tag/%e4%ba%ba%e7%89%a9" class="tag-link-730" title="61个话题" style="font-size: 12px;">人物</a> 
+         <a href="http://www.iydu.net/tag/%e4%ba%b2%e6%83%85" class="tag-link-91" title="16个话题" style="font-size: 12px;">亲情</a> 
+         <a href="http://www.iydu.net/tag/%e4%ba%92%e8%81%94%e7%bd%91" class="tag-link-38" title="60个话题" style="font-size: 12px;">互联网</a> 
+         <a href="http://www.iydu.net/tag/%e4%b9%a6%e8%af%84-2" class="tag-link-32" title="119个话题" style="font-size: 12px;">书评</a> 
+         <a href="http://www.iydu.net/tag/it-2" class="tag-link-37" title="57个话题" style="font-size: 12px;">IT</a>
+        </aside> 
+       </div> 
+       <div id="tinbookmark-2" class="widget widget_tinbookmark"> 
+        <h3><span class="widget-title">友情链接</span></h3> 
+        <div class="tinbookmark">
+         <ul>
+          <li class="tinbookmark-list list-left"><i class="fa fa-angle-right"></i><a href="http://www.platoism.com" title="柏拉图" target="_blank">柏拉图</a></li>
+          <li class="tinbookmark-list list-right"><i class="fa fa-angle-right"></i><a href="http://www.21cncn.com/" title="青年说" target="_blank">青年说</a></li>
+          <li class="tinbookmark-list list-left"><i class="fa fa-angle-right"></i><a href="http://zatime.com/" title="杂时代" target="_blank">杂时代</a></li>
+          <li class="tinbookmark-list list-right"><i class="fa fa-angle-right"></i><a href="http://shulaquan.com/" title="书啦圈" target="_blank">书啦圈</a></li>
+          <li class="tinbookmark-list list-left"><i class="fa fa-angle-right"></i><a href="http://www.lailianzi.com" title="练字网" target="_blank">练字网</a></li>
+          <li class="tinbookmark-list list-right"><i class="fa fa-angle-right"></i><a href="http://www.listenfog.com/" title="听雾读书" target="_blank">听雾读书</a></li>
+          <li class="tinbookmark-list list-left"><i class="fa fa-angle-right"></i><a href="http://www.liuyuanw.com/forum.php" title="柳苑文学" target="_blank">柳苑文学</a></li>
+          <li class="tinbookmark-list list-right"><i class="fa fa-angle-right"></i><a href="http://www.wutu.info" title="於菟阅读博客" target="_blank">於菟阅读博客</a></li>
+          <li class="tinbookmark-list list-left"><i class="fa fa-angle-right"></i><a href="http://fanhcy.com/" title="饭后茶娱" target="_blank">饭后茶娱</a></li>
+          <li class="tinbookmark-list list-right"><i class="fa fa-angle-right"></i><a href="http://lusongsong.com/daohang/html/YunNan_138.htm" title="博客大全" target="_blank">博客大全</a></li>
+          <li class="tinbookmark-list list-left"><i class="fa fa-angle-right"></i><a href="http://www.chinadmoz.org/" title="DMOZ目录" target="_blank">DMOZ目录</a></li>
+         </ul>
+        </div> 
+       </div> 
+       <div id="text-12" class="widget widget_text"> 
+        <div class="textwidget">
+         <script type="text/javascript">
+    (function(win,doc){
+        var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0];
+        if (!win.alimamatk_show) {
+            s.charset = "utf-8";
+            s.async = true;
+            s.src = "http://a.alimama.cn/tkapi.js";
+            h.insertBefore(s, h.firstChild);
+        };
+        var o = {
+            pid: "mm_31202157_7418138_30178413",/*推广单元ID，用于区分不同的推广渠道*/
+            appkey: "",/*通过TOP平台申请的appkey，设置后引导成交会关联appkey*/
+            unid: "",/*自定义统计字段*/
+            type: "click" /* click 组件的入口标志 （使用click组建必设）*/
+        };
+        win.alimamatk_onload = win.alimamatk_onload || [];
+        win.alimamatk_onload.push(o);
+    })(window,document);
+</script> 
+         <p align="center"><a data-type="3" data-tmpl="320x250" data-tmplid="187" data-rd="2" data-style="2" data-border="1" href="#"></a></p> 
+        </div> 
+       </div>
+       <div id="text-14" class="widget widget_text"> 
+        <div class="textwidget">
+         <p><a href="http://iydu.100xuexi.com/" target="_blank"><img src="images/20150928153704_4466.jpg" alt="" /></a></p> 
+        </div> 
+       </div> 
+       <div id="tinsitestatistic-3" class="widget widget_tinsitestatistic"> 
+        <ul> 
+         <li>日志总数：<span>1934</span> 篇</li> 
+         <li> 评论总数：<span>628</span> 条</li> 
+         <li>标签数量：<span>64</span> 个</li> 
+         <li>链接总数：<span>11</span> 个</li> 
+         <li>建站日期：<span>2013-04-05</span></li> 
+         <li>运行天数：<span>1281</span> 天</li> 
+         <li>最后更新：<span>2016-9-30</span></li> 
+        </ul> 
+        <div class="clear"></div> 
+       </div> 
+       <div id="meta-3" class="widget widget_meta">
+        <h3><span class="widget-title">小编管理</span></h3> 
+        <ul> 
+         <li><a href="http://www.iydu.net/wp-login.php">登录</a></li> 
+         <li><a href="http://www.iydu.net/feed">文章<abbr title="Really Simple Syndication">RSS</abbr></a></li> 
+         <li><a href="http://www.iydu.net/comments/feed">评论<abbr title="Really Simple Syndication">RSS</abbr></a></li> 
+         <li><a href="https://cn.wordpress.org/" title="基于WordPress，一个优美、先进的个人信息发布平台。">WordPress.org</a></li> 
+        </ul> 
+       </div>
+       <div class="floatwidget-container"> 
+       </div> 
+      </div> 
+      <script type="text/javascript">
+	$('.site_loading').animate({'width':'78%'},50);  //第三个节点
+</script> 
+     </div> 
+    </div> 
+    <!--/.Main Wrap --> 
+    <!-- Bottom Banner --> 
+    <div style="height:50px;"></div> 
+    <!-- /.Bottom Banner --> 
+    <!-- Footer --> 
+    <!-- Footer Wrap --> 
+    <div class="separator"></div> 
+    <div id="footer-wrap"> 
+     <div id="footer" class="layout-wrap"> 
+      <!-- Footer Widgets --> 
+      <div id="footer-widgets"> 
+      </div> 
+      <div class="clr"></div> 
+      <!-- /.Footer Widgets --> 
+     </div> 
+    </div> 
+    <!-- /.Footer Wrap --> 
+    <!-- Footer Nav Wrap --> 
+    <footer id="footer-nav-wrap"> 
+     <div id="footer-nav" class="layout-wrap"> 
+      <div id="footer-nav-left"> 
+       <!-- Footer Nav --> 
+       <!-- /.Footer Nav --> 
+       <!-- Copyright --> 
+       <div id="footer-copyright">
+        &copy; 2013 - 2016 
+        <a target="_blank" rel="nofollow" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=53230102000151" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="images/beiantubiao.png" style="float:left;" />滇公网安备 53230102000151号</a>&nbsp;|&nbsp;Theme by&nbsp; 
+        <a href="http://www.zhiyanblog.com/tinection.html" target="_blank">Tinection</a>. &nbsp;|&nbsp; &nbsp;|&nbsp;
+        <a href="http://www.miitbeian.gov.cn/" target="_blank">滇ICP备14001375号-1</a> 
+        <!--52 queries in 3.333 seconds.--> 
+       </div> 
+       <!-- /.Copyright --> 
+      </div> 
+      <div id="footer-nav-right"> 
+       <!--  links --> 
+       <div id="footer-links-icons"> 
+        <span class="footer-wordpress-link"> <a href="http://wordpress.org" target="_blank" rel="nofollow" class="wordpress"> <span class="tinicon-wordpress"><i class="fa fa-wordpress"></i></span> <br />WordPress </a> </span> 
+        <span class="footer-sinaweibo-link"> <a href="http://weibo.com/iydu" target="_blank" rei="nofollow" class="sinaweibo"> <span class="tinicon-sinaweibo"><i class="fa fa-weibo"></i></span> <br />Weibo </a> </span> 
+        <span class="footer-qq-link"> <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=55002834&amp;site=qq&amp;menu=yes" target="_blank" rei="nofollow" class="qq"> <span class="tinicon-qq"><i class="fa fa-qq"></i></span> <br />QQ </a> </span> 
+        <span class="footer-rss-link"> <a href="http://www.iydu.net/feed" target="_blank" class="rss"> <span class="tinicon-rss"><i class="fa fa-rss"></i></span> <br />RSS </a> </span> 
+       </div> 
+       <!-- /.links --> 
+       <div class="clear clr"></div> 
+      </div> 
+     </div> 
+    </footer> 
+    <script type="text/javascript">
+	$('.site_loading').animate({'width':'90%'},50);  //第四个节点
+</script> 
+   </section>
+  </div>  
+  <div id="sign" class="sign"> 
+   <div class="part loginPart"> 
+    <form id="login" action="http://www.iydu.net/wp-login.php" method="post" novalidate="novalidate"> 
+     <h3>登录<p class="status"></p></h3> 
+     <p> <label class="icon" for="username"><i class="fa fa-user"></i></label> <input class="input-control" id="username" type="text" placeholder="请输入用户名" name="username" required="" aria-required="true" /> </p> 
+     <p> <label class="icon" for="password"><i class="fa fa-lock"></i></label> <input class="input-control" id="password" type="password" placeholder="请输入密码" name="password" required="" aria-required="true" /> </p> 
+     <p class="safe"> <label class="remembermetext" for="rememberme"><input name="rememberme" type="checkbox" checked="checked" id="rememberme" class="rememberme" value="forever" />记住我的登录</label> <a class="lost" href="http://www.iydu.net/wp-login.php?action=lostpassword">忘记密码 ?</a> </p> 
+     <p> <input class="submit" type="submit" value="登录" name="submit" /> </p> 
+     <a class="close"><i class="fa fa-times"></i></a> 
+     <input type="hidden" id="security" name="security" value="e1b561a7b6" /> 
+     <input type="hidden" name="_wp_http_referer" value="/?s=a" /> 
+    </form> 
+   </div> 
+   <div class="part registerPart"> 
+    <form id="register" action="http://www.iydu.net/wp-login.php?action=register" method="post" novalidate="novalidate"> 
+     <div id="login-active" class="switch">
+      <i class="fa fa-toggle-off"></i>切换登录
+     </div> 
+     <h3>注册<p class="status"></p></h3> 
+     <p> <label class="icon" for="user_name"><i class="fa fa-user"></i></label> <input class="input-control" id="user_name" type="text" name="user_name" placeholder="输入英文用户名" required="" aria-required="true" /> </p> 
+     <p> <label class="icon" for="user_email"><i class="fa fa-envelope"></i></label> <input class="input-control" id="user_email" type="email" name="user_email" placeholder="输入常用邮箱" required="" aria-required="true" /> </p> 
+     <p> <label class="icon" for="user_pass"><i class="fa fa-lock"></i></label> <input class="input-control" id="user_pass" type="password" name="user_pass" placeholder="密码最小长度为6" required="" aria-required="true" /> </p> 
+     <p> <label class="icon" for="user_pass2"><i class="fa fa-retweet"></i></label> <input class="input-control" type="password" id="user_pass2" name="user_pass2" placeholder="再次输入密码" required="" aria-required="true" /> </p> 
+     <p> <input class="submit" type="submit" value="注册" name="submit" /> </p> 
+     <a class="close"><i class="fa fa-times"></i></a> 
+     <input type="hidden" id="user_security" name="user_security" value="74efd99220" />
+     <input type="hidden" name="_wp_http_referer" value="/?s=a" /> 
+    </form> 
+   </div> 
+  </div>
+  <div class="floatbtn"> 
+   <!-- Comment --> 
+   <!-- /.Comment --> 
+   <!-- Share --> 
+   <span id="bdshare" class="bdshare_t mobile-hide"><a class="bds_more" href="#" data-cmd="more"><i class="fa fa-share-alt"></i></a></span> 
+   <!-- /.Share --> 
+   <!-- QR --> 
+   <span id="qr" class="mobile-hide"><i class="fa fa-qrcode"></i> 
+    <div id="floatbtn-qr"> 
+     <div id="floatbtn-qr-msg">
+      扫一扫二维码分享
+     </div> 
+    </div> </span> 
+   <!-- /.QR --> 
+   <!-- Simplified or Traditional --> 
+   <span id="zh-cn-tw" class="mobile-hide"><i><a id="StranLink">繁</a></i></span> 
+   <!-- /.Simplified or Traditional --> 
+   <!-- Layout Switch --> 
+   <!-- /.Layout Switch --> 
+   <!-- Back to Home --> 
+   <span id="back-to-home" class="mobile-hide"> <a href="http://www.iydu.net"><i class="fa fa-home"></i></a> </span> 
+   <!-- /.Back to Home --> 
+   <!-- Scroll Top --> 
+   <span id="back-to-top"><i class="fa fa-arrow-up"></i></span> 
+   <!-- /.Scroll Top --> 
+  </div>
+  <!-- /.Footer Nav Wrap --> 
+  <script type="text/javascript" src="js/zh-cn-tw.js"></script> 
+  <script type="text/javascript" src="js/comments-ajax.js"></script> 
+  <script type="text/javascript" src="js/ajax-sign-script.min.js"></script> 
+  <script type="text/javascript" src="js/prettify.js"></script> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var ajax_sign_object = {"redirecturl":"http:\/\/www.iydu.net\/?s=a","ajaxurl":"http:\/\/www.iydu.net\/wp-admin\/admin-ajax.php","loadingmessage":"\u6b63\u5728\u8bf7\u6c42\u4e2d\uff0c\u8bf7\u7a0d\u7b49..."};
+/* ]]> */
+</script> 
+  <script src="js/jquery.prettyPhoto.js"></script> 
+  <script type="text/javascript">var defaultEncoding = 0; var translateDelay = 100; var cookieDomain = "http://www.iydu.net";</script> 
+
+
+  <script type="text/javascript" src="js/theme.js?ver=4.3.6"></script> 
+  <!-- /.Footer --> 
+  <script type="text/javascript">
+	$('.site_loading').animate({'width':'100%'},50);  //第五个节点
+</script>  
+ </body>
+</html>

@@ -13,17 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
 
-//前台VIP用户模块路由
-    Route::get('vip/vipUser/del','Vip\VipController@delAll');
-    Route::resource('vip/vipUser','Vip\VipController');
-
-
-
-
+//后台模块
 //无需中间件配置组
 Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
     //后台登录路由
@@ -38,7 +29,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
     //加密路由lock
     Route::get('encrypt','LoginController@lock');
 });
-
 
 //配置中间件，路由分组
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['isLogin','isPermission']],function(){
@@ -64,8 +54,19 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['isLogin','i
     Route::resource('permission','PermissionController');
 
 });
-
 //中间件IsPermission访问无效提示页面
     Route::get('admin/noaccess','Admin\LoginController@noAccess');
 //后台退出登录路由
     Route::get('admin/logout','Admin\LoginController@logout');
+
+
+
+//前台模块
+//前台VIP用户模块路由
+Route::get('vip/vipUser/del','Vip\VipController@delAll');
+Route::resource('vip/vipUser','Vip\VipController');
+
+//前台登录路由
+Route::get('vip/login','Vip\LoginController@login');
+Route::post('vip/dologin','Vip\LoginController@doLogin');
+Route::get('vip/logout','Vip\LoginController@loginOut');
