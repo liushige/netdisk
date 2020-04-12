@@ -17,7 +17,7 @@
         <span style="vertical-align: middle"> <img style="vertical-align: middle" src="http://www.netdisk.com/vip/images/jlulogo.jpg" width="102px" height="56px"></span>
         欢迎登陆吉大教务网盘
     </div>
-    <form name="loginform" id="loginform" action="{{ url('dologin') }}" method="post">
+    <form name="loginform" id="loginform" action="{{ url('vip/dologin') }}" method="post">
         {{ csrf_field() }}
         @if(session('msg'))
            <p style="color:red;">{{ session('msg') }}</p>
@@ -26,6 +26,21 @@
         @if(session('active'))
             <p style="color:red;">{{ session('active') }}</p>
         @endif
+
+        @if (!empty($errors))
+            <div class="alert alert-danger">
+                <ul>
+                    @if(is_object($errors))
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    @else
+                        <li>{{ $errors }}</li>
+                    @endif
+                </ul>
+            </div>
+        @endif
+
         <p>
             <label for="user_login">用户名或电子邮件地址<br>
                 <input type="text" name="user_name" id="user_name" class="input" value="" size="20"></label>
@@ -34,15 +49,16 @@
             <label for="user_pass">密码<br>
                 <input type="password" name="user_pass" id="user_pass" class="input" value="" size="20"></label>
         </p>
-        <p class="forgetmenot"><label for="rememberme"><input name="rememberme" type="checkbox" id="rememberme"
-                                                              value="forever"> 记住我的登录信息</label></p>
+        <p class="forgetmenot"><label for="rememberme">
+                <input name="rememberme" type="checkbox" id="rememberme" value="forever"> 记住我的登录信息</label>
+        </p>
         <p class="submit">
-            <input type="submit"  id="wp-submit" class="button button-primary button-large" value="登录">
+            <input type="submit" id="wp-submit" class="button button-primary button-large" value="登录">
         </p>
     </form>
 
     <p id="nav">
-        <a href="{{ asset('forget') }}">忘记密码？</a>
+        <a href="{{ asset('vip/forget') }}">>>>忘记密码<<<</a>
     </p>
 
     <script type="text/javascript">
@@ -56,13 +72,11 @@
                 }
             }, 200)
         }
-
         wp_attempt_focus();
-        if (typeof wpOnload == 'function') wpOnload();</script>
-
-    <p id="backtoblog"><a href="/">← 返回前台首页</a></p>
-    <p id="backtoblog"><a href="/phoneregister">← 手机注册页</a></p>
-    <p id="backtoblog"><a href="/emailregister">← 邮箱注册页</a></p>
+        if (typeof wpOnload == 'function') wpOnload();
+    </script>
+    <p id="backtoblog"><a href="/phoneregister">>>>手机注册<<<</a></p>
+    <p id="backtoblog"><a href="/emailregister">>>>邮箱注册<<<</a></p>
 
 </div>
 

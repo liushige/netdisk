@@ -70,3 +70,16 @@ Route::resource('vip/vipUser','Vip\VipController');
 Route::get('vip/login','Vip\LoginController@login');
 Route::post('vip/dologin','Vip\LoginController@doLogin');
 Route::get('vip/logout','Vip\LoginController@loginOut');
+
+//前台vip密码找回
+Route::get('vip/forget','Vip\RegisterController@forget');
+//密码找回处理
+Route::post('vip/doforget','Vip\RegisterController@doforget');
+//重置密码
+Route::get('vip/reset','Vip\RegisterController@reset');
+//重置密码处理
+Route::post('vip/doreset','Vip\RegisterController@doreset');
+
+
+//前台首页
+Route::get('vip/index','Vip\IndexController@index')->name('index');

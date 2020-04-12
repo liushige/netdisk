@@ -7,45 +7,35 @@
 <!--<![endif]-->
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>忘记密码 &lsaquo; 猿圈 &#8212; WordPress</title>
-    <style type="text/css">
-        body.login div#login h1 a {
-            background-image: url(https://www.lmonkey.com/wp-content/themes/tinection/images/wordpress-logo.png);
-            -webkit-background-size: 85px 85px;
-            background-size: 85px 85px;
-            width: 85px;
-            height: 85px;
-        }
-    </style>
+    <title>密码找回</title>
+
     <link rel='dns-prefetch' href='//s.w.org'/>
     <link rel='stylesheet'
-          href='{{ asset('home/css/login.css') }}'
+          href='{{ asset('vip/css/login.css') }}'
           type='text/css' media='all'/>
     <meta name='robots' content='noindex,follow'/>
     <meta name="viewport" content="width=device-width"/>
 </head>
 <body class="login login-action-lostpassword wp-core-ui  locale-zh-cn">
 <div id="login">
-    <h1><a href="http://www.lmonkey.com" title="猿圈" tabindex="-1">猿圈</a></h1>
+    <div style="background-color: white; vertical-align: middle; color: #0085ba; font-weight:bold; font-size: 18px">
+        <span style="vertical-align: middle"> <img style="vertical-align: middle" src="http://www.netdisk.com/vip/images/jlulogo.jpg" width="102px" height="56px"></span>
+        欢迎登陆吉大教务网盘
+    </div>
     <p class="message">请输入您的用户名或电子邮箱地址。您会收到一封包含创建新密码链接的电子邮件。</p>
-
-    <form name="lostpasswordform" id="lostpasswordform"  action="{{ url('doforget') }}"
+    <form name="lostpasswordform" id="lostpasswordform"  action="{{ url('vip/doforget') }}"
           method="post">
         {{ csrf_field() }}
         <p>
             <label for="user_login">用户名或电子邮件地址<br/>
                 <input type="text" name="email" id="user_login" class="input" value="" size="20"/></label>
         </p>
-
-        <p class="submit"><input type="submit"  id="wp-submit"
-                                 class="button button-primary button-large" value="获取新密码"/></p>
+        <p class="submit">
+            <input type="submit"  id="wp-submit" class="button button-primary button-large" value="获取新密码"/>
+        </p>
     </form>
 
-    <p id="nav">
-        <a href="{{ url('login') }}">登录</a>
-    </p>
-
-    <p id="backtoblog"><a href="{{ url('index') }}">&larr; 返回到猿圈</a></p>
+    <p id="backtoblog"><a href="{{ url('vip/login') }}">>>>返回登录<<<</a></p>
 
 </div>
 

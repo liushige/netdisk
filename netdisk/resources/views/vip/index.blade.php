@@ -1,4 +1,4 @@
-@extends('layouts.home')
+@extends('layouts.vip')
 @section('title','博客系统')
 
 

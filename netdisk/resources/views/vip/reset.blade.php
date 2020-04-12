@@ -1,28 +1,21 @@
 <!DOCTYPE html>
-<!-- saved from url=(0032)https://www.lmonkey.com/wp-login.php -->
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN"><!--<![endif]-->
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <title>登录 ‹ 猿圈 — WordPress</title>
-    <style type="text/css">
-        body.login div#login h1 a {
-            background-image: url(https://www.lmonkey.com/wp-content/themes/tinection/images/wordpress-logo.png);
-            -webkit-background-size: 85px 85px;
-            background-size: 85px 85px;
-            width: 85px;
-            height: 85px
-        }</style>
+    <title>密码重置</title>
     <link rel="dns-prefetch" href="http://s.w.org/">
-    <link rel="stylesheet" href="{{ asset('home/css/login.css') }}" type="text/css" media="all">
+    <link rel="stylesheet" href="{{ asset('vip/css/login.css') }}" type="text/css" media="all">
     <meta name="robots" content="noindex,follow">
     <meta name="viewport" content="width=device-width">
 </head>
 <body class="login login-action-login wp-core-ui  locale-zh-cn">
 <div id="login">
-    <h1><a href="https://www.lmonkey.com/" title="猿圈" tabindex="-1">猿圈</a></h1>
-
-    <form name="loginform" id="loginform" action="{{ url('doreset') }}" method="post">
+    <div style="background-color: white; vertical-align: middle; color: #0085ba; font-weight:bold; font-size: 18px">
+        <span style="vertical-align: middle"> <img style="vertical-align: middle" src="http://www.netdisk.com/vip/images/jlulogo.jpg" width="102px" height="56px"></span>
+        欢迎登陆吉大教务网盘
+    </div>
+    <form name="loginform" id="loginform" action="{{ url('vip/doreset') }}" method="post">
         {{ csrf_field() }}
         <p>
             <label for="user_login">用户名或电子邮件地址<br>
