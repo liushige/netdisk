@@ -19,7 +19,7 @@
             </dl>
         </li>
         <li class="layui-nav-item to-index">
-            <a href="/">前台首页</a></li>
+            <a href="{{ url('vip/login') }}">前台登录</a></li>
     </ul>
 </div>
 <!-- 顶部结束 -->

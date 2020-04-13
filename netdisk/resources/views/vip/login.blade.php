@@ -75,8 +75,8 @@
         wp_attempt_focus();
         if (typeof wpOnload == 'function') wpOnload();
     </script>
-    <p id="backtoblog"><a href="/phoneregister">>>>手机注册<<<</a></p>
-    <p id="backtoblog"><a href="/emailregister">>>>邮箱注册<<<</a></p>
+    <p id="backtoblog"><a href="{{ asset('vip/phoneregister') }}">>>>手机注册<<<</a></p>
+    <p id="backtoblog"><a href="{{ asset('vip/emailregister') }}">>>>邮箱注册<<<</a></p>
 
 </div>
 

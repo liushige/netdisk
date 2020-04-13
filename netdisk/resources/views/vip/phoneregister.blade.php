@@ -1,30 +1,28 @@
 <!DOCTYPE html>
-<!-- saved from url=(0032)https://www.lmonkey.com/wp-login.php -->
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN"><!--<![endif]-->
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-    <title>登录 ‹ 猿圈 — WordPress</title>
-    <style type="text/css">
-        body.login div#login h1 a {
-            background-image: url(https://www.lmonkey.com/wp-content/themes/tinection/images/wordpress-logo.png);
-            -webkit-background-size: 85px 85px;
-            background-size: 85px 85px;
-            width: 85px;
-            height: 85px
-        }</style>
+    <title>手机号码注册</title>
     <link rel="dns-prefetch" href="http://s.w.org/">
-    <link rel="stylesheet" href="{{ asset('home/css/login.css') }}" type="text/css" media="all">
+    <link rel="stylesheet" href="{{ asset('vip/css/login.css') }}" type="text/css" media="all">
     <meta name="robots" content="noindex,follow">
     <meta name="viewport" content="width=device-width">
     @include('admin.public.script')
+    @include('admin.public.styles')
+    <script type="text/javascript" src="{{url('admin/js/xadmin.js')}}"></script>
 </head>
 <body class="login login-action-login wp-core-ui  locale-zh-cn">
 <div id="login">
-    <h1><a href="https://www.lmonkey.com/" title="猿圈" tabindex="-1">猿圈</a></h1>
-
-    <form name="loginform" id="loginform" action="{{ url('dophoneregister') }}" method="post">
+    <div style="background-color: white; vertical-align: middle; color: #0085ba; font-weight:bold; font-size: 18px">
+        <span style="vertical-align: middle"> <img style="vertical-align: middle" src="http://www.netdisk.com/vip/images/jlulogo.jpg" width="102px" height="56px"></span>
+        欢迎登陆吉大教务网盘
+    </div>
+    <form name="loginform" id="loginform" action="{{ url('vip/dophoneregister') }}" method="post">
         {{ csrf_field() }}
+        <p>
+            <label for="user_login">用户名<br>
+                <input type="text" name="username"  class="input" value="" size="40"></label>
+        </p>
         <p>
             <label for="user_login">手机号<br>
                 <input type="text" name="phone"  class="input" value="" size="20"></label>
@@ -46,12 +44,10 @@
         </p>
     </form>
 
-    <p id="nav">
-        <a href="{{ asset('forgetpssword') }}">忘记密码？</a>
-    </p>
-    <p id="backtoblog"><a href="/">← 返回前台首页</a></p>
-    <p id="backtoblog"><a href="/register">← 返回注册页</a></p>
+    <p id="backtoblog"><a href="{{ asset('vip/login') }}">>>>返回登录<<</a></p>
+
     <script type="text/javascript">
+
         // 倒计时60s
         var countdown = 60;
         function settime(){
@@ -70,13 +66,35 @@
         }
 
         function sendCode(){
-            // 1. 获取手机号
+            // 1. 获取用户名、手机号和密码
+            var username = $('input[name=username]').val();
             var phone = $('input[name=phone]').val();
-            // alert(phone);
+            var pass = $('input[name=user_pass]').val();
 
-            // 2. 判断手机号是否为空
+            // 2. 判断是否为空
+            if(!username){
+                layer.msg('用户名不能为空');
+                return ;
+            }
             if(!phone){
                 layer.msg('手机号不能为空');
+                return ;
+            }
+            if(!/^1[34578]\d{9}$/.test(phone)){
+                // $("input[name='phone']").val('');
+                // $("input[name='phone']").attr("placeholder", "手机号码不正确！");
+                // return ;
+                layer.msg('手机号格式不正确');
+                return ;
+            }
+
+            // if(!is_mobile_phone(phone))
+            // {
+            //     layer.msg('手机号格式不正确');
+            //     return ;
+            // }
+            if(!pass){
+                layer.msg('密码不能为空');
                 return ;
             }
 
@@ -90,8 +108,6 @@
                         layer.msg('发送失败',{'time':1000,'icon':5})
                     }
             });
-
-
         }
     </script>
 </div>

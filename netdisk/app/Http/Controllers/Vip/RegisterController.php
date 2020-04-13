@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Vip;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-//use App\SMS\SendTemplateSMS;
-//use App\SMS\M3Result;
+use App\SMS\SendTemplateSMS;
+use App\SMS\M3Result;
 use Illuminate\Support\Facades\Crypt;
 //use Mail;
 use App\Model\Vip;
@@ -15,8 +15,7 @@ class RegisterController extends Controller
     //手机注册页面
     public function phoneReg()
     {
-        return view('home.phoneregister');
-//        return view('admin.register');
+        return view('vip.phoneregister');
     }
 
     //发送手机验证码
@@ -48,30 +47,34 @@ class RegisterController extends Controller
     public function doPhoneRegister(Request $request)
     {
         $input = $request->except('_token');
-        //如果验证码不对
-//        if(session()->get('phone') != $input['code']){
-//            return redirect('phoneregister');
-//        }
+
+
+//        如果验证码不对
+        if(session()->get('phone') != $input['code']){
+            return redirect('vip/phoneregister');
+        }
+
+//        查找vip用户是否已用改手机号注册
+
+
+
 
         $input['user_pass'] = Crypt::encrypt($input['user_pass']);
-        $input['user_name'] = $input['phone'];
         $input['expire'] = time()+3600*24;
 
-        $user = HomeUser::create(['user_name'=>$input['phone'],'phone'=>$input['phone'],'user_pass'=>$input['user_pass']]);
+        $user = Vip::create(['user_name'=>$input['username'],'user_phone'=>$input['phone'],'user_pass'=>$input['user_pass']]);
 
         if($user){
-
-            return redirect('login');
+            return redirect('vip/login')->with('errors','恭喜您，注册成功');
         }else{
             return back();
         }
-
     }
 
     //前台邮箱注册页
     public function register()
     {
-        return view('home.emailregister');
+        return view('vip.emailregister');
     }
 
     //    邮箱登录处理
