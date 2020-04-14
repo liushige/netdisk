@@ -79,11 +79,18 @@ Route::post('vip/doforget','Vip\RegisterController@doforget');
 Route::get('vip/reset','Vip\RegisterController@reset');
 //重置密码处理
 Route::post('vip/doreset','Vip\RegisterController@doreset');
+
 //手机号码注册
 Route::get('vip/phoneregister','Vip\RegisterController@phoneReg');
 //发送手机验证码处理
 Route::get('vip/sendcode','Vip\RegisterController@sendCode');
 Route::post('vip/dophoneregister','Vip\RegisterController@doPhoneRegister');
+
+//邮箱注册激活路由
+Route::get('vip/emailregister','Vip\RegisterController@register');
+Route::post('vip/doregister','Vip\RegisterController@doRegister');
+Route::get('vip/active','Vip\RegisterController@active');
+
 
 
 //前台首页

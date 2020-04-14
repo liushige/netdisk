@@ -22,13 +22,13 @@
         <span style="vertical-align: middle"> <img style="vertical-align: middle" src="http://www.netdisk.com/vip/images/jlulogo.jpg" width="102px" height="56px"></span>
         欢迎登陆吉大教务网盘
     </div>
-    <p class="message">请输入您的用户名或电子邮箱地址。您会收到一封包含创建新密码链接的电子邮件。</p>
+    <p class="message">请输入您的电子邮箱地址。您会收到一封包含创建新密码链接的电子邮件。</p>
     <form name="lostpasswordform" id="lostpasswordform"  action="{{ url('vip/doforget') }}"
           method="post">
         {{ csrf_field() }}
         <p>
-            <label for="user_login">用户名或电子邮件地址<br/>
-                <input type="text" name="email" id="user_login" class="input" value="" size="20"/></label>
+            <label for="user_login">电子邮件地址<br/>
+                <input type="text" name="email" id="user_login" required class="input" value="" size="20"/></label>
         </p>
         <p class="submit">
             <input type="submit"  id="wp-submit" class="button button-primary button-large" value="获取新密码"/>

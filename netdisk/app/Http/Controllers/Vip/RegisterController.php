@@ -7,8 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Sms\SendTemplateSMS;
 use App\Sms\M3Result;
 use Illuminate\Support\Facades\Crypt;
-//use Mail;
 use App\Model\Vip;
+use Mail;
 
 class RegisterController extends Controller
 {
@@ -50,8 +50,8 @@ class RegisterController extends Controller
 
 
 //        如果未填验证码或者验证码不对
-        if(!empty(session()->get('phone')) and session()->get('phone') != $input['code']){
-            return redirect('vip/phoneregister')->with('errors','验证码填写有误');
+        if(session()->get('phone') != $input['code']){
+            return redirect('vip/phoneregister')->with('errors','信息填写有误，请重新填写');
         }
 
 //        查找vip用户是否已用改手机号注册
@@ -83,34 +83,26 @@ class RegisterController extends Controller
         $input = $request->except('_token');
 //        dd($input);
         $input['user_pass'] = Crypt::encrypt($input['user_pass']);
-        $input['email'] = $input['user_name'];
-        $input['token'] = md5($input['email'].$input['user_pass'].'123');
+        $input['token'] = md5($input['user_email'].$input['user_pass'].'123');
         $input['expire'] = time()+3600*24;
 
-        $user = HomeUser::create($input);
+        $user = Vip::create($input);
 
         if($user){
-
-            Mail::send('email.active',['user'=>$user],function ($m) use ($user) {
-//              $m->from('hello@app.com', 'Your Application');
-
-                $m->to($user->email, $user->name)->subject('激活邮箱');
+            Mail::send('vip.email.active',['user'=>$user],function ($m) use ($user) {
+                $m->to($user->user_email, $user->user_name)->subject('激活邮箱');
             });
-
-
-            return redirect('login')->with('active','请先登录邮箱激活账号');
+            return redirect('vip/login')->with('active','请先登录邮箱激活账号');
         }else{
-            return redirect('emailregister');
+            return redirect('vip/emailregister');
         }
-
     }
-
 
     //注册账号邮箱激活
     public function active(Request $request){
         //找到要激活的用户，将用户的active字段改成1
 
-        $user = HomeUser::findOrFail($request->userid);
+        $user = Vip::findOrFail($request->userid);
 
         //验证token的有效性，保证链接是通过邮箱中的激活链接发送的
         if($request->token  != $user->token){
@@ -124,7 +116,7 @@ class RegisterController extends Controller
         $res = $user->update(['active'=>1]);
         //激活成功，跳转到登录页
         if($res){
-            return redirect('login')->with('msg','账号激活成功');
+            return redirect('vip/login')->with('msg','账号激活成功');
         }else{
             return '邮箱激活失败，请检查激活链接，或者重新注册账号';
         }
@@ -141,22 +133,17 @@ class RegisterController extends Controller
         //要发送邮件的账号
         $email = $request->email;
         // 根据账号名查询用户信息
-        $user = Vip::where('user_name',$email)->first();
+        $user = Vip::where('user_email',$email)->first();
+
         if($user){
             //想此用户发送密码找回邮件
-            Mail::send('email.forget',['user'=>$user],function ($m) use ($user) {
-//              $m->from('hello@app.com', 'Your Application');
-
-                $m->to($user->email, $user->name)->subject('找回密码');
-
-
+            Mail::send('vip.email.forget',['user'=>$user],function ($m) use ($user) {
+                $m->to($user->user_email, $user->user_name)->subject('找回密码');
             });
-
-            return '请登录您的邮箱查看重置密码邮件，重新设置密码';
+            return redirect('vip/login')->with('active','请先登录邮箱重置密码');
         }else{
-            return '用户不存在，请重新输入要找回密码的账号';
+            return back()->with('active','用户不存在，请重新输入要找回密码的账号');
         }
-
     }
     //重新设置密码页面
     public function reset(Request $request)
@@ -177,13 +164,13 @@ class RegisterController extends Controller
         $pass = Crypt::encrypt($input['user_pass']);
 
 //        2.将此账号的密码重置为新密码
-        $res = Vip::where('user_name',$input['user_name'])->update(['user_pass'=>$pass]);
+        $res = Vip::where('user_email',$input['user_email'])->update(['user_pass'=>$pass]);
 
 //        3. 判断更新是否成功
         if($res){
-            return redirect('vip/login');
+            return redirect('vip/login')->with('errors','密码重置成功');
         }else{
-            return redirect('vip/reset');
+            return redirect('vip/reset')->with('errors','密码重置失败，请重试');
         }
     }
 

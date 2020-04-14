@@ -18,17 +18,17 @@
     <form name="loginform" id="loginform" action="{{ url('vip/doreset') }}" method="post">
         {{ csrf_field() }}
         <p>
-            <label for="user_login">用户名或电子邮件地址<br>
+            <label for="user_login">电子邮件地址<br>
                 <input type="hidden" name="user_id" value="{{ $user->user_id }}">
-                <input type="text" name="user_name" id="user_login" class="input" value="{{ $user->email }}" size="20"></label>
+                <input type="text" name="user_email" id="user_login" readonly="readonly" class="input" value="{{ $user->user_email }}" size="20"></label>
         </p>
         <p>
             <label for="user_pass">密码<br>
-                <input type="password" name="user_pass" id="user_pass" class="input" value="" size="20"></label>
+                <input type="password" name="user_pass" required id="user_pass" class="input" value="" size="20"></label>
         </p>
         <p>
             <label for="user_pass">确认密码<br>
-                <input type="password" name="repass" id="user_pass" class="input" value="" size="20"></label>
+                <input type="password" name="repass" required id="user_pass" class="input" value="" size="20"></label>
         </p>
         <p class="submit">
             <input type="submit"  id="wp-submit" class="button button-primary button-large" value="重置密码">
@@ -54,14 +54,7 @@
         wp_attempt_focus();
         if (typeof wpOnload == 'function') wpOnload();</script>
 
-    <p id="backtoblog"><a href="/">← 返回前台首页</a></p>
-    <p id="backtoblog"><a href="/phoneregister">← 返回手机注册页</a></p>
-
 </div>
-
-
-<div class="clear"></div>
-
 
 </body>
 </html>

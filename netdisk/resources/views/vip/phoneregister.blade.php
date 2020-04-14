@@ -17,36 +17,36 @@
         <span style="vertical-align: middle"> <img style="vertical-align: middle" src="http://www.netdisk.com/vip/images/jlulogo.jpg" width="102px" height="56px"></span>
         欢迎登陆吉大教务网盘
     </div>
-    @if (!empty($errors))
-        <div class="alert alert-danger">
-            <ul>
-                @if(is_object($errors))
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                @else
-                    <li>{{ $errors }}</li>
-                @endif
-            </ul>
-        </div>
-    @endif
     <form name="loginform" id="loginform" action="{{ url('vip/dophoneregister') }}" method="post">
         {{ csrf_field() }}
+        @if (!empty($errors))
+            <div class="alert alert-danger">
+                <ul>
+                    @if(is_object($errors))
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    @else
+                        <li>{{ $errors }}</li>
+                    @endif
+                </ul>
+            </div>
+        @endif
         <p>
             <label for="user_login">用户名<br>
-                <input type="text" name="username"  class="input" value="" size="40"></label>
+                <input type="text" name="username" required class="input" value="" size="20"></label>
         </p>
         <p>
             <label for="user_login">手机号<br>
-                <input type="text" name="phone"  class="input" value="" size="20"></label>
+                <input type="text" name="phone" required class="input" value="" size="20"></label>
         </p>
         <p>
             <label for="user_pass">密码<br>
-                <input type="password" name="user_pass" id="user_pass" class="input" value="" size="20"></label>
+                <input type="password" name="user_pass" required id="user_pass" class="input" value="" size="20"></label>
         </p>
         <p>
             <label for="user_pass">验证码<br>
-                <input type="password" name="code"  class="input" value="" style="height:36px;width:120px;float:left;">
+                <input type="password" name="code" required class="input" value="" style="height:36px;width:120px;float:left;">
                 <a id="yzm" href="javascript:;" onclick="sendCode();" style="float:right;display: block;line-height:40px;height:40px;width:100px;" >发送验证码</a>
 
             </label>
@@ -94,7 +94,7 @@
                 return ;
             }
             if(!/^1[34578]\d{9}$/.test(phone)){
-                layer.msg('手机号格式不正确');
+                layer.msg('手机号填写有误');
                 return ;
             }
             if(!pass){
