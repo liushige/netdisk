@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Vip;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\SMS\SendTemplateSMS;
-use App\SMS\M3Result;
+use App\Sms\SendTemplateSMS;
+use App\Sms\M3Result;
 use Illuminate\Support\Facades\Crypt;
 //use Mail;
 use App\Model\Vip;
@@ -38,7 +38,7 @@ class RegisterController extends Controller
 //        4 将验证码存入session
         session()->put('phone',$code);
 
-//        5 给客户端返回容联云通讯的响应结果
+//        5 给前台返回容联云通讯的响应结果
         return $M3result->toJson();
 
     }
@@ -49,9 +49,9 @@ class RegisterController extends Controller
         $input = $request->except('_token');
 
 
-//        如果验证码不对
-        if(session()->get('phone') != $input['code']){
-            return redirect('vip/phoneregister');
+//        如果未填验证码或者验证码不对
+        if(!empty(session()->get('phone')) and session()->get('phone') != $input['code']){
+            return redirect('vip/phoneregister')->with('errors','验证码填写有误');
         }
 
 //        查找vip用户是否已用改手机号注册

@@ -17,6 +17,19 @@
         <span style="vertical-align: middle"> <img style="vertical-align: middle" src="http://www.netdisk.com/vip/images/jlulogo.jpg" width="102px" height="56px"></span>
         欢迎登陆吉大教务网盘
     </div>
+    @if (!empty($errors))
+        <div class="alert alert-danger">
+            <ul>
+                @if(is_object($errors))
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                @else
+                    <li>{{ $errors }}</li>
+                @endif
+            </ul>
+        </div>
+    @endif
     <form name="loginform" id="loginform" action="{{ url('vip/dophoneregister') }}" method="post">
         {{ csrf_field() }}
         <p>
@@ -81,18 +94,9 @@
                 return ;
             }
             if(!/^1[34578]\d{9}$/.test(phone)){
-                // $("input[name='phone']").val('');
-                // $("input[name='phone']").attr("placeholder", "手机号码不正确！");
-                // return ;
                 layer.msg('手机号格式不正确');
                 return ;
             }
-
-            // if(!is_mobile_phone(phone))
-            // {
-            //     layer.msg('手机号格式不正确');
-            //     return ;
-            // }
             if(!pass){
                 layer.msg('密码不能为空');
                 return ;
@@ -103,9 +107,9 @@
             // 3. 触发ajax，请求验证码,根据是否成功，给提示信息
             $.get('sendcode',{'phone':phone},function(data){
                     if(data.status == 0){
-                        layer.msg('发送成功',{'time':1000,'icon':6})
-                    }else{
                         layer.msg('发送失败',{'time':1000,'icon':5})
+                    }else{
+                        layer.msg('发送成功',{'time':1000,'icon':6})
                     }
             });
         }
