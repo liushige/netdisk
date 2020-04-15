@@ -7,10 +7,9 @@ use Illuminate\Http\Request;
 use App\Model\Vip;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
-//use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-//use Mail;
+//use Illuminate\Support\Facades\Input;
 
 class LoginController extends Controller
 {

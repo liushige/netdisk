@@ -106,10 +106,10 @@
 
             // 3. 触发ajax，请求验证码,根据是否成功，给提示信息
             $.get('sendcode',{'phone':phone},function(data){
-                    if(data.status == 0){
-                        layer.msg('发送失败',{'time':1000,'icon':5})
-                    }else{
+                    if(data == 0){
                         layer.msg('发送成功',{'time':1000,'icon':6})
+                    }else{
+                        layer.msg('发送失败',{'time':1000,'icon':5})
                     }
             });
         }

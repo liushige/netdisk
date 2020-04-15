@@ -8,7 +8,7 @@ use App\Sms\SendTemplateSMS;
 use App\Sms\M3Result;
 use Illuminate\Support\Facades\Crypt;
 use App\Model\Vip;
-use Mail;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -30,7 +30,7 @@ class RegisterController extends Controller
 
 //      3 调用容联云通讯的接口
         $templateSMS = new SendTemplateSMS();
-        $M3result = new M3Result();
+//        $M3result = new M3Result();
 
         $M3result = $templateSMS->sendTemplateSMS($phone,$arr,1);
 
@@ -39,7 +39,7 @@ class RegisterController extends Controller
         session()->put('phone',$code);
 
 //        5 给前台返回容联云通讯的响应结果
-        return $M3result->toJson();
+        return $M3result->status;
 
     }
 

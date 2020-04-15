@@ -49,9 +49,6 @@ class SendTemplateSMS
            $m3_result->status = 0;
            $m3_result->message = '发送成功';
        }
-
        return $m3_result;
-
-
   }
 }
