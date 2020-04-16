@@ -7,19 +7,36 @@ namespace App\Http\Controllers\Vip;
 //use App\Model\ClientIp;
 //use App\Model\Collect;
 //use App\Model\Comment;
+use App\Model\Vip;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class IndexController extends CommonController
 {
-    //前台首页
-    public function index()
-    {
-        //获取相关二级类及二级类下的文章
-//        $cate_arts = Cate::where('cate_pid','<>',0)->with('article')->get();
-//        dd($cate_arts);
-        return view('vip.index',compact('cate_arts'));
+
+    //返回前台首页
+    public function index(){
+//       从session中获取当前用户，传回前台
+        $currentUser = Vip::find(session()->get('vip')->user_id);
+        return view('vip.index',compact('currentUser'));
     }
+    //返回后台首页中的欢迎页
+    public function welcome(){
+//       从session中获取当前用户，传回前台
+        $currentUser = Vip::find(session()->get('vip')->user_id);
+        return view('vip.welcome',compact('currentUser'));
+    }
+
+    //返回后台退出登录页面
+    public function logout()
+    {
+//    1.清空session
+        session()->flush();
+//    2.重定向到登录页面
+        return redirect('vip/login');
+    }
+
+
 
     //文章收藏
     public function collect(Request $request)

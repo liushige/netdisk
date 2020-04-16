@@ -77,7 +77,10 @@ class VipController extends Controller
      */
     public function show($id)
     {
-        //
+        //        1.获取当前用户拥有的所有权限
+//        $user = User::find(session()->get('user')->user_id);
+        $user = Vip::find($id);
+        return view('vip.vipUser.show',compact('user'));
     }
 
     /**

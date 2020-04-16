@@ -57,4 +57,12 @@ class LoginController extends Controller
              return redirect('vip/index');
          }
 
+    //   退出登录
+    public function logout(){
+        //    1.清空session
+        session()->flush();
+//    2.重定向到登录页面
+        return redirect('vip/login');
+    }
+
 }

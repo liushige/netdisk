@@ -69,7 +69,7 @@ Route::resource('vip/vipUser','Vip\VipController');
 //前台登录路由
 Route::get('vip/login','Vip\LoginController@login');
 Route::post('vip/dologin','Vip\LoginController@doLogin');
-Route::get('vip/logout','Vip\LoginController@loginOut');
+Route::get('vip/logout','Vip\LoginController@logout');
 
 //前台vip密码找回
 Route::get('vip/forget','Vip\RegisterController@forget');
@@ -91,7 +91,6 @@ Route::get('vip/emailregister','Vip\RegisterController@register');
 Route::post('vip/doregister','Vip\RegisterController@doRegister');
 Route::get('vip/active','Vip\RegisterController@active');
 
-
-
 //前台首页
 Route::get('vip/index','Vip\IndexController@index')->name('index');
+Route::get('vip/welcome','Vip\IndexController@welcome');
