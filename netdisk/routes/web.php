@@ -58,6 +58,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['isLogin','i
     Route::get('admin/noaccess','Admin\LoginController@noAccess');
 //后台退出登录路由
     Route::get('admin/logout','Admin\LoginController@logout');
+//后台unicode图标参考路由
+Route::get('admin/unicode','Admin\LoginController@unicode');
+
 
 
 

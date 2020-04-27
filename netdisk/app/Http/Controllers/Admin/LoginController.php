@@ -108,4 +108,11 @@ class LoginController extends Controller
         return view('tip.noaccess');
     }
 
+    //后台Unicode参考获取
+    public function unicode()
+    {
+//    获取unicode参考页面
+        return view('admin.public.unicode');
+    }
+
 }

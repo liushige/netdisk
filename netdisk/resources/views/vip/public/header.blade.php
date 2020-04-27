@@ -1,13 +1,13 @@
 <!-- 顶部开始 -->
 <div class="container">
     <div class="logo">
-        <a href="index">吉盘后台管理系统1.0</a></div>
+        <a href="index">吉大教务网盘</a></div>
     <div class="left_open">
         <a><i title="展开左侧栏" class="iconfont">&#xe699;</i></a>
     </div>
     <ul class="layui-nav right" lay-filter="">
         <li class="layui-nav-item">
-            <a href="javascript:;">{{ $currentUser->user_name }}</a>
+            <a href="javascript:;"><img src="{{ url('vip/images/headerOfVip.jpg') }}" class="layui-nav-img">{{ $currentUser->user_name }}</a>
             <dl class="layui-nav-child">
                 <!-- 二级菜单 -->
                 <dd>

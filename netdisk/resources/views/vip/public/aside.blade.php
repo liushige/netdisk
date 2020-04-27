@@ -4,144 +4,77 @@
         <ul id="nav">
             <li>
                 <a href="javascript:;">
-                    <i class="iconfont left-nav-li" lay-tips="管理员管理">&#xe726;</i>
-                    <cite>管理员管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i></a>
+                    <i class="iconfont left-nav-li" lay-tips="我的网盘">&#xe6cb;</i>
+                    <cite>我的网盘</cite>
+                    <i class="iconfont nav_right">&#xe6cb;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('管理员列表','{{ url('admin/user') }}')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>管理员列表</cite></a>
+                        <a onclick="xadmin.add_tab('全部软件','{{ url('vip/vipUser') }}')">
+                            <i class="iconfont">&#xe696;</i>
+                            <cite>全部软件</cite>
+                        </a>
                     </li>
                     <li>
-                        <a onclick="xadmin.add_tab('添加管理员','{{ url('admin/user/create') }}')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>添加管理员</cite></a>
+                        <a onclick="xadmin.add_tab('系统','{{ url('vip/vipUser') }}')">
+                            <i class="iconfont">&#xe6ae;</i>
+                            <cite>系统</cite>
+                        </a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('网络','{{ url('vip/vipUser') }}')">
+                            <i class="iconfont">&#xe828;</i>
+                            <cite>网络</cite>
+                        </a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('安全','{{ url('vip/vipUser') }}')">
+                            <i class="iconfont">&#xe71c;</i>
+                            <cite>安全</cite>
+                        </a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('编程','{{ url('vip/vipUser') }}')">
+                            <i class="iconfont">&#xe6da;</i>
+                            <cite>编程</cite>
+                        </a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('设计','{{ url('vip/vipUser') }}')">
+                            <i class="iconfont">&#xe6de;</i>
+                            <cite>设计</cite>
+                        </a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('办公','{{ url('vip/vipUser') }}')">
+                            <i class="iconfont">&#xe6d4;</i>
+                            <cite>办公</cite>
+                        </a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('媒体','{{ url('vip/vipUser') }}')">
+                            <i class="iconfont">&#xe719;</i>
+                            <cite>媒体</cite>
+                         </a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('Windows','{{ url('vip/vipUser') }}')">
+                            <i class="iconfont">&#xe6f2;</i>
+                            <cite>Windows</cite>
+                        </a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('Linux','{{ url('vip/vipUser') }}')">
+                            <i class="iconfont">&#xe6f2;</i>
+                            <cite>Linux</cite>
+                        </a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('其他','{{ url('vip/vipUser') }}')">
+                            <i class="iconfont">&#xe6bf;</i>
+                            <cite>其他</cite>
+                        </a>
                     </li>
 
-                </ul>
-            </li>
-
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont left-nav-li" lay-tips="角色管理">&#xe732;</i>
-                    <cite>角色管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i></a>
-                <ul class="sub-menu">
-                    <li>
-                        <a onclick="xadmin.add_tab('角色列表','{{ url('admin/role') }}')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>角色列表</cite></a>
-                    </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('添加角色','{{ url('admin/role/create') }}')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>添加角色</cite></a>
-                    </li>
-
-                </ul>
-            </li>
-
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont left-nav-li" lay-tips="权限管理">&#xe82b;</i>
-                    <cite>权限管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i></a>
-                <ul class="sub-menu">
-                    <li>
-                        <a onclick="xadmin.add_tab('权限列表','{{ url('admin/permission') }}')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>权限列表</cite></a>
-                    </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('权限添加','{{ url('admin/permission/create') }}')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>权限添加</cite></a>
-                    </li>
-
-                </ul>
-            </li>
-
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont left-nav-li" lay-tips="前台会员管理">&#xe6b8;</i>
-                    <cite>前台会员管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i></a>
-                <ul class="sub-menu">
-                    <li>
-                        <a onclick="xadmin.add_tab('会员列表','{{ url('vip/vipUser') }}')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>会员列表</cite></a>
-                    </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('添加会员','{{ url('vip/vipUser/create') }}')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>添加会员</cite></a>
-                    </li>
-
-                </ul>
-            </li>
-
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont left-nav-li" lay-tips="系统统计">&#xe6ce;</i>
-                    <cite>系统统计</cite>
-                    <i class="iconfont nav_right">&#xe697;</i></a>
-                <ul class="sub-menu">
-                    <li>
-                        <a onclick="xadmin.add_tab('拆线图','echarts1.html')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>拆线图</cite></a>
-                    </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('拆线图','echarts2.html')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>拆线图</cite></a>
-                    </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('地图','echarts3.html')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>地图</cite></a>
-                    </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('饼图','echarts4.html')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>饼图</cite></a>
-                    </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('雷达图','echarts5.html')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>雷达图</cite></a>
-                    </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('k线图','echarts6.html')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>k线图</cite></a>
-                    </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('热力图','echarts7.html')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>热力图</cite></a>
-                    </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('仪表图','echarts8.html')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>仪表图</cite></a>
-                    </li>
-                </ul>
-            </li>
-
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont left-nav-li" lay-tips="图标字体">&#xe6b4;</i>
-                    <cite>图标字体</cite>
-                    <i class="iconfont nav_right">&#xe697;</i></a>
-                <ul class="sub-menu">
-                    <li>
-                        <a onclick="xadmin.add_tab('图标对应字体','unicode.html')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>图标对应字体</cite></a>
-                    </li>
                 </ul>
             </li>
 

@@ -84,63 +84,28 @@
 
             <li>
                 <a href="javascript:;">
-                    <i class="iconfont left-nav-li" lay-tips="系统统计">&#xe6ce;</i>
-                    <cite>系统统计</cite>
+                    <i class="iconfont left-nav-li" lay-tips="图标字体参考">&#xe6b4;</i>
+                    <cite>图标字体参考</cite>
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('拆线图','echarts1.html')">
+                        <a onclick="xadmin.add_tab('图标对应字体','{{ url('admin/unicode') }}')">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>拆线图</cite></a>
-                    </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('拆线图','echarts2.html')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>拆线图</cite></a>
-                    </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('地图','echarts3.html')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>地图</cite></a>
-                    </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('饼图','echarts4.html')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>饼图</cite></a>
-                    </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('雷达图','echarts5.html')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>雷达图</cite></a>
-                    </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('k线图','echarts6.html')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>k线图</cite></a>
-                    </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('热力图','echarts7.html')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>热力图</cite></a>
-                    </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('仪表图','echarts8.html')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>仪表图</cite></a>
+                            <cite>图标对应字体</cite></a>
                     </li>
                 </ul>
             </li>
 
             <li>
                 <a href="javascript:;">
-                    <i class="iconfont left-nav-li" lay-tips="图标字体">&#xe6b4;</i>
-                    <cite>图标字体</cite>
+                    <i class="iconfont left-nav-li" lay-tips="数据库备份">&#xe744;</i>
+                    <cite>数据库备份</cite>
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('图标对应字体','unicode.html')">
+                        <a onclick="xadmin.add_tab('数据库备份','{{ url('') }}')">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>图标对应字体</cite></a>
+                            <cite>数据库备份</cite></a>
                     </li>
                 </ul>
             </li>
