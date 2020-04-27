@@ -8,7 +8,7 @@
     <meta name="robots" content="noindex,follow">
     <meta name="viewport" content="width=device-width">
     @include('admin.public.script')
-    @include('admin.public.styles')
+    @include('vip.public.styles')
     <script type="text/javascript" src="{{url('admin/js/xadmin.js')}}"></script>
 </head>
 <body class="login login-action-login wp-core-ui  locale-zh-cn">
