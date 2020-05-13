@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Vip;
 
+use App\Model\Folder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Sms\SendTemplateSMS;
 use App\Sms\M3Result;
 use Illuminate\Support\Facades\Crypt;
 use App\Model\Vip;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
@@ -58,6 +60,7 @@ class RegisterController extends Controller
 
 
 
+        
 
         $input['user_pass'] = Crypt::encrypt($input['user_pass']);
         $input['expire'] = time()+3600*24;
@@ -65,6 +68,19 @@ class RegisterController extends Controller
         $user = Vip::create(['user_name'=>$input['username'],'user_phone'=>$input['phone'],'user_pass'=>$input['user_pass']]);
 
         if($user){
+//      预制文件夹结构 再重定向
+
+//            通过phone查找vip
+            $vipuser = Vip::where('user_phone',$input['phone'])->first();
+//            获取所有系统自带文件夹
+            $folder = DB::table('folder')->where('folder_original',0)->get();
+//            为用户内置系统文件夹
+            if(!empty($vipuser) and !empty($folder)){
+                foreach ($folder as $v){
+                    \DB::table('vipuser_folder')->insert(['user_id'=>$vipuser->user_id,'folder_id'=>$v->folder_id]);
+                }
+            }
+
             return redirect('vip/login')->with('errors','恭喜您，注册成功');
         }else{
             return back();

@@ -97,3 +97,6 @@ Route::get('vip/active','Vip\RegisterController@active');
 //前台首页
 Route::get('vip/index','Vip\IndexController@index')->name('index');
 Route::get('vip/welcome','Vip\IndexController@welcome');
+
+//前台文件夹路由模块
+Route::resource('vip/folder','Vip\FolderController');

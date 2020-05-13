@@ -9,7 +9,7 @@
                     <i class="iconfont nav_right">&#xe6cb;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('全部软件','{{ url('vip/vipUser') }}')">
+                        <a onclick="xadmin.add_tab('全部软件','{{ url('vip/folder') }}')">
                             <i class="iconfont">&#xe696;</i>
                             <cite>全部软件</cite>
                         </a>
