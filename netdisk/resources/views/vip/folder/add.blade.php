@@ -3,7 +3,7 @@
     
     <head>
         <meta charset="UTF-8">
-        <title>文件夹重命名页面</title>
+        <title>新建文件夹页面</title>
         <meta name="renderer" content="webkit">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -22,16 +22,15 @@
             <div class="layui-row">
                 <form class="layui-form">
                     <div class="layui-form-item">
-                        <label for="L_foldername" class="layui-form-label">
+                        <label for="L_username" class="layui-form-label">
                             <span class="x-red">*</span>文件夹名称</label>
                         <div class="layui-input-inline">
-                            <input type="hidden" name="id" value="{{ $folder->folder_id }}">
-                            <input type="text" id="L_foldername" name="foldername" value="{{ $folder->folder_name }}" required="" lay-verify="foldername" autocomplete="off" class="layui-input">
-                        </div>
+                            <input type="hidden" name="id" value="{{ $folder_id }}">
+                            <input type="text" id="L_username" name="foldername" required="" lay-verify="nikename" autocomplete="off" class="layui-input"></div>
                     </div>
                     <div class="layui-form-item">
                         <label for="L_repass" class="layui-form-label"></label>
-                        <button class="layui-btn" lay-filter="edit" lay-submit="">修改</button></div>
+                        <button class="layui-btn" lay-filter="add" lay-submit="">创建</button></div>
                 </form>
             </div>
         </div>
@@ -43,21 +42,20 @@
 
                 //自定义验证规则
                 form.verify({
-                    foldername: function(value) {
-                        if (value.length > 30) {
-                            return '文件夹名称名最多30个字符';
+                    nikename: function(value) {
+                        if (value.length < 2 || value.length > 30) {
+                            return '文件夹名称必须2-30位';
                         }
                     },
                 });
 
-                //监听提交
-                form.on('submit(edit)', function(data) {
-                    var rid = $("input[name='id']").val();
+                form.on('submit(add)', function(data) {
+                    var fpid = $("input[name='id']").val();
                     //发异步，把数据提交给php
                     $.ajax({
-                        type:'PUT',
+                        type:'POST',
                         dataType:'json',
-                        url:'/vip/folder/'+rid,
+                        url:'/vip/folder/'+fpid+'/store',
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
@@ -65,7 +63,7 @@
                         success:function (data) {
                             // 弹层提示添加成功，并刷新父页面
                             if (data == 0){
-                                layer.alert("修改成功", {
+                                layer.alert("创建成功", {
                                         icon: 6
                                     },
                                     function() {
@@ -75,12 +73,8 @@
                                         // 可以对父窗口进行刷新
                                         xadmin.father_reload();
                                     });
-                            } else if(data == 1){
-                                layer.alert("修改失败", {
-                                    icon: 5
-                                });
-                            }else {
-                                layer.alert("抱歉，系统文件夹无法修改", {
+                            } else {
+                                layer.alert("创建失败", {
                                     icon: 5
                                 });
                             }
@@ -91,7 +85,9 @@
                     });
                     return false;
                 });
-            });</script>
+
+            });
+        </script>
         <script>var _hmt = _hmt || []; (function() {
                 var hm = document.createElement("script");
                 hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";

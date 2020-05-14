@@ -100,3 +100,5 @@ Route::get('vip/welcome','Vip\IndexController@welcome');
 
 //前台文件夹路由模块
 Route::resource('vip/folder','Vip\FolderController');
+Route::get('vip/folder/{folder}/create','Vip\FolderController@folderCreate');
+Route::post('vip/folder/{folder}/store','Vip\FolderController@folderStore');

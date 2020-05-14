@@ -2,7 +2,7 @@
 <html class="x-admin-sm" xmlns:float="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>后台角色列表页面</title>
+    <title>文件夹列表页面</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     {{--<meta name="csrf-token" content="{{ csrf_token() }}">--}}
@@ -39,7 +39,7 @@
                             </select>
                         </div>
                         <div class="layui-inline layui-show-xs-block">
-                            <input type="text" name="foldername"  value="{{ $request->input('foldername') }}" placeholder="请输入" autocomplete="off" class="layui-input">
+                            <input type="text" name="foldername"  value="{{ $request->input('foldername') }}" placeholder="全局搜索" autocomplete="off" class="layui-input">
                         </div>
                         <div class="layui-inline layui-show-xs-block">
                             <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
@@ -48,8 +48,8 @@
                 </div>
                 <div class="layui-card-header">
                     <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-                    <button class="layui-btn" onclick="xadmin.open('新建文件夹','{{ url('vip/folder/create') }}',600,400)"><i class="layui-icon"></i>新建文件夹</button>
-                    <button class="layui-btn" onclick="xadmin.open('上传软件','{{ url('') }}',600,400)"><i class="layui-icon"></i>上传软件</button>
+                    <button class="layui-btn" onclick="xadmin.open('新建文件夹','{{ url('vip/folder/'.$cF_id.'/create') }}',600,400)"><i class="layui-icon"></i>新建文件夹</button>
+                    <button class="layui-btn" onclick="xadmin.open('上传软件','{{ url('vip/folder/create') }}',600,400)"><i class="layui-icon"></i>上传软件</button>
                 </div>
                 <div class="layui-card-body layui-table-body layui-table-main">
                     <table class="layui-table layui-form">
@@ -67,14 +67,18 @@
                             <tr>
                                 <td>
                                     <input type="checkbox" lay-skin="primary" value="{{ $v->folder_id }}">
+                                    <i class="iconfont">&#xe83c;</i>
                                 </td>
                                 <td>{{ $v->folder_id }}</td>
                                 <td>{{ $v->folder_name }}</td>
                                 <td class="td-manage">
-                                    {{--<a title="授予权限" href="{{ url('admin/role/'.$v->role_id.'/auth') }}">--}}
-                                        {{--<i class="layui-icon">&#xe612;</i>--}}
+                                    <a title="打开" href="{{ url('vip/folder/'.$v->folder_id) }}">
+                                        <i class="layui-icon">&#xe603;</i>
+                                    </a>
+                                    {{--<a title="打开" onclick="xadmin.open('打开','{{ url('vip/folder/'.$v->folder_id) }}')" href="javascript:;">--}}
+                                        {{--<i class="layui-icon">&#xe603;</i>--}}
                                     {{--</a>--}}
-                                    <a title="重命名"  onclick="xadmin.open('重命名','{{ url('vip/folder/'.$v->folder_id.'/edit') }}',600,400)" href="javascript:;">
+                                    <a title="重命名" onclick="xadmin.open('重命名','{{ url('vip/folder/'.$v->folder_id.'/edit') }}',600,400)" href="javascript:;">
                                         <i class="layui-icon">&#xe642;</i>
                                     </a>
                                     <a title="删除" onclick="member_del(this,'{{ $v->role_id }}')" href="javascript:;">
@@ -101,7 +105,6 @@
     layui.use(['laydate','form'], function(){
         var laydate = layui.laydate;
         var  form = layui.form;
-
 
         // 监听全选
         form.on('checkbox(checkall)', function(data){
@@ -140,8 +143,6 @@
                     layer.msg('删除失败!',{icon:5,time:1000});
                 }
             })
-
-
         });
     }
 
