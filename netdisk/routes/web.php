@@ -100,5 +100,9 @@ Route::get('vip/welcome','Vip\IndexController@welcome');
 
 //前台文件夹路由模块
 Route::resource('vip/folder','Vip\FolderController');
+//新建文件夹路由
 Route::get('vip/folder/{folder}/create','Vip\FolderController@folderCreate');
 Route::post('vip/folder/{folder}/store','Vip\FolderController@folderStore');
+//移动文件夹路由
+Route::get('vip/folder/{folder}/move','Vip\FolderController@folderMove');
+Route::put('vip/folder/{folder}/moveUpdate','Vip\FolderController@folderMoveUpdate');

@@ -22,15 +22,23 @@
             <div class="layui-row">
                 <form class="layui-form">
                     <div class="layui-form-item">
-                        <label for="L_username" class="layui-form-label">
+                        <label for="L_foldername" class="layui-form-label">
                             <span class="x-red">*</span>文件夹名称</label>
                         <div class="layui-input-inline">
-                            <input type="hidden" name="id" value="{{ $folder_id }}">
-                            <input type="text" id="L_username" name="foldername" required="" lay-verify="nikename" autocomplete="off" class="layui-input"></div>
+                            <input type="text" id="L_foldername" name="foldername" value="{{ $folder->folder_name }}"  readonly="readonly" required="" autocomplete="off" class="layui-input"></div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label for="L_username" class="layui-form-label">
+                            <span class="x-red">*</span>将要移动到</label>
+                        <div class="layui-input-inline">
+                            <input type="hidden" name="id" value="{{ $folder->folder_id }}">
+                            <input type="text" id="L_username" name="toFolderid" required="" lay-verify="required|number|nikename" autocomplete="off" class="layui-input"></div>
+                        <div class="layui-form-mid layui-word-aux">
+                            <span class="x-red">*</span>请填写文件夹id（1-11位数字）</div>
                     </div>
                     <div class="layui-form-item">
                         <label for="L_repass" class="layui-form-label"></label>
-                        <button class="layui-btn" lay-filter="add" lay-submit="">创建</button></div>
+                        <button class="layui-btn" lay-filter="add" lay-submit="">确定</button></div>
                 </form>
             </div>
         </div>
@@ -43,8 +51,8 @@
                 //自定义验证规则
                 form.verify({
                     nikename: function(value) {
-                        if (value.length < 2 || value.length > 30) {
-                            return '文件夹名称必须2-30个字符';
+                        if (value.length < 1 || value.length > 11) {
+                            return '文件夹id必须1-11位数字';
                         }
                     },
                 });
@@ -53,17 +61,25 @@
                     var fpid = $("input[name='id']").val();
                     //发异步，把数据提交给php
                     $.ajax({
-                        type:'POST',
+                        type:'PUT',
                         dataType:'json',
-                        url:'/vip/folder/'+fpid+'/store',
+                        url:'/vip/folder/'+fpid+'/moveUpdate',
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         data:data.field,
                         success:function (data) {
-                            // 弹层提示添加成功，并刷新父页面
-                            if (data == 0){
-                                layer.alert("创建成功", {
+                            // 弹层提示移动成功，并刷新父页面
+                            if (data == 3){
+                                layer.alert("文件夹id不存在！", {
+                                    icon: 5
+                                });
+                            } else if(data == 2){
+                                layer.alert("抱歉，系统文件夹无法移动！", {
+                                    icon: 5
+                                });
+                            } else if(data == 0){
+                                layer.alert("移动成功", {
                                         icon: 6
                                     },
                                     function() {
@@ -73,8 +89,8 @@
                                         // 可以对父窗口进行刷新
                                         xadmin.father_reload();
                                     });
-                            } else {
-                                layer.alert("创建失败", {
+                            }else{
+                                layer.alert("移动失败", {
                                     icon: 5
                                 });
                             }

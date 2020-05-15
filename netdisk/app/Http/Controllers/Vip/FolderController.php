@@ -38,7 +38,7 @@ class FolderController extends Controller
                     $query->where('folder_parentid',0);
                 }
             })
-            ->paginate($request->input('num')?$request->input('num'):10);
+            ->paginate($request->input('num')?$request->input('num'):15);
 
         return view('vip.folder.list',compact('folder','request','cF_id'));
     }
@@ -84,12 +84,12 @@ class FolderController extends Controller
         $res = Folder::create(['folder_name'=>$foldername, 'folder_parentid'=>$folderpid, 'folder_original'=>1]);
 
 //        获取新建文件夹的id号码
-        $currentFid = Folder::where('folder_name',$foldername)->value('folder_parentid',$folderpid);
+        $currentFid = Folder::where('folder_name',$foldername)->where('folder_parentid',$folderpid)->first();
 
-
+//        dd($currentFid->folder_id);
 
 //        添加到数据库vipuser_folder表
-        \DB::table('vipuser_folder')->insert(['user_id'=>$currentUser->user_id,'folder_id'=>$currentFid]);
+        \DB::table('vipuser_folder')->insert(['user_id'=>$currentUser->user_id,'folder_id'=>$currentFid->folder_id]);
 
 //        根据是否成功，给客户端一个Json格式反馈
         if($res){
@@ -140,12 +140,62 @@ class FolderController extends Controller
                     $query->where('folder_parentid',$id);
                 }
             })
-            ->paginate($request->input('num')?$request->input('num'):10);
+            ->paginate($request->input('num')?$request->input('num'):15);
 
 
 //        return redirect('vip/folder')->with('folder','request');
         return view('vip.folder.list',compact('folder', 'request','cF_id'));
     }
+
+    /**
+     * move the folder.
+     *
+     * @param  int  Request $request,$id
+     * @return \Illuminate\Http\Response
+     */
+    public function folderMove(Request $request, $id)
+    {
+        $folder = Folder::find($id);
+        return view('vip.folder.move',compact('folder'));
+    }
+
+
+    /**
+     * moveUpdate the folder.
+     *
+     * @param  int  Request $request,$id
+     * @return \Illuminate\Http\Response
+     */
+    public function folderMoveUpdate(Request $request, $id)
+    {
+        $folder = Folder::find($id);
+        $toFolderid = $request->input('toFolderid');
+
+//        1.判断用户输入的id是否在数据库中有存档
+        $toFolder = Folder::find($toFolderid);
+        if(empty($toFolder) and $toFolderid != 0)
+        {
+            $data = 3;
+            return $data;
+        }
+//        2.判断是否为系统文件夹
+        if(!$folder->folder_original){
+            $data = 2;
+            return $data;
+        }
+
+//        3.修改数据库中相应值
+        $folder->folder_parentid = $toFolderid;
+
+        $res = $folder->save();
+        if($res){
+            $data = 0;
+        }else{
+            $data = 1;
+        }
+        return $data;
+    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -168,16 +218,17 @@ class FolderController extends Controller
      */
     public function update(Request $request, $id)
     {
-//        1.根据ID获取要修改(自定义文件夹)的记录
-//        $folder = Folder::find($id)->where();
-        $folder = DB::table('folder')->where('folder_id','$id')->value('folder_original');
+//        根据ID获取要修改的文件夹original属性
+        $folder_id = Folder::where('folder_id',$id)->value('folder_original');
 
-        if(!$folder)
+        if(!$folder_id)
         {
             $data = 2;
             return $data;
         }
 
+//        1.获取所选文件夹记录
+        $folder = Folder::find($id);
 //        2.获取要修改的其他信息
         $foldername = $request->input('foldername');
 //        3.修改数据库中相应值
@@ -202,6 +253,27 @@ class FolderController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+//        根据ID获取要删除的文件夹original属性
+        $folder_id = Folder::where('folder_id',$id)->value('folder_original');
+
+//        dd($folder_id);
+
+//        判断是否为系统文件夹（系统文件夹不允许删除）
+        if(!$folder_id)
+        {
+            $data = 2;
+            return $data;
+        }
+
+        $folder = Folder::find($id);
+        $res1 = $folder->delete();
+        $res2 = DB::table('vipuser_folder')->where('folder_id',$folder->folder_id)->delete();
+        if($res1 and $res2){
+            $data = 0;
+        }else{
+            $data = 1;
+        }
+        return $data;
     }
 }

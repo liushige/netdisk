@@ -44,8 +44,8 @@
                 //自定义验证规则
                 form.verify({
                     foldername: function(value) {
-                        if (value.length > 30) {
-                            return '文件夹名称名最多30个字符';
+                        if (value.length < 2 || value.length > 30) {
+                            return '文件夹名称必须2-30个字符';
                         }
                     },
                 });

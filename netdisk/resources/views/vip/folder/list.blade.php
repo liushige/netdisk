@@ -34,8 +34,8 @@
                     <form class="layui-form layui-col-space5" method="get" action="{{ url('vip/folder') }}">
                         <div class="layui-inline layui-show-xs-block">
                             <select name="num" lay-verify="">
-                                <option value="10" @if($request->input('num')==10)    selected    @endif>每页10条记录</option>
-                                <option value="20" @if($request->input('num')==20)    selected    @endif>每页20条记录</option>
+                                <option value="15" @if($request->input('num')==15)    selected    @endif>每页15条记录</option>
+                                <option value="30" @if($request->input('num')==30)    selected    @endif>每页30条记录</option>
                             </select>
                         </div>
                         <div class="layui-inline layui-show-xs-block">
@@ -73,15 +73,15 @@
                                 <td>{{ $v->folder_name }}</td>
                                 <td class="td-manage">
                                     <a title="打开" href="{{ url('vip/folder/'.$v->folder_id) }}">
-                                        <i class="layui-icon">&#xe603;</i>
+                                        <i class="layui-icon">&#xe617;</i>
                                     </a>
-                                    {{--<a title="打开" onclick="xadmin.open('打开','{{ url('vip/folder/'.$v->folder_id) }}')" href="javascript:;">--}}
-                                        {{--<i class="layui-icon">&#xe603;</i>--}}
-                                    {{--</a>--}}
+                                    <a title="移动"  onclick="xadmin.open('移动','{{ url('vip/folder/'.$v->folder_id.'/move') }}',600,400)" href="javascript:;">
+                                        <i class="layui-icon">&#xe609;</i>
+                                    </a>
                                     <a title="重命名" onclick="xadmin.open('重命名','{{ url('vip/folder/'.$v->folder_id.'/edit') }}',600,400)" href="javascript:;">
                                         <i class="layui-icon">&#xe642;</i>
                                     </a>
-                                    <a title="删除" onclick="member_del(this,'{{ $v->role_id }}')" href="javascript:;">
+                                    <a title="删除" onclick="member_del(this,'{{ $v->folder_id }}')" href="javascript:;">
                                         <i class="layui-icon">&#xe640;</i>
                                     </a>
                                 </td>
@@ -134,12 +134,14 @@
     /*角色-删除*/
     function member_del(obj,id){
         layer.confirm('确认要删除吗？',function(index){
-            $.post('/admin/role/'+id,{"_method":"delete","_token":"{{ csrf_token() }}"},function (data) {
-                if(data==0){
+            $.post('/vip/folder/'+id,{"_method":"delete","_token":"{{ csrf_token() }}"},function (data) {
+                if(data==2){
+                    layer.msg('抱歉，系统文件夹无法删除!',{icon:5,time:1000});
+                }else if(data==0){
                     //发异步删除数据
                     $(obj).parents("tr").remove();
                     layer.msg('删除成功!',{icon:6,time:1000});
-                }else{
+                }else {
                     layer.msg('删除失败!',{icon:5,time:1000});
                 }
             })
