@@ -28,13 +28,13 @@
                             <input type="text" id="L_foldername" name="foldername" value="{{ $folder->folder_name }}"  readonly="readonly" required="" autocomplete="off" class="layui-input"></div>
                     </div>
                     <div class="layui-form-item">
-                        <label for="L_username" class="layui-form-label">
+                        <label for="L_folderpath" class="layui-form-label">
                             <span class="x-red">*</span>将要移动到</label>
                         <div class="layui-input-inline">
                             <input type="hidden" name="id" value="{{ $folder->folder_id }}">
-                            <input type="text" id="L_username" name="toFolderid" required="" lay-verify="required|number|nikename" autocomplete="off" class="layui-input"></div>
+                            <input type="text" id="L_folderpath" name="toFolderid" placeholder="请填写文件夹ID" required="" lay-verify="required|number|folderpath" autocomplete="off" class="layui-input"></div>
                         <div class="layui-form-mid layui-word-aux">
-                            <span class="x-red">*</span>请填写文件夹id（1-11位数字）</div>
+                            <span class="x-red">*</span>1-11位数字(根目录为0)</div>
                     </div>
                     <div class="layui-form-item">
                         <label for="L_repass" class="layui-form-label"></label>
@@ -50,7 +50,7 @@
 
                 //自定义验证规则
                 form.verify({
-                    nikename: function(value) {
+                    folderpath: function(value) {
                         if (value.length < 1 || value.length > 11) {
                             return '文件夹id必须1-11位数字';
                         }

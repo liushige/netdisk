@@ -161,7 +161,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        Overtrue\LaravelFilesystem\Qiniu\QiniuStorageServiceProvider::class,
         /*
          * Package Service Providers...
          */

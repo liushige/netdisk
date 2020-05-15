@@ -96,6 +96,10 @@
       <path value="$PROJECT_DIR$/vendor/dnoegel/php-xdg-base-dir" />
       <path value="$PROJECT_DIR$/vendor/sebastian/object-enumerator" />
       <path value="$PROJECT_DIR$/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/vendor/qiniu/php-sdk" />
+      <path value="$PROJECT_DIR$/vendor/overtrue/laravel-filesystem-qiniu" />
+      <path value="$PROJECT_DIR$/vendor/overtrue/flysystem-qiniu" />
+      <path value="$PROJECT_DIR$/vendor/johnlui/aliyun-oss" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />

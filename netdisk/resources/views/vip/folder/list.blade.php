@@ -47,9 +47,10 @@
                     </form>
                 </div>
                 <div class="layui-card-header">
-                    <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-                    <button class="layui-btn" onclick="xadmin.open('新建文件夹','{{ url('vip/folder/'.$cF_id.'/create') }}',600,400)"><i class="layui-icon"></i>新建文件夹</button>
-                    <button class="layui-btn" onclick="xadmin.open('上传软件','{{ url('vip/folder/create') }}',600,400)"><i class="layui-icon"></i>上传软件</button>
+                    <button type="button" class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
+                    <button type="button" class="layui-btn" onclick="xadmin.open('新建文件夹','{{ url('vip/folder/'.$cF_id.'/create') }}',600,400)"><i class="layui-icon"></i>新建文件夹</button>
+                    {{--<button type="button" class="layui-btn" lay-filter="uploadApp"><i class="layui-icon">&#xe619;</i>上传软件</button>--}}
+                    <a href="{{ url('vip/app/'.$cF_id.'/create') }}" class="layui-btn"><i class="layui-icon">&#xe619;</i>上传软件</a>
                 </div>
                 <div class="layui-card-body layui-table-body layui-table-main">
                     <table class="layui-table layui-form">
@@ -104,7 +105,7 @@
 <script>
     layui.use(['laydate','form'], function(){
         var laydate = layui.laydate;
-        var  form = layui.form;
+        var form = layui.form;
 
         // 监听全选
         form.on('checkbox(checkall)', function(data){
@@ -126,8 +127,6 @@
         laydate.render({
             elem: '#end' //指定元素
         });
-
-
     });
 
 
