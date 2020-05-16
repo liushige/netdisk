@@ -111,5 +111,5 @@ Route::put('vip/folder/{folder}/moveUpdate','Vip\FolderController@folderMoveUpda
 Route::resource('vip/app','Vip\AppController');
 //上传（添加app详细信息及安装教程）软件路由
 Route::get('vip/app/{app}/create','Vip\AppController@appCreate');
-Route::post('vip/app/{app}/store','Vip\AppController@appStore');
+Route::post('vip/app/store','Vip\AppController@appStore');
 Route::post('vip/app/upload','Vip\AppController@upload');

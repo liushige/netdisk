@@ -16,15 +16,31 @@
 
 <body>
 <div class="x-body">
-    <form class="layui-form" id="art_form" action="{{ url('vip/app/') }}" method="post">
-        <div class="layui-form-item">
 
+    @if (!empty($errors))
+        <label for="L_app_path" class="layui-form-label">
+            <span class="x-red"></span></label>
+        <div class="layui-input-inline" style="top: 6px">
+            <ul>
+                @if(is_object($errors))
+                    @foreach ($errors->all() as $error)
+                        <li style="color: #8080C0">{{ $error }}</li>
+                    @endforeach
+                @else
+                    <li style="top: 6px; color: #8080C0">{{ $errors }}</li>
+                @endif
+            </ul>
+        </div>
+    @endif
+
+    <form class="layui-form" id="art_form" action="{{ url('vip/app/store') }}" method="post">
+        <div class="layui-form-item">
         </div>
         <div class="layui-form-item">
             <label for="L_app_path" class="layui-form-label">
                 <span class="x-red">*</span>存放到</label>
             <div class="layui-input-inline">
-                <input type="text" id="L_app_path" name="app_path" value="{{ $cF_id }}" required="" lay-verify="required|number|apppath" autocomplete="off" class="layui-input"></div>
+                <input type="text" id="L_app_path" name="app_path" value="" required="" lay-verify="required|number|apppath" autocomplete="off" class="layui-input"></div>
                 <div class="layui-form-mid layui-word-aux">
                     <span class="x-red">*</span>请输入文件夹ID：1-11位数字（根目录为0）</div>
         </div>
@@ -84,21 +100,29 @@
         </div>
 
         <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label">软件上传</label>
+            <label class="layui-form-label">
+                <span class="x-red">*</span>软件上传
+            </label>
             <div class="layui-input-block layui-upload">
                 <input type="hidden" id="img1" class="hidden" name="art_thumb" value="">
                 <button type="button" class="layui-btn" id="test1">
                     <i class="layui-icon">&#xe681;</i>上传
                 </button>
-                <input type="file" name="app" id="app_upload" style="display: none;" />
+                <input type="file" name="app" id="app_upload" style="display: none;">
             </div>
         </div>
 
 
         <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label"></label>
-            <div class="layui-input-block">
-                <img src="" alt="" id="art_thumb_img" style="max-width: 350px; max-height:100px;">
+            <label class="layui-form-label">
+                <span class="x-red">*</span>上传状态
+            </label>
+            <div class="layui-input-inline">
+                {{--<img src="" alt="" id="art_thumb_img" style="max-width: 350px; max-height:100px;">--}}
+                {{--<span id="art_thumb_img">你好</span>--}}
+                {{--<textarea name="file_up" id="art_thumb_img" placeholder="请点击上传">--}}
+                {{--</textarea>--}}
+                <input type="text" id="art_thumb_img" name="file_up" value="" placeholder=" 未上传，请点击上方按钮上传软件" readonly="readonly" style="width: 470px; height: 38px; border: none">
             </div>
         </div>
 
@@ -111,7 +135,7 @@
                 <script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.config.js"></script>
                 <script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.all.min.js"> </script>
                 <script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js"></script>
-                <script id="editor" type="text/plain" name="art_content" style="width:90%;height:700px;"></script>
+                <script id="editor" type="text/plain" name="app_doc" style="width:90%;height:700px;"></script>
                 <script type="text/javascript">
 
                 //实例化编辑器
@@ -124,7 +148,8 @@
 
         <div class="layui-form-item">
             <label for="L_submmit" class="layui-form-label"></label>
-            <button  class="layui-btn" lay-filter="add" lay-submit="">添加</button>
+            <button  class="layui-btn" lay-filter="add" lay-submit="">全部提交</button>
+            {{--<a href="{{ url('vip/app/store') }}" class="layui-btn"><i class="layui-icon"></i>全部提交</a>--}}
         </div>
     </form>
 </div>
@@ -135,7 +160,7 @@
        });
     </script>
     <script>
-        layui.use(['form','layer','upload','element'], function(){
+        layui.use(['form','layer','upload','element','jquery'], function(){
             $ = layui.jquery;
             var form = layui.form
                 ,layer = layui.layer;
@@ -185,8 +210,13 @@
                                 {{--$('#art_thumb_img').attr('src', '{{ env('ALIOSS_DOMAIN')  }}'+data['ResultData']);--}}
                                 {{--$('#art_thumb_img').attr('src', '{{ env('QINIU_DOMAIN')  }}'+data['ResultData']);--}}
                                 // $('input[name=art_thumb]').val(data);
-                                $('#art_thumb_img').attr('src', '/app_cache/'+data['ResultData']);
-                                $('input[name=art_thumb]').val('/app_cache/'+data['ResultData']);
+                                layer.alert("上传成功", {
+                                    icon: 6
+                                });
+                                // $('#art_thumb_img').attr('text', data['ResultData']);
+                                // $("#art_thumb_img").val('/app_cache/'+data['ResultData']);
+                                $("#art_thumb_img").val( data['OriginalName']+' 已成功上传');
+                                $('input[name=art_thumb]').val('www.netdisk.com'+'/app_cache/'+data['ResultData']);
                                 $(obj).off('change');
                             }else{
                                 // 如果失败
@@ -206,9 +236,9 @@
 
 
           // 监听提交
-            form.on('submit(add)', function(data){
-
-            });
+          //   form.on('submit(add)', function(data){
+          //
+          //   });
         });
     </script>
 <script>var _hmt = _hmt || []; (function() {

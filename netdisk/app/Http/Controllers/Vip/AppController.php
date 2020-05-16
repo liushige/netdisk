@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Vip;
 
 use App\Http\Controllers\Controller;
+use App\Model\App;
+use App\Model\Folder;
 use App\Model\Vip;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Qiniu\Storage;
 
 class AppController extends Controller
@@ -46,10 +49,9 @@ class AppController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function appCreate($id)
+    public function appCreate()
     {
-        $cF_id = $id;
-        return view('vip.app.add',compact('cF_id'));
+        return view('vip.app.add');
     }
 
 
@@ -61,7 +63,61 @@ class AppController extends Controller
      */
     public function appStore(Request $request)
     {
-        //
+//        $listkey = 'LIST:ARTICLE';
+//        $hashkey = 'HASH:ARTICLE:';
+
+//        获取当前登录用户
+        $currentUser = Vip::find(session()->get('vip')->user_id);
+
+        $appname = $request->input('app_name');
+        $appurl = $request->input('app_url');
+        $appver = $request->input('app_version');
+        $appsort = $request->input('app_sort');
+        $appplat = $request->input('app_plat');
+        $apploc = $request->input('art_thumb');
+        $appdoc = $request->input('app_doc');
+        $fid = $request->input('app_path');
+
+//        查看用户输入的id是否存在
+        $folder = Folder::find($fid);
+        if(empty($folder) and $fid != 0)
+        {
+            return back()->with('errors','存放位置不合法');
+        }
+
+//        判断app_path是否属于当前操作对象的
+        if($fid){
+            $userfolder = DB::table('vipuser_folder as a')
+                ->where(function ($q) use($fid){
+                    $q->where('a.folder_id','=',$fid);
+                })
+                ->where(function ($q) use($currentUser){
+                    $q->where('a.user_id','=',$currentUser->user_id);
+                })
+                ->get();
+            if(empty($userfolder)){
+                return back()->with('errors','存放位置不合法');
+            }
+        }
+
+//        添加到数据库app表
+        $res = App::create(['app_name'=>$appname, 'app_url'=>$appurl, 'app_version'=>$appver, 'app_sort'=>$appsort, 'app_platform'=>$appplat, 'app_location'=>$apploc, 'app_doc'=>$appdoc, 'app_userid'=>$currentUser->user_id]);
+
+//        获取新建app的id号码
+        $currentApp = App::where('app_location',$apploc)->where('app_userid',$currentUser->user_id)->first();
+
+//        添加到数据库folder_app表
+        \DB::table('folder_app')->insert(['app_id'=>$currentApp->app_id,'folder_id'=>$fid]);
+
+        if($res){
+//            如果添加成功，更新redis
+//            \Redis::rpush($listkey,$res->art_id);
+//            \Redis::hMset($hashkey.$res->art_id,$res->toArray());
+
+            return redirect('vip/app/{app}/create')->with('errors','操作成功');
+        }else{
+            return back()->with('errors','操作失败');
+        }
     }
 
     /**
@@ -77,10 +133,14 @@ class AppController extends Controller
         $file = $request->file('app');
         //判断上传文件是否成功
         if(!$file->isValid()){
-            return response()->json(['ServerNo'=>'400','ResultData'=>'无效的上传文件']);
+            return response()->json(['ServerNo'=>'400','ResultData'=>'无效的上传文件','OriginalName'=>'上传失败，请重新上传']);
         }
-        //获取原文件的扩展名
+        //获取原文件扩展名
         $ext = $file->getClientOriginalExtension();    //文件拓展名
+        $name = $file->getClientOriginalName();          //原文件名
+
+//        dd($name);
+
         //新文件名
         $newfile = md5(time().rand(1000,9999)).'.'.$ext;
 
@@ -90,9 +150,9 @@ class AppController extends Controller
 
         //1.本地目录：将文件从临时目录移动到本地指定目录
         if(! $file->move($path,$newfile)){
-            return response()->json(['ServerNo'=>'400','ResultData'=>'保存文件失败']);
+            return response()->json(['ServerNo'=>'400','ResultData'=>'保存文件失败','OriginalName'=>'上传失败，请重新上传']);
         }
-        return response()->json(['ServerNo'=>'200','ResultData'=>$newfile]);
+        return response()->json(['ServerNo'=>'200','ResultData'=>$newfile,'OriginalName'=>$name]);
 
 //        2. 将文件上传到OSS的指定仓库
 //        $osskey : 文件上传到oss仓库后的新文件名
