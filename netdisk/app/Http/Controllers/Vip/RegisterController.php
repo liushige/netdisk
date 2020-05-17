@@ -60,10 +60,11 @@ class RegisterController extends Controller
 
 
 
-        
+
 
         $input['user_pass'] = Crypt::encrypt($input['user_pass']);
         $input['expire'] = time()+3600*24;
+        $res = 1;
 
         $user = Vip::create(['user_name'=>$input['username'],'user_phone'=>$input['phone'],'user_pass'=>$input['user_pass']]);
 
@@ -73,15 +74,20 @@ class RegisterController extends Controller
 //            通过phone查找vip
             $vipuser = Vip::where('user_phone',$input['phone'])->first();
 //            获取所有系统自带文件夹
-            $folder = DB::table('folder')->where('folder_original',0)->get();
+            $sysfolder = DB::table('sysfolder')->get();
 //            为用户内置系统文件夹
-            if(!empty($vipuser) and !empty($folder)){
-                foreach ($folder as $v){
-                    \DB::table('vipuser_folder')->insert(['user_id'=>$vipuser->user_id,'folder_id'=>$v->folder_id]);
+            if(!empty($vipuser) and !empty($sysfolder)){
+//                Folder::create(['folder_name'=>'根目录','folder_id'=>0,'folder_userid'=>$vipuser->user_id]);
+                foreach ($sysfolder as $v){
+                    $res = Folder::create(['folder_name'=>$v->folder_name,'folder_id'=>$v->folder_id,'folder_parentid'=>$v->folder_parentid,'folder_userid'=>$vipuser->user_id]);
                 }
             }
+            if($res){
+                return redirect('vip/login')->with('errors','恭喜您，注册成功');
+            }else{
+                return back()->with('errors','创建失败');
+            }
 
-            return redirect('vip/login')->with('errors','恭喜您，注册成功');
         }else{
             return back();
         }
