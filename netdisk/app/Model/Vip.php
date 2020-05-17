@@ -15,8 +15,8 @@ class Vip extends Model
     public $guarded = [];
 //    4.是否维护created_at和update_at字段
     public $timestamps = false;
-////    5.添加动态属性，关联文件模型
-//    public function folder(){
-//        return $this->belongsToMany('App\Model\Folder','vipuser_folder','user_id','folder_id');
-//    }
+//    5.添加动态属性，关联文件模型
+    public function folder(){
+        return $this->belongsToMany('App\Model\Folder','vipuser_folder','user_id','folder_id');
+    }
 }

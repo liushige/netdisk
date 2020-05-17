@@ -23,7 +23,6 @@ class FolderController extends Controller
         $currentUser = Vip::find(session()->get('vip')->user_id);
         $cF_id = 0;
 
-<<<<<<< HEAD
 //        获取用户所有的文件夹
 //        $userfolder = DB::table('vipuser_folder')->where('user_id',$currentUser->user_id);
 //        $folder = Folder::find($userfolder->value('folder_id'))
@@ -45,28 +44,9 @@ class FolderController extends Controller
             ->where(function ($q) use($cF_id,$currentUser){
                 $q->orwhere('folder_userid','=',$currentUser->user_id)
                     ->orwhere('folder_userid','=',$cF_id);
-=======
-        $userfolder = DB::table('folder')->where('folder_userid',$currentUser->user_id);
-
-        dd($userfolder);
-
-//        foreach ($u)
-        $folder = Folder::find($userfolder->value('id'))
-
-//        $folder = Folder::orderBy('folder_id','asc')
-            ->where(function ($query) use ($request, $currentUser){
-                $foldername = $request->input('foldername');
-                if(!empty($foldername)){
-                    $query->where('folder_name','like','%'.$foldername.'%');
-                } else {
-                    $query->where('folder_userid',$currentUser->user_id)->value('folder_parentid',0);
-                }
->>>>>>> 02084e0de99aba6e78c48939e2a0bad4c824914f
             })
 
             ->paginate($request->input('num')?$request->input('num'):15);
-
-        dd($folder);
 
         return view('vip.folder.list',compact('folder','request','cF_id'));
     }
@@ -109,42 +89,18 @@ class FolderController extends Controller
 //        dd($foldername);
 
 //        添加到数据库folder表
-<<<<<<< HEAD
         $res = Folder::create(['folder_name'=>$foldername, 'folder_parentid'=>$folderpid, 'folder_original'=>1, 'folder_userid'=>$currentUser->user_id]);
-=======
-        $res = Folder::create(['folder_name'=>$foldername, 'folder_parentid'=>$folderpid, 'folder_userid'=>$currentUser->user_id]);
-
-//        获取新创建的文件夹
-        $newfolder = DB::table('folder as a')
-            ->where(function ($q) use($foldername){
-                $q->where('a.folder_name','=',$foldername);
-            })
-            ->where(function ($q) use($currentUser){
-                $q->where('a.folder_userid','=',$currentUser->user_id);
-            })
-            ->where(function ($q){
-                $q->where('a.folder_id','=',null);
-            })->first();
-
-//        dd($newfolder->id);
-        $fid = $newfolder->id;
-
-        $folder = Folder::find($fid);
-
-//        dd($folder);
-
-//        给其folder_id赋值自增的数字，使其不重复
-        $folder->folder_id = $folder->id;
-        $res1 = $folder->save();
->>>>>>> 02084e0de99aba6e78c48939e2a0bad4c824914f
 
 //        获取新建文件夹的id号码
-//        $currentFid = Folder::where('folder_name',$foldername)->where('folder_parentid',$folderpid)->first();
+        $currentFid = Folder::where('folder_name',$foldername)->where('folder_parentid',$folderpid)->first();
 
 //        dd($currentFid->folder_id);
 
+//        添加到数据库vipuser_folder表
+        \DB::table('vipuser_folder')->insert(['user_id'=>$currentUser->user_id,'folder_id'=>$currentFid->folder_id]);
+
 //        根据是否成功，给客户端一个Json格式反馈
-        if($res and $res1){
+        if($res){
             $data = 0;
         }else{
             $data = 1;
