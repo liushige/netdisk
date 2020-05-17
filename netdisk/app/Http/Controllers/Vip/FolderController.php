@@ -7,6 +7,7 @@ use App\Model\Folder;
 use App\Model\Vip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use function PHPSTORM_META\type;
 
 class FolderController extends Controller
 {
@@ -20,24 +21,31 @@ class FolderController extends Controller
 //        分页显示
 //        获取当前登录用户
         $currentUser = Vip::find(session()->get('vip')->user_id);
-
         $cF_id = 0;
 
 //        获取用户所有的文件夹
-//        $allFolder = $currentUser->folder;
-        $userfolder = DB::table('vipuser_folder')->where('user_id',$currentUser->user_id);
-        $folder = Folder::find($userfolder->value('folder_id'))
+//        $userfolder = DB::table('vipuser_folder')->where('user_id',$currentUser->user_id);
+//        $folder = Folder::find($userfolder->value('folder_id'))
 
+//        ->where(function ($query) use ($request){
+//        $foldername = $request->input('foldername');
+//        if(!empty($foldername)){
+//            $query->where('folder_name','like','%'.$foldername.'%');
+//        } else {
+//            $query->where('folder_parentid',0);
+//        }
+//    })
+//        ->paginate($request->input('num')?$request->input('num'):15);
 
-//        $folder = Folder::orderBy('folder_id','asc')
-            ->where(function ($query) use ($request){
-                $foldername = $request->input('foldername');
-                if(!empty($foldername)){
-                    $query->where('folder_name','like','%'.$foldername.'%');
-                } else {
-                    $query->where('folder_parentid',0);
-                }
+        $folder = DB::table('folder as a')
+            ->where(function ($q) use($cF_id){
+                $q->where('folder_parentid','=',$cF_id);
             })
+            ->where(function ($q) use($cF_id,$currentUser){
+                $q->orwhere('folder_userid','=',$currentUser->user_id)
+                    ->orwhere('folder_userid','=',$cF_id);
+            })
+
             ->paginate($request->input('num')?$request->input('num'):15);
 
         return view('vip.folder.list',compact('folder','request','cF_id'));
@@ -81,7 +89,7 @@ class FolderController extends Controller
 //        dd($foldername);
 
 //        添加到数据库folder表
-        $res = Folder::create(['folder_name'=>$foldername, 'folder_parentid'=>$folderpid, 'folder_original'=>1]);
+        $res = Folder::create(['folder_name'=>$foldername, 'folder_parentid'=>$folderpid, 'folder_original'=>1, 'folder_userid'=>$currentUser->user_id]);
 
 //        获取新建文件夹的id号码
         $currentFid = Folder::where('folder_name',$foldername)->where('folder_parentid',$folderpid)->first();
@@ -121,26 +129,51 @@ class FolderController extends Controller
     {
 //        获取当前登录用户
         $currentUser = Vip::find(session()->get('vip')->user_id);
-//        获取选中的文件夹
-        $currentFolder = Folder::find($id);
-
 //        当前文件夹id，后续传回前台，方便新建文件夹等使用
         $cF_id = $id;
 
-//        dd($cF_id);
 
-//        获取用户所有的文件夹（选中文件夹的子文件夹）
-        $userfolder = DB::table('vipuser_folder')->where('user_id',$currentUser->user_id);
-        $folder = Folder::find($userfolder->value('folder_id'))
-            ->where(function ($query) use ($request,$id){
-                $foldername = $request->input('foldername');
-                if(!empty($foldername)){
-                    $query->where('folder_name','like','%'.$foldername.'%');
-                } else {
-                    $query->where('folder_parentid',$id);
-                }
+
+        $folder = DB::table('folder as a')
+            ->where(function ($q) use($cF_id){
+                $q->where('folder_parentid','=',$cF_id);
             })
+            ->where(function ($q) use($cF_id,$currentUser){
+                $q->orwhere('folder_userid','=',$currentUser->user_id)
+                    ->orwhere('folder_userid','=',0);
+            })
+
             ->paginate($request->input('num')?$request->input('num'):15);
+
+
+
+////        dd($cF_id);
+//
+////        获取用户所有的文件夹（选中文件夹的子文件夹）
+//        $userfolder = DB::table('vipuser_folder')->where('user_id',$currentUser->user_id)->get();
+//
+////        dd($userfolder->value('folder_id'));
+//        $ids = [];
+//        foreach ($userfolder as $v){
+//            $ids[] = Folder::find($v->folder_id);
+//        }
+//
+//        $folder = $ids;
+
+
+
+
+
+//        $folder1 = Folder::find($userfolder->folder_id)
+//            ->where(function ($query) use ($request,$cF_id){
+//                $foldername = $request->input('foldername');
+//                if(!empty($foldername)){
+//                    $query->where('folder_name','like','%'.$foldername.'%');
+//                } else {
+//                    $query->where('folder_parentid',$cF_id);
+//                }
+//            })
+//            ->paginate($request->input('num')?$request->input('num'):15);
 
 
 //        return redirect('vip/folder')->with('folder','request');
@@ -168,19 +201,34 @@ class FolderController extends Controller
      */
     public function folderMoveUpdate(Request $request, $id)
     {
+//        获取当前登录用户
+        $currentUser = Vip::find(session()->get('vip')->user_id);
+
         $folder = Folder::find($id);
         $toFolderid = $request->input('toFolderid');
 
-//        1.判断用户输入的id是否在数据库中有存档
-        $toFolder = Folder::find($toFolderid);
-        if(empty($toFolder) and $toFolderid != 0)
-        {
-            $data = 3;
-            return $data;
-        }
-//        2.判断是否为系统文件夹
+//        1.判断是否为系统文件夹
         if(!$folder->folder_original){
             $data = 2;
+            return $data;
+        }
+
+//        2.判断用户输入的id是否存在且是自己的
+        $toFolder = DB::table('folder as a')
+            ->where(function ($q) use($toFolderid){
+                $q->where('folder_id','=',$toFolderid);
+            })
+            ->where(function ($q) use($currentUser){
+                $q->orwhere('folder_userid','=',$currentUser->user_id)
+                    ->orwhere('folder_userid','=',0);
+            })->get();
+
+//        dd(count($toFolder));
+
+//        $toFolder = Folder::find($toFolderid);
+        if(!count($toFolder))
+        {
+            $data = 3;
             return $data;
         }
 

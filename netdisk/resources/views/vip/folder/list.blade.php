@@ -23,34 +23,35 @@
             <a>
               <cite>导航元素</cite></a>
           </span>
-    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right;background-color: #8080C0" onclick="location.reload()" title="刷新">
         <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
 </div>
 <div class="layui-fluid">
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md12">
-            <div class="layui-card">
-                <div class="layui-card-body ">
-                    <form class="layui-form layui-col-space5" method="get" action="{{ url('vip/folder') }}">
-                        <div class="layui-inline layui-show-xs-block">
-                            <select name="num" lay-verify="">
-                                <option value="15" @if($request->input('num')==15)    selected    @endif>每页15条记录</option>
-                                <option value="30" @if($request->input('num')==30)    selected    @endif>每页30条记录</option>
-                            </select>
-                        </div>
-                        <div class="layui-inline layui-show-xs-block">
-                            <input type="text" name="foldername"  value="{{ $request->input('foldername') }}" placeholder="全局搜索" autocomplete="off" class="layui-input">
-                        </div>
-                        <div class="layui-inline layui-show-xs-block">
-                            <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-                        </div>
-                    </form>
-                </div>
+            {{--<div class="layui-card">--}}
+                {{--<div class="layui-card-body ">--}}
+                    {{--<form class="layui-form layui-col-space5" method="get" action="{{ url('vip/folder') }}">--}}
+                        {{--<div class="layui-inline layui-show-xs-block">--}}
+                            {{--<select name="num" lay-verify="">--}}
+                                {{--<option value="15" @if($request->input('num')==15)    selected    @endif>每页15条记录</option>--}}
+                                {{--<option value="30" @if($request->input('num')==30)    selected    @endif>每页30条记录</option>--}}
+                            {{--</select>--}}
+                        {{--</div>--}}
+                        {{--<div class="layui-inline layui-show-xs-block">--}}
+                            {{--<input type="text" name="foldername"  value="{{ $request->input('foldername') }}" placeholder="全局搜索" autocomplete="off" class="layui-input">--}}
+                        {{--</div>--}}
+                        {{--<div class="layui-inline layui-show-xs-block">--}}
+                            {{--<button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>--}}
+                        {{--</div>--}}
+                    {{--</form>--}}
+                {{--</div>--}}
                 <div class="layui-card-header">
-                    <button type="button" class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-                    <button type="button" class="layui-btn" onclick="xadmin.open('新建文件夹','{{ url('vip/folder/'.$cF_id.'/create') }}',600,400)"><i class="layui-icon"></i>新建文件夹</button>
+                    <button type="button" style="background-color: #cc0033" class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
+                    <button type="button" style="background-color: #8080C0" class="layui-btn" onclick="xadmin.open('新建文件夹','{{ url('vip/folder/'.$cF_id.'/create') }}',600,400)"><i class="layui-icon"></i>新建文件夹</button>
                     {{--<button type="button" class="layui-btn" lay-filter="uploadApp"><i class="layui-icon">&#xe619;</i>上传软件</button>--}}
-                    <a href="{{ url('vip/app/'.$cF_id.'/create') }}" class="layui-btn"><i class="layui-icon">&#xe619;</i>上传软件</a>
+                    <a style="background-color: #8080C0" href="{{ url('vip/app/'.$cF_id.'/create') }}" class="layui-btn"><i class="layui-icon">&#xe62f;</i>上传软件</a>
+                    <a style="background-color: #8080C0" href="{{ url('vip/app/'.$cF_id.'/create') }}" class="layui-btn"><i class="layui-icon">&#xe615;</i>全局搜索</a>
                 </div>
                 <div class="layui-card-body layui-table-body layui-table-main">
                     <table class="layui-table layui-form">
@@ -94,7 +95,7 @@
                 <div class="layui-card-body ">
                     <div class="page">
                         <div class="layui-inline layui-show-xs-block"> {!! $folder->appends($request->all())->render() !!} </div>
-                        <div class="layui-inline layui-show-xs-block">共有 {!! $folder->total() !!} 条记录</div>
+                        <div class="layui-inline layui-show-xs-block">本页 {!! sizeof($folder) !!} 条记录</div>
                     </div>
                 </div>
             </div>
@@ -140,6 +141,8 @@
                     //发异步删除数据
                     $(obj).parents("tr").remove();
                     layer.msg('删除成功!',{icon:6,time:1000});
+                    // 可以对父窗口进行刷新
+                    xadmin.father_reload();
                 }else {
                     layer.msg('删除失败!',{icon:5,time:1000});
                 }
