@@ -18,8 +18,7 @@
                     <div class="layui-card">
                         <div class="layui-card-body ">
                             <blockquote class="layui-elem-quote"> 欢迎您：
-                                <span class="x-red">{{ $currentUser->user_name }}</span> <br> 当前时间：
-                                <span class="x-red">{{ Carbon\Carbon::now() }}</span>
+                                <span class="x-red" style="color: #009688">{{ $currentUser->user_name }}</span>
                             </blockquote>
                         </div>
                     </div>

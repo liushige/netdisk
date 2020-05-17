@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Vip;
 
 use App\Http\Controllers\Controller;
+use App\Model\App;
 use App\Model\Folder;
 use App\Model\Vip;
 use Illuminate\Http\Request;
@@ -23,20 +24,7 @@ class FolderController extends Controller
         $currentUser = Vip::find(session()->get('vip')->user_id);
         $cF_id = 0;
 
-//        获取用户所有的文件夹
-//        $userfolder = DB::table('vipuser_folder')->where('user_id',$currentUser->user_id);
-//        $folder = Folder::find($userfolder->value('folder_id'))
-
-//        ->where(function ($query) use ($request){
-//        $foldername = $request->input('foldername');
-//        if(!empty($foldername)){
-//            $query->where('folder_name','like','%'.$foldername.'%');
-//        } else {
-//            $query->where('folder_parentid',0);
-//        }
-//    })
-//        ->paginate($request->input('num')?$request->input('num'):15);
-
+//        文件夹部分
         $folder = DB::table('folder as a')
             ->where(function ($q) use($cF_id){
                 $q->where('folder_parentid','=',$cF_id);
@@ -45,10 +33,21 @@ class FolderController extends Controller
                 $q->orwhere('folder_userid','=',$currentUser->user_id)
                     ->orwhere('folder_userid','=',$cF_id);
             })
-
             ->paginate($request->input('num')?$request->input('num'):15);
 
-        return view('vip.folder.list',compact('folder','request','cF_id'));
+//        软件部分
+//        获取当前目录下所有的app在folder_app中的记录
+        $appitem = DB::table('folder_app')->where('folder_id',$cF_id)->get();
+//        遍历$app
+        $app = [];
+                foreach ($appitem as $v){
+                    $apptemp = App::find($v->app_id);
+                    if($apptemp->app_userid == $currentUser->user_id){
+                        $app[] = $apptemp;
+            }
+        }
+
+        return view('vip.folder.list',compact('folder','request','cF_id','app'));
     }
 
     /**
@@ -132,8 +131,7 @@ class FolderController extends Controller
 //        当前文件夹id，后续传回前台，方便新建文件夹等使用
         $cF_id = $id;
 
-
-
+//        文件夹打开部分
         $folder = DB::table('folder as a')
             ->where(function ($q) use($cF_id){
                 $q->where('folder_parentid','=',$cF_id);
@@ -146,38 +144,19 @@ class FolderController extends Controller
             ->paginate($request->input('num')?$request->input('num'):15);
 
 
+//        软件打开部分
+//        获取当前目录下所有的app在folder_app中的记录
+        $appitem = DB::table('folder_app')->where('folder_id',$cF_id)->get();
+//        遍历$app
+        $app = [];
+        foreach ($appitem as $v){
+            $apptemp = App::find($v->app_id);
+            if($apptemp->app_userid == $currentUser->user_id){
+                $app[] = $apptemp;
+            }
+        }
 
-////        dd($cF_id);
-//
-////        获取用户所有的文件夹（选中文件夹的子文件夹）
-//        $userfolder = DB::table('vipuser_folder')->where('user_id',$currentUser->user_id)->get();
-//
-////        dd($userfolder->value('folder_id'));
-//        $ids = [];
-//        foreach ($userfolder as $v){
-//            $ids[] = Folder::find($v->folder_id);
-//        }
-//
-//        $folder = $ids;
-
-
-
-
-
-//        $folder1 = Folder::find($userfolder->folder_id)
-//            ->where(function ($query) use ($request,$cF_id){
-//                $foldername = $request->input('foldername');
-//                if(!empty($foldername)){
-//                    $query->where('folder_name','like','%'.$foldername.'%');
-//                } else {
-//                    $query->where('folder_parentid',$cF_id);
-//                }
-//            })
-//            ->paginate($request->input('num')?$request->input('num'):15);
-
-
-//        return redirect('vip/folder')->with('folder','request');
-        return view('vip.folder.list',compact('folder', 'request','cF_id'));
+        return view('vip.folder.list',compact('folder', 'request','cF_id','app'));
     }
 
     /**

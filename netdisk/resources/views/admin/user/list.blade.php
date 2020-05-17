@@ -53,7 +53,7 @@
                             </form>
                         </div>
                         <div class="layui-card-header">
-                            <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
+                            <button class="layui-btn layui-btn-danger" onclick="delAll()" style="background-color: #cc0033"><i class="layui-icon"></i>批量删除</button>
                             <button class="layui-btn" onclick="xadmin.open('添加用户','{{ url('admin/user/create') }}',600,400)"><i class="layui-icon"></i>添加</button>
                         </div>
                         <div class="layui-card-body layui-table-body layui-table-main">
@@ -79,7 +79,7 @@
                                     <td>{{ $v->user_name }}</td>
                                     <td>{{ $v->user_email }}</td>
                                     <td class="td-status">
-                                      <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
+                                      <span class="layui-btn layui-btn-normal layui-btn-mini" style="background-color: #009688">已启用</span></td>
                                     <td class="td-manage">
                                       <a title="授予角色" href="{{ url('admin/user/'.$v->user_id.'/auth') }}">
                                           <i class="layui-icon">&#xe612;</i>

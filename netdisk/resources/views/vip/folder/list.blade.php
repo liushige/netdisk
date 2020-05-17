@@ -29,23 +29,6 @@
 <div class="layui-fluid">
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md12">
-            {{--<div class="layui-card">--}}
-                {{--<div class="layui-card-body ">--}}
-                    {{--<form class="layui-form layui-col-space5" method="get" action="{{ url('vip/folder') }}">--}}
-                        {{--<div class="layui-inline layui-show-xs-block">--}}
-                            {{--<select name="num" lay-verify="">--}}
-                                {{--<option value="15" @if($request->input('num')==15)    selected    @endif>每页15条记录</option>--}}
-                                {{--<option value="30" @if($request->input('num')==30)    selected    @endif>每页30条记录</option>--}}
-                            {{--</select>--}}
-                        {{--</div>--}}
-                        {{--<div class="layui-inline layui-show-xs-block">--}}
-                            {{--<input type="text" name="foldername"  value="{{ $request->input('foldername') }}" placeholder="全局搜索" autocomplete="off" class="layui-input">--}}
-                        {{--</div>--}}
-                        {{--<div class="layui-inline layui-show-xs-block">--}}
-                            {{--<button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>--}}
-                        {{--</div>--}}
-                    {{--</form>--}}
-                {{--</div>--}}
                 <div class="layui-card-header">
                     <button type="button" style="background-color: #cc0033" class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
                     <button type="button" style="background-color: #8080C0" class="layui-btn" onclick="xadmin.open('新建文件夹','{{ url('vip/folder/'.$cF_id.'/create') }}',600,400)"><i class="layui-icon"></i>新建文件夹</button>
@@ -53,6 +36,8 @@
                     <a style="background-color: #8080C0" href="{{ url('vip/app/'.$cF_id.'/create') }}" class="layui-btn"><i class="layui-icon">&#xe62f;</i>上传软件</a>
                     <a style="background-color: #8080C0" href="{{ url('vip/app/'.$cF_id.'/create') }}" class="layui-btn"><i class="layui-icon">&#xe615;</i>全局搜索</a>
                 </div>
+
+            {{--文件夹展示部分--}}
                 <div class="layui-card-body layui-table-body layui-table-main">
                     <table class="layui-table layui-form">
                         <thead>
@@ -92,12 +77,56 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="layui-card-body ">
-                    <div class="page">
-                        <div class="layui-inline layui-show-xs-block"> {!! $folder->appends($request->all())->render() !!} </div>
-                        <div class="layui-inline layui-show-xs-block">本页 {!! sizeof($folder) !!} 条记录</div>
-                    </div>
+
+            {{--软件展示部分--}}
+            <div class="layui-card-body layui-table-body layui-table-main">
+                <table class="layui-table layui-form">
+                    <thead>
+                    <tr>
+                        <th>
+                            <input type="checkbox" lay-filter="checkall" name="" lay-skin="primary">
+                        </th>
+                        <th>ID</th>
+                        <th>软件名称</th>
+                        <th>操作</th></tr>
+                    </thead>
+                    <tbody>
+                    @foreach($app as $v)
+                        <tr>
+                            <td>
+                                <input type="checkbox" lay-skin="primary" value="{{ $v->app_id }}">
+                                <i class="iconfont">&#xe705;</i>
+                            </td>
+                            <td>{{ $v->app_id }}</td>
+                            <td>{{ $v->app_name }}</td>
+                            <td class="td-manage">
+                                <a title="打开" href="{{ url('vip/app/'.$v->app_id) }}">
+                                    <i class="layui-icon">&#xe617;</i>
+                                </a>
+                                <a title="移动"  onclick="xadmin.open('移动','{{ url('vip/app/'.$v->app_id.'/move') }}',600,400)" href="javascript:;">
+                                    <i class="layui-icon">&#xe609;</i>
+                                </a>
+                                <a title="编辑" href="{{ url('vip/app/'.$v->app_id.'/edit') }}">
+                                    <i class="layui-icon">&#xe642;</i>
+                                </a>
+                                <a title="删除" onclick="app_del(this,'{{ $v->app_id }}')" href="javascript:;">
+                                    <i class="layui-icon">&#xe640;</i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            {{--底部统计模块--}}
+            <div class="layui-card-body ">
+                <div class="page">
+                    <div class="layui-inline layui-show-xs-block"> {!! $folder->appends($request->all())->render() !!} </div>
+                    <div class="layui-inline layui-show-xs-block">共 {!! $folder->total() !!} 个文件夹, {!! sizeof($app) !!} 个软件</div>
                 </div>
+            </div>
+
             </div>
         </div>
     </div>
@@ -131,7 +160,7 @@
     });
 
 
-    /*角色-删除*/
+    /*文件夹-删除*/
     function member_del(obj,id){
         layer.confirm('确认要删除吗？',function(index){
             $.post('/vip/folder/'+id,{"_method":"delete","_token":"{{ csrf_token() }}"},function (data) {
@@ -150,7 +179,22 @@
         });
     }
 
-
+    /*app-删除*/
+    function app_del(obj,id){
+        layer.confirm('确认要删除吗？',function(index){
+            $.post('/vip/app/'+id,{"_method":"delete","_token":"{{ csrf_token() }}"},function (data) {
+                if(data==0){
+                    //发异步删除数据
+                    $(obj).parents("tr").remove();
+                    layer.msg('删除成功!',{icon:6,time:1000});
+                    // 可以对父窗口进行刷新
+                    xadmin.father_reload();
+                }else {
+                    layer.msg('删除失败!',{icon:5,time:1000});
+                }
+            })
+        });
+    }
 
     function delAll (argument) {
         var ids = [];

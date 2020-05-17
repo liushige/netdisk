@@ -113,3 +113,12 @@ Route::resource('vip/app','Vip\AppController');
 Route::get('vip/app/{app}/create','Vip\AppController@appCreate');
 Route::post('vip/app/store','Vip\AppController@appStore');
 Route::post('vip/app/upload','Vip\AppController@upload');
+//软件移动
+Route::get('vip/app/{folder}/move','Vip\AppController@appMove');
+Route::put('vip/app/{folder}/moveUpdate','Vip\AppController@appMoveUpdate');
+//软件修改重新上传路由
+Route::post('vip/app/{app}/uploadagain','Vip\AppController@uploadAgain');
+Route::post('vip/app/{app}/storeagain','Vip\AppController@storeAgain');
+//侧边栏软件大类展示路由
+Route::get('vip/app/{app}/sortShow','Vip\AppController@asideShow');
+
