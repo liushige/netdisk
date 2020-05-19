@@ -83,12 +83,12 @@
                 <table class="layui-table layui-form">
                     <thead>
                     <tr>
-                        <th>
+                        <th width="40px">
                             <input type="checkbox" lay-filter="checkall" name="" lay-skin="primary">
                         </th>
-                        <th>ID</th>
-                        <th>软件名称</th>
-                        <th>操作</th></tr>
+                        <th width="40px">ID</th>
+                        <th width="40px">软件名称</th>
+                        <th width="40px">操作</th></tr>
                     </thead>
                     <tbody>
                     @foreach($app as $v)
@@ -170,8 +170,8 @@
                     //发异步删除数据
                     $(obj).parents("tr").remove();
                     layer.msg('删除成功!',{icon:6,time:1000});
-                    // 可以对父窗口进行刷新
-                    xadmin.father_reload();
+                    // // 可以对父窗口进行刷新
+                    // xadmin.father_reload();
                 }else {
                     layer.msg('删除失败!',{icon:5,time:1000});
                 }
@@ -187,8 +187,8 @@
                     //发异步删除数据
                     $(obj).parents("tr").remove();
                     layer.msg('删除成功!',{icon:6,time:1000});
-                    // 可以对父窗口进行刷新
-                    xadmin.father_reload();
+                    // // 可以对父窗口进行刷新
+                    // xadmin.father_reload();
                 }else {
                     layer.msg('删除失败!',{icon:5,time:1000});
                 }

@@ -89,10 +89,10 @@ Route::get('vip/phoneregister','Vip\RegisterController@phoneReg');
 Route::get('vip/sendcode','Vip\RegisterController@sendCode');
 Route::post('vip/dophoneregister','Vip\RegisterController@doPhoneRegister');
 
-//邮箱注册激活路由
-Route::get('vip/emailregister','Vip\RegisterController@register');
-Route::post('vip/doregister','Vip\RegisterController@doRegister');
-Route::get('vip/active','Vip\RegisterController@active');
+////邮箱注册激活路由
+//Route::get('vip/emailregister','Vip\RegisterController@register');
+//Route::post('vip/doregister','Vip\RegisterController@doRegister');
+//Route::get('vip/active','Vip\RegisterController@active');
 
 //前台首页
 Route::get('vip/index','Vip\IndexController@index')->name('index');

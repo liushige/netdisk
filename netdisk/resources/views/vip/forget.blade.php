@@ -16,9 +16,9 @@
     <meta name='robots' content='noindex,follow'/>
     <meta name="viewport" content="width=device-width"/>
 </head>
-<body class="login login-action-lostpassword wp-core-ui  locale-zh-cn">
+<body class="login login-action-lostpassword wp-core-ui  locale-zh-cn" style="background: #8080C0">
 <div id="login">
-    <div style="background-color: white; vertical-align: middle; color: #0085ba; font-weight:bold; font-size: 18px">
+    <div style="background-color: white; vertical-align: middle; color: #8080C0; font-weight:bold; font-size: 18px">
         <span style="vertical-align: middle"> <img style="vertical-align: middle" src="http://www.netdisk.com/vip/images/jlulogo.jpg" width="102px" height="56px"></span>
         欢迎登陆吉大教务网盘
     </div>
@@ -31,11 +31,11 @@
                 <input type="text" name="email" id="user_login" required class="input" value="" size="20"/></label>
         </p>
         <p class="submit">
-            <input type="submit"  id="wp-submit" class="button button-primary button-large" value="获取新密码"/>
+            <input type="submit"  id="wp-submit" class="button button-primary button-large" value="获取新密码" style="background: #8080C0; color: white"/>
         </p>
     </form>
 
-    <p id="backtoblog"><a href="{{ url('vip/login') }}">>>>返回登录<<<</a></p>
+    <p id="backtoblog"><a href="{{ url('vip/login') }}" style="color: white">>>>返回登录<<<</a></p>
 
 </div>
 

@@ -80,19 +80,19 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+                <div class="title m-b-md" style="font-size: 30px; font-weight: bold">
+                    本网盘致谢以下技术
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a>Laravel</a>
+                    <a>PHP</a>
+                    <a>MySQL</a>
+                    <a>Apache</a>
+                    <a>Layui</a>
+                    <a>X-admin</a>
+                    <a>PHPstudy</a>
+                    <a>GitHub</a>
                 </div>
             </div>
         </div>

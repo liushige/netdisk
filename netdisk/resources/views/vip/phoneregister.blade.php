@@ -11,9 +11,9 @@
     @include('vip.public.styles')
     <script type="text/javascript" src="{{url('admin/js/xadmin.js')}}"></script>
 </head>
-<body class="login login-action-login wp-core-ui  locale-zh-cn">
+<body class="login login-action-login wp-core-ui  locale-zh-cn" style="background: #8080C0">
 <div id="login">
-    <div style="background-color: white; vertical-align: middle; color: #0085ba; font-weight:bold; font-size: 18px">
+    <div style="background-color: white; vertical-align: middle; color: #8080C0; font-weight:bold; font-size: 18px">
         <span style="vertical-align: middle"> <img style="vertical-align: middle" src="http://www.netdisk.com/vip/images/jlulogo.jpg" width="102px" height="56px"></span>
         欢迎登陆吉大教务网盘
     </div>
@@ -41,6 +41,10 @@
                 <input type="text" name="phone" required class="input" value="" size="20"></label>
         </p>
         <p>
+            <label for="user_login">邮箱<br>
+                <input type="text" name="email" required class="input" value="" size="20"></label>
+        </p>
+        <p>
             <label for="user_pass">密码<br>
                 <input type="password" name="user_pass" required id="user_pass" class="input" value="" size="20"></label>
         </p>
@@ -52,12 +56,12 @@
             </label>
         </p>
         <p class="submit">
-            <input type="submit"  class="button button-primary button-large" value="注册">
+            <input type="submit"  class="button button-primary button-large" value="注册" style="background: #8080C0; color: white">
 
         </p>
     </form>
 
-    <p id="backtoblog"><a href="{{ asset('vip/login') }}">>>>返回登录<<</a></p>
+    <p id="backtoblog"><a href="{{ asset('vip/login') }}" style="color: white">>>>返回登录<<</a></p>
 
     <script type="text/javascript">
 
@@ -82,6 +86,7 @@
             // 1. 获取用户名、手机号和密码
             var username = $('input[name=username]').val();
             var phone = $('input[name=phone]').val();
+            var email = $('input[name=email]').val();
             var pass = $('input[name=user_pass]').val();
 
             // 2. 判断是否为空
@@ -95,6 +100,10 @@
             }
             if(!/^1[34578]\d{9}$/.test(phone)){
                 layer.msg('手机号填写有误');
+                return ;
+            }
+            if(!/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/.test(email)){
+                layer.msg('邮箱填写有误');
                 return ;
             }
             if(!pass){

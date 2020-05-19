@@ -11,9 +11,9 @@
     <meta name="robots" content="noindex,follow">
     <meta name="viewport" content="width=device-width">
 </head>
-<body class="login login-action-login wp-core-ui  locale-zh-cn" onload="getCookie();">
+<body class="login login-action-login wp-core-ui  locale-zh-cn" onload="getCookie();" style="background: #8080C0">
 <div id="login">
-    <div style="background-color: white; vertical-align: middle; color: #0085ba; font-weight:bold; font-size: 18px">
+    <div style="background-color: white; vertical-align: middle; color: #8080C0; font-weight:bold; font-size: 18px">
         <span style="vertical-align: middle"> <img style="vertical-align: middle" src="http://www.netdisk.com/vip/images/jlulogo.jpg" width="102px" height="56px"></span>
         欢迎登陆吉大教务网盘
     </div>
@@ -53,12 +53,12 @@
                 <input name="rememberme" type="checkbox" id="rememberme" value="forever"> 记住我的登录信息</label>
         </p>
         <p class="submit">
-            <input type="submit" id="wp-submit" class="button button-primary button-large" value="登录">
+            <input type="submit" id="wp-submit" class="button button-primary button-large" value="登录" style="background: #8080C0;color: white">
         </p>
     </form>
 
     <p id="nav">
-        <a href="{{ asset('vip/forget') }}">>>>忘记密码<<<</a>
+        <a href="{{ asset('vip/forget') }}" style="color: white">>>>忘记密码<<<</a>
     </p>
 
     <script type="text/javascript">
@@ -75,8 +75,8 @@
         wp_attempt_focus();
         if (typeof wpOnload == 'function') wpOnload();
     </script>
-    <p id="backtoblog"><a href="{{ asset('vip/phoneregister') }}">>>>手机注册<<<</a></p>
-    <p id="backtoblog"><a href="{{ asset('vip/emailregister') }}">>>>邮箱注册<<<</a></p>
+    <p id="backtoblog"><a href="{{ asset('vip/phoneregister') }}" style="color: white">>>>手机注册<<<</a></p>
+    {{--<p id="backtoblog"><a href="{{ asset('vip/emailregister') }}" style="color: white">>>>邮箱注册<<<</a></p>--}}
 
 </div>
 
