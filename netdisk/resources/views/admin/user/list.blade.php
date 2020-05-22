@@ -79,7 +79,7 @@
                                     <td>{{ $v->user_name }}</td>
                                     <td>{{ $v->user_email }}</td>
                                     <td class="td-status">
-                                      <span class="layui-btn layui-btn-normal layui-btn-mini" style="background-color: #009688">已启用</span></td>
+                                      <span class="layui-btn layui-btn-normal layui-btn-mini" style="background-color: #009688">@if( $v->status == 1) 已启用 @else 未启用 @endif</span></td>
                                     <td class="td-manage">
                                       <a title="授予角色" href="{{ url('admin/user/'.$v->user_id.'/auth') }}">
                                           <i class="layui-icon">&#xe612;</i>

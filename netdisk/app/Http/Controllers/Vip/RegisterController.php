@@ -26,21 +26,28 @@ class RegisterController extends Controller
 //        1. 获取要发送的手机号
         $phone = $request->phone;
 
-//        2. 生成模板中需要的参数 ，验证码和时间
+//        2.在数据库中查找此号码是否已注册
+        $phoneagain = DB::table('vipuser')->where('user_phone',$phone)->first();
+        if ($phoneagain){
+            $data = 2;
+            return $data;
+        }
+
+//        3.生成模板中需要的参数 ，验证码和时间
         $code = rand(1000,9999);
         $arr = [$code,5];
 
-//      3 调用容联云通讯的接口
+//        4.调用容联云通讯的接口
         $templateSMS = new SendTemplateSMS();
 //        $M3result = new M3Result();
 
         $M3result = $templateSMS->sendTemplateSMS($phone,$arr,1);
 
 
-//        4 将验证码存入session
+//        5.将验证码存入session
         session()->put('phone',$code);
 
-//        5 给前台返回容联云通讯的响应结果
+//        6.给前台返回容联云通讯的响应结果
         return $M3result->status;
 
     }
@@ -50,17 +57,20 @@ class RegisterController extends Controller
     {
         $input = $request->except('_token');
 
+//        在vipuser表查找输入的用户名是否重复
+        $vipname = $input['username'];
+        $nameagain = DB::table('vipuser')->where('user_name',$vipname)->first();
+        if ($nameagain){
+            return redirect('vip/phoneregister')->with('errors','已有此用户名存在，请更换后重新注册');
+        }
 
 //        如果未填验证码或者验证码不对
         if(session()->get('phone') != $input['code']){
             return redirect('vip/phoneregister')->with('errors','信息填写有误，请重新填写');
         }
 
-//        查找vip用户是否已用改手机号注册
-
-
         $input['user_pass'] = Crypt::encrypt($input['user_pass']);
-        $input['expire'] = time()+3600*24;
+//        $input['expire'] = time()+3600*24;
 
         $user = Vip::create(['user_name'=>$input['username'],'user_phone'=>$input['phone'],'user_pass'=>$input['user_pass'],'user_email'=>$input['email']]);
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Vip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 
 class VipController extends Controller
 {
@@ -50,16 +51,26 @@ class VipController extends Controller
     {
 //        1.接收前台传来的表单数据
         $input = $request->all();
-//        2.进行表单验证
+
+//        2.验证电话号码和用户名是否存在
+        $username = $input['username'];
+        $userphone = $input['phone'];
+        $nameagain = DB::table('vipuser')->where('user_name',$username)->first();
+        $phoneagain = DB::table('vipuser')->where('user_phone',$userphone)->first();
+        if($nameagain){
+            $data = 2;
+            return $data;
+        }
+        if($phoneagain){
+            $data = 3;
+            return $data;
+        }
 
 //        3.添加到数据库user表
-        $username = $input['username'];
         $email = $input['email'];
-        $phone = $input['phone'];
         $pass = Crypt::encrypt($input['pass']);
-        $active = $input['active'];
 
-        $res = Vip::create(['user_name'=>$username,'user_email'=>$email,'user_phone'=>$phone,'user_pass'=>$pass,'active'=>$active]);
+        $res = Vip::create(['user_email'=>$email,'user_pass'=>$pass,'user_name'=>$username,'user_phone'=>$userphone]);
 //        4.根据是否成功，给客户端一个Json格式反馈
         if($res){
             $data = 0;
@@ -109,16 +120,10 @@ class VipController extends Controller
         $user = Vip::find($id);
 //        2.获取要修改的其他信息
         $useremail = $request->input('email');
-        $username = $request->input('username');
-        $userphone = $request->input('phone');
         $userpass = $request->input('pass');
-        $useractive = $request->input('active');
 //        3.修改数据库中相应值
         $user->user_email = $useremail;
-        $user->user_name = $username;
-        $user->user_phone = $userphone;
         $user->user_pass = Crypt::encrypt($userpass);
-        $user->active = $useractive;
 
 //        给到前台作为修改编辑页面未改动时的原密码展示
 //        $pass = Crypt::decrypt($user->user_pass);

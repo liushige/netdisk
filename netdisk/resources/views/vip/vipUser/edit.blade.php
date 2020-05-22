@@ -25,7 +25,8 @@
                         <label for="L_username" class="layui-form-label">
                             <span class="x-red">*</span>姓名</label>
                         <div class="layui-input-inline">
-                            <input type="text" id="L_username" name="username" value="{{ $vip->user_name }}" required="" lay-verify="nikename" autocomplete="off" class="layui-input"></div>
+                            <input type="text" id="L_username" readonly="readonly" name="username" value="{{ $vip->user_name }}" required="" lay-verify="nikename" autocomplete="off" class="layui-input"></div>
+                        <div class="layui-form-mid layui-word-aux">将会成为您唯一的登入名（无法更改）</div>
                     </div>
                     <div class="layui-form-item">
                         <label for="L_email" class="layui-form-label">
@@ -38,7 +39,8 @@
                         <label for="L_phone" class="layui-form-label">
                             <span class="x-red">*</span>手机号码</label>
                         <div class="layui-input-inline">
-                            <input type="text" id="L_phone" name="phone" value="{{ $vip->user_phone }}" required="" lay-verify="phone" autocomplete="off" class="layui-input"></div>
+                            <input type="text" id="L_phone" readonly="readonly" name="phone" value="{{ $vip->user_phone }}" required="" lay-verify="phone" autocomplete="off" class="layui-input"></div>
+                        <div class="layui-form-mid layui-word-aux">仅允许查看（无法更改）</div>
                     </div>
                     <div class="layui-form-item">
                         <label for="L_pass" class="layui-form-label">
@@ -52,12 +54,12 @@
                         <div class="layui-input-inline">
                             <input type="password" id="L_repass" name="repass" required="" lay-verify="repass" autocomplete="off" class="layui-input"></div>
                     </div>
-                    <div class="layui-form-item">
-                        <label for="L_active" class="layui-form-label">
-                            <span class="x-red">*</span>是否激活</label>
-                        <div class="layui-input-inline">
-                            <input type="text" id="L_active" name="active" value="{{ $vip->active }}" required="" lay-verify="active" autocomplete="off" class="layui-input"></div>
-                        <div class="layui-form-mid layui-word-aux">请填0或1（0：激活，1：不激活）</div></div>
+                    {{--<div class="layui-form-item">--}}
+                        {{--<label for="L_active" class="layui-form-label">--}}
+                            {{--<span class="x-red">*</span>是否激活</label>--}}
+                        {{--<div class="layui-input-inline">--}}
+                            {{--<input type="text" id="L_active" name="active" value="{{ $vip->active }}" required="" lay-verify="active" autocomplete="off" class="layui-input"></div>--}}
+                        {{--<div class="layui-form-mid layui-word-aux">请填0或1（0：激活，1：不激活）</div></div>--}}
                     <div class="layui-form-item">
                         <label for="L_repass" class="layui-form-label"></label>
                         <button class="layui-btn" lay-filter="edit" lay-submit="">修改</button></div>

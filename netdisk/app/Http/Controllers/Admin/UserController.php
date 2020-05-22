@@ -8,6 +8,7 @@ use App\Model\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use App\Model\User;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -54,14 +55,21 @@ class UserController extends Controller
     {
 //        1.接收前台传来的表单数据
         $input = $request->all();
-//        2.进行表单验证
+
+//        查看已添加的用户名是否重复
+        $username = $input['username'];
+        $nameagain = DB::table('adminuser')->where('user_name',$username)->first();
+        if($nameagain){
+            $data = 2;
+            return $data;
+        }
 
 //        3.添加到数据库user表
-        $username = $input['username'];
         $email = $input['email'];
         $pass = Crypt::encrypt($input['pass']);
+        $status = $input['status'];
 
-        $res = User::create(['user_name'=>$username,'user_email'=>$email,'user_pass'=>$pass]);
+        $res = User::create(['user_name'=>$username,'user_email'=>$email,'user_pass'=>$pass,'status'=>$status]);
 //        4.根据是否成功，给客户端一个Json格式反馈
         if($res){
 //            $data = [
@@ -137,12 +145,12 @@ class UserController extends Controller
         $user = User::find($id);
 //        2.获取要修改的其他信息
         $useremail = $request->input('email');
-        $username = $request->input('username');
         $userpass = $request->input('pass');
+        $status = $request->input('status');
 //        3.修改数据库中相应值
         $user->user_email = $useremail;
-        $user->user_name = $username;
         $user->user_pass = Crypt::encrypt($userpass);
+        $user->status = $status;
 
 //        给到前台作为修改编辑页面未改动时的原密码展示
 //        $pass = Crypt::decrypt($user->user_pass);

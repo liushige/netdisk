@@ -117,8 +117,10 @@
             $.get('sendcode',{'phone':phone},function(data){
                     if(data == 0){
                         layer.msg('发送成功',{'time':1000,'icon':6})
-                    }else{
+                    }else if (data == 1){
                         layer.msg('发送失败',{'time':1000,'icon':5})
+                    }else {
+                        layer.msg('此手机号码已注册过，请更换后重新注册',{'time':1000,'icon':5})
                     }
             });
         }

@@ -26,6 +26,7 @@
                             <span class="x-red">*</span>用户名</label>
                         <div class="layui-input-inline">
                             <input type="text" id="L_username" name="username" required="" lay-verify="nikename" autocomplete="off" class="layui-input"></div>
+                        <div class="layui-form-mid layui-word-aux">将会成为您唯一的登入名（无法更改）</div>
                     </div>
                     <div class="layui-form-item">
                         <label for="L_email" class="layui-form-label">
@@ -38,6 +39,7 @@
                             <span class="x-red">*</span>手机号</label>
                         <div class="layui-input-inline">
                             <input type="text" id="L_phone" name="phone" required="" lay-verify="phone" autocomplete="off" class="layui-input"></div>
+                        <div class="layui-form-mid layui-word-aux">一经录入，无法更改</div>
                     </div>
                     <div class="layui-form-item">
                         <label for="L_pass" class="layui-form-label">
@@ -51,12 +53,12 @@
                         <div class="layui-input-inline">
                             <input type="password" id="L_repass" name="repass" required="" lay-verify="repass" autocomplete="off" class="layui-input"></div>
                     </div>
-                    <div class="layui-form-item">
-                        <label for="L_active" class="layui-form-label">
-                            <span class="x-red">*</span>是否激活</label>
-                        <div class="layui-input-inline">
-                            <input type="text" id="L_active" name="active" required="" autocomplete="off" class="layui-input"></div>
-                        <div class="layui-form-mid layui-word-aux">请填0或1（0：未激活，1：已激活）</div></div>
+                    {{--<div class="layui-form-item">--}}
+                        {{--<label for="L_active" class="layui-form-label">--}}
+                            {{--<span class="x-red">*</span>是否激活</label>--}}
+                        {{--<div class="layui-input-inline">--}}
+                            {{--<input type="text" id="L_active" name="active" required="" autocomplete="off" class="layui-input"></div>--}}
+                        {{--<div class="layui-form-mid layui-word-aux">请填0或1（0：未激活，1：已激活）</div></div>--}}
                     <div class="layui-form-item">
                         <label for="L_repass" class="layui-form-label"></label>
                         <button class="layui-btn" lay-filter="add" lay-submit="">添加</button></div>
@@ -113,8 +115,16 @@
                                         // 可以对父窗口进行刷新
                                         xadmin.father_reload();
                                     });
-                            } else {
+                            } else if(data == 1){
                                 layer.alert("添加失败", {
+                                    icon: 5
+                                });
+                            }else if(data == 2){
+                                layer.alert("用户名已存在，请更换后重新添加", {
+                                    icon: 5
+                                });
+                            } else{
+                                layer.alert("电话号码已存在，请更换后重新添加", {
                                     icon: 5
                                 });
                             }

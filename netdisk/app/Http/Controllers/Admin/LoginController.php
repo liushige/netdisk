@@ -63,6 +63,10 @@ class LoginController extends Controller
             return redirect('admin/login')->with('errors','用户名错误');
         }
 
+        if (!$user->status){
+            return redirect('admin/login')->with('errors','该账户未启用');
+        }
+
         if($input['password'] != Crypt::decrypt($user->user_pass)){
             return redirect('admin/login')->with('errors','密码错误');
         }

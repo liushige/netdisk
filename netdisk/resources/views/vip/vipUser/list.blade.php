@@ -67,7 +67,6 @@
                                     <th>用户名</th>
                                     <th>邮箱</th>
                                     <th>电话号码</th>
-                                    <th>状态</th>
                                     <th>操作</th></tr>
                                 </thead>
                                 <tbody>
@@ -80,8 +79,8 @@
                                     <td>{{ $v->user_name }}</td>
                                     <td>{{ $v->user_email }}</td>
                                     <td>{{ $v->user_phone }}</td>
-                                    <td class="td-status">
-                                      <span class="layui-btn layui-btn-normal layui-btn-mini" style="background-color: #009688">@if( $v->active == 1) 已激活 @else 未激活 @endif</span></td>
+                                    {{--<td class="td-status">--}}
+                                      {{--<span class="layui-btn layui-btn-normal layui-btn-mini" style="background-color: #009688">@if( $v->active == 1) 已激活 @else 未激活 @endif</span></td>--}}
                                     <td class="td-manage">
                                       <a title="修改"  onclick="xadmin.open('修改','{{ url('vip/vipUser/'.$v->user_id.'/edit') }}',600,420)" href="javascript:;">
                                         <i class="layui-icon">&#xe642;</i>

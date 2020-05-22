@@ -25,15 +25,28 @@
                         <label for="L_username" class="layui-form-label">
                             <span class="x-red">*</span>姓名</label>
                         <div class="layui-input-inline">
-                            <input type="text" id="L_username" name="username" value="{{ $user->user_name }}" required="" lay-verify="nikename" autocomplete="off" class="layui-input"></div>
+                            <input type="text" id="L_username" readonly="readonly" name="username" value="{{ $user->user_name }}" required="" lay-verify="nikename" autocomplete="off" class="layui-input"></div>
                         <div class="layui-form-mid layui-word-aux">
-                            <span class="x-red">*</span>将会成为您唯一的登入名</div></div>
+                            <span class="x-red">*</span>将会成为您唯一的登入名（无法更改）</div></div>
                     <div class="layui-form-item">
                         <label for="L_email" class="layui-form-label">
                             <span class="x-red">*</span>邮箱</label>
                         <div class="layui-input-inline">
                             <input type="hidden" name="uid" value="{{ $user->user_id }}">
                             <input type="text" id="L_email" name="email" value="{{ $user->user_email }}" required="" lay-verify="email" autocomplete="off" class="layui-input"></div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label for="L_admin_status" class="layui-form-label">
+                            <span class="x-red">*</span>是否启用
+                        </label>
+                        <div class="layui-input-inline" style="z-index:9999;position: relative;">
+                            <select name="status">
+                                <option value="0">不启用</option>
+                                <option value="1">启用</option>
+                            </select>
+                        </div>
+                        <div class="layui-form-mid layui-word-aux">
+                            <span class="x-red">*</span>启用才可以正常登录</div>
                     </div>
                     <div class="layui-form-item">
                         <label for="L_pass" class="layui-form-label">
