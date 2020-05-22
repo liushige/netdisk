@@ -154,16 +154,16 @@ class RegisterController extends Controller
     public function doforget(Request $request)
     {
         //要发送邮件的账号
-        $email = $request->email;
+        $username = $request->username;
         // 根据账号名查询用户信息
-        $user = Vip::where('user_email',$email)->first();
+        $user = Vip::where('user_name',$username)->first();
 
         if($user){
             //想此用户发送密码找回邮件
             Mail::send('vip.email.forget',['user'=>$user],function ($m) use ($user) {
                 $m->to($user->user_email, $user->user_name)->subject('找回密码');
             });
-            return redirect('vip/login')->with('active','请先登录邮箱重置密码');
+            return redirect('vip/login')->with('active','发送成功,请先登录邮箱重置密码');
         }else{
             return back()->with('active','用户不存在，请重新输入要找回密码的账号');
         }
@@ -187,7 +187,7 @@ class RegisterController extends Controller
         $pass = Crypt::encrypt($input['user_pass']);
 
 //        2.将此账号的密码重置为新密码
-        $res = Vip::where('user_email',$input['user_email'])->update(['user_pass'=>$pass]);
+        $res = Vip::where('user_name',$input['user_name'])->update(['user_pass'=>$pass]);
 
 //        3. 判断更新是否成功
         if($res){

@@ -42,7 +42,7 @@
         @endif
 
         <p>
-            <label for="user_login">用户名或电子邮件地址<br>
+            <label for="user_login">用户名<br>
                 <input type="text" name="user_name" id="user_name" class="input" value="" size="20"></label>
         </p>
         <p>

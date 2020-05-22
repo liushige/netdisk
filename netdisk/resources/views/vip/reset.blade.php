@@ -18,9 +18,9 @@
     <form name="loginform" id="loginform" action="{{ url('vip/doreset') }}" method="post">
         {{ csrf_field() }}
         <p>
-            <label for="user_login">电子邮件地址<br>
+            <label for="user_login">用户名<br>
                 <input type="hidden" name="user_id" value="{{ $user->user_id }}">
-                <input type="text" name="user_email" id="user_login" readonly="readonly" class="input" value="{{ $user->user_email }}" size="20"></label>
+                <input type="text" name="user_name" id="user_login" readonly="readonly" class="input" value="{{ $user->user_name }}" size="20"></label>
         </p>
         <p>
             <label for="user_pass">密码<br>
