@@ -97,6 +97,7 @@ Route::post('vip/dophoneregister','Vip\RegisterController@doPhoneRegister');
 //前台首页
 Route::get('vip/index','Vip\IndexController@index')->name('index');
 Route::get('vip/welcome','Vip\IndexController@welcome');
+Route::get('vip/find','Vip\FolderController@findItem');
 
 //前台文件夹路由模块
 Route::resource('vip/folder','Vip\FolderController');

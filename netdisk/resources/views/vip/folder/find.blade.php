@@ -31,9 +31,9 @@
         <div class="layui-col-md12">
                 <div class="layui-card-header">
                     {{--<button type="button" style="background-color: #cc0033" class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>--}}
-                    <button type="button" style="background-color: #8080C0" class="layui-btn" onclick="xadmin.open('新建文件夹','{{ url('vip/folder/'.$cF_id.'/create') }}',600,400)"><i class="layui-icon"></i>新建文件夹</button>
+                    {{--<button type="button" style="background-color: #8080C0" class="layui-btn" onclick="xadmin.open('新建文件夹','{{ url('vip/folder/'.$cF_id.'/create') }}',600,400)"><i class="layui-icon"></i>新建文件夹</button>--}}
                     {{--<button type="button" class="layui-btn" lay-filter="uploadApp"><i class="layui-icon">&#xe619;</i>上传软件</button>--}}
-                    <a style="background-color: #8080C0" href="{{ url('vip/app/'.$cF_id.'/create') }}" class="layui-btn"><i class="layui-icon">&#xe62f;</i>上传软件</a>
+                    {{--<a style="background-color: #8080C0" href="{{ url('vip/app/'.$cF_id.'/create') }}" class="layui-btn"><i class="layui-icon">&#xe62f;</i>上传软件</a>--}}
 
                     <form class="layui-inline layui-show-xs-block" method="get" action="{{ url('vip/find') }}">
                         <div class="layui-inline layui-show-xs-block">

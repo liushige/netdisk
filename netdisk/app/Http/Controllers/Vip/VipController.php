@@ -147,17 +147,62 @@ class VipController extends Controller
      */
     public function destroy($id)
     {
-        $vip = Vip::find($id);
         $res = 1;
-        if(is_array($id)){
-            foreach ($vip as $v){
-                $res = $v->delete() and $res;
-            }
-        }else{
+        $res1 = 1;
+        $res2 = 1;
+        $res4 = 1;
+        $res5 = 1;
+//        if(is_array($id)){
+//
+////            dd($res);
+//
+//            foreach ($id as $v){
+//
+//                $vip = DB::table('vipuser')->where('user_id',$v)->get();
+//
+//                $res = DB::table('vipuser')->where('user_id',$v)->delete() and $res;
+////                删除vipuser_folder表的记录
+//                $res1 = DB::table('vipuser_folder')->where('user_id',$v)->delete() and $res1;
+////            判断是否有自定义文件夹并删除folder表的记录
+//                if(DB::table('folder')->where('folder_userid',$v))
+//                {
+//                    $res2 = DB::table('folder')->where('folder_userid',$v)->delete();
+//                }
+////            判断是否有app并删除对应app和folder_app表里的记录
+//                $res3 = DB::table('app')->where('app_userid',$v)->get();
+//                if(!empty($res3)){
+////                删除folder_app表的记录
+//                    foreach ($res3 as $m){
+//                        $res4 = DB::table('folder_app')->where('app_id',$m->app_id)->delete();
+//                    }
+////                删除app表的记录
+//                    $res5 = DB::table('app')->where('app_userid',$v)->delete();
+//                }
+//            }
+//        }else{
+            $vip = Vip::find($id);
+//            删除vipuser表的记录
             $res = $vip->delete();
-        }
+//            删除vipuser_folder表的记录
+            $res1 = DB::table('vipuser_folder')->where('user_id',$vip->user_id)->delete();
+//            判断是否有自定义文件夹并删除folder表的记录
+            if(DB::table('folder')->where('folder_userid',$vip->userid))
+            {
+                $res2 = DB::table('folder')->where('folder_userid',$vip->user_id)->delete();
+            }
+//            判断是否有app并删除对应app和folder_app表里的记录
+            $res3 = DB::table('app')->where('app_userid',$vip->user_id)->get();
+            if(!empty($res3)){
+//                删除folder_app表的记录
+                foreach ($res3 as $v){
+                    $res4 = DB::table('folder_app')->where('app_id',$v->app_id)->delete();
+                }
+//                删除app表的记录
+                $res5 = DB::table('app')->where('app_userid',$vip->user_id)->delete();
+            }
+//        }
 
-        if($res){
+        if($res and $res1){
             $data = 0;
         }else{
             $data = 1;
@@ -175,8 +220,15 @@ class VipController extends Controller
     public function delAll(Request $request)
     {
         $input = $request->input('ids');
+        $res = 1;
 
-        $res = Vip::destroy($input);
+        if(is_array($input)){
+            foreach ($input as $v){
+                $res = Vip::destroy($v) and $res;
+            }
+        }else{
+            $res = Vip::destroy($input);
+        }
 
         if($res){
             $data = 0;

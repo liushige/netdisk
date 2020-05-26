@@ -40,10 +40,10 @@ class FolderController extends Controller
         $appitem = DB::table('folder_app')->where('folder_id',$cF_id)->get();
 //        遍历$app
         $app = [];
-                foreach ($appitem as $v){
-                    $apptemp = App::find($v->app_id);
-                    if($apptemp->app_userid == $currentUser->user_id){
-                        $app[] = $apptemp;
+        foreach ($appitem as $v){
+            $apptemp = App::find($v->app_id);
+            if($apptemp->app_userid == $currentUser->user_id){
+                $app[] = $apptemp;
             }
         }
 
@@ -105,6 +105,48 @@ class FolderController extends Controller
             $data = 1;
         }
         return $data;
+    }
+
+    /**
+     * Find from allWhere.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function findItem(Request $request)
+    {
+//        获取当前登录用户
+        $currentUser = Vip::find(session()->get('vip')->user_id);
+        $name = $request->input('name');
+
+//        dd($name);
+
+//        文件夹打开部分
+        $folder = DB::table('folder as a')
+            ->where(function ($q) use($name){
+                $q->where('folder_name','like','%'.$name.'%');
+            })
+            ->where(function ($q) use($currentUser){
+                $q->orwhere('folder_userid','=',$currentUser->user_id)
+                    ->orwhere('folder_userid','=',0);
+            })
+
+            ->paginate($request->input('num')?$request->input('num'):15);
+
+
+//        软件打开部分
+        $app = DB::table('app as a')
+            ->where(function ($q) use($name){
+                $q->where('app_name','like','%'.$name.'%');
+            })
+            ->where(function ($q) use($currentUser){
+                $q->where('app_userid','=',$currentUser->user_id);
+            })
+
+            ->paginate($request->input('num')?$request->input('num'):15);
+
+
+        return view('vip.folder.find',compact('folder', 'request','app'));
     }
 
     /**
@@ -296,6 +338,12 @@ class FolderController extends Controller
         $folder = Folder::find($id);
         $res1 = $folder->delete();
         $res2 = DB::table('vipuser_folder')->where('folder_id',$folder->folder_id)->delete();
+        $appitem = DB::table('folder_app')->where('folder_id',$id)->get();
+        foreach ($appitem as $v){
+            DB::table('app')->where('app_id',$v->app_id)->delete();
+        }
+        DB::table('folder_app')->where('folder_id',$id)->delete();
+
         if($res1 and $res2){
             $data = 0;
         }else{
