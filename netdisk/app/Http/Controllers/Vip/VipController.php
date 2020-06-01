@@ -71,7 +71,21 @@ class VipController extends Controller
         $pass = Crypt::encrypt($input['pass']);
 
         $res = Vip::create(['user_email'=>$email,'user_pass'=>$pass,'user_name'=>$username,'user_phone'=>$userphone]);
-//        4.根据是否成功，给客户端一个Json格式反馈
+
+//        4.预制文件夹结构
+
+//        通过phone查找vip
+        $vipuser = Vip::where('user_phone',$userphone)->first();
+//        获取所有系统自带文件夹
+        $folder = DB::table('folder')->where('folder_original',0)->get();
+//            为用户内置系统文件夹
+        if(!empty($vipuser) and !empty($folder)){
+            foreach ($folder as $v){
+                \DB::table('vipuser_folder')->insert(['user_id'=>$vipuser->user_id,'folder_id'=>$v->folder_id]);
+            }
+        }
+
+//        5.根据是否成功，给客户端一个Json格式反馈
         if($res){
             $data = 0;
         }else{
