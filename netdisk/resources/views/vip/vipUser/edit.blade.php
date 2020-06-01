@@ -62,7 +62,7 @@
                         {{--<div class="layui-form-mid layui-word-aux">请填0或1（0：激活，1：不激活）</div></div>--}}
                     <div class="layui-form-item">
                         <label for="L_repass" class="layui-form-label"></label>
-                        <button class="layui-btn" lay-filter="edit" lay-submit="">修改</button></div>
+                        <button class="layui-btn" lay-filter="edit" lay-submit="" style="background: #8080C0">修改</button></div>
                 </form>
             </div>
         </div>

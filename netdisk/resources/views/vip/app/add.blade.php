@@ -105,7 +105,7 @@
             </label>
             <div class="layui-input-block layui-upload">
                 <input type="hidden" id="img1" class="hidden" name="art_thumb" value="">
-                <button type="button" class="layui-btn" id="test1">
+                <button type="button" class="layui-btn" id="test1" style="background: #8080C0">
                     <i class="layui-icon">&#xe681;</i>上传
                 </button>
                 <input type="file" name="app" id="app_upload" style="display: none;">
@@ -148,7 +148,7 @@
 
         <div class="layui-form-item">
             <label for="L_submmit" class="layui-form-label"></label>
-            <button  class="layui-btn" lay-filter="add" lay-submit="">全部提交</button>
+            <button  class="layui-btn" lay-filter="add" lay-submit="" style="background: #8080C0">全部提交</button>
             {{--<a href="{{ url('vip/app/store') }}" class="layui-btn"><i class="layui-icon"></i>全部提交</a>--}}
         </div>
     </form>

@@ -37,7 +37,7 @@
 
                     <form class="layui-inline layui-show-xs-block" method="get" action="{{ url('vip/find') }}">
                         <div class="layui-inline layui-show-xs-block">
-                            <input type="text" name="name"  value="{{ $request->input('name') }}" placeholder="请输入文件夹或软件" autocomplete="off" class="layui-input">
+                            <input type="text" name="name"  value="{{ $request->input('name') }}" placeholder="请输入文件夹或软件" required autocomplete="off" class="layui-input">
                         </div>
                         {{--<a style="background-color: #8080C0" href="{{ url('vip/find') }}" class="layui-btn"><i class="layui-icon">&#xe615;</i>全局搜索</a>--}}
                         <div class="layui-inline layui-show-xs-block">
