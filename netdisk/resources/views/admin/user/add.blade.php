@@ -25,7 +25,7 @@
                         <label for="L_username" class="layui-form-label">
                             <span class="x-red">*</span>用户名</label>
                         <div class="layui-input-inline">
-                            <input type="text" id="L_username" name="username" required="" lay-verify="nikename" autocomplete="off" class="layui-input"></div>
+                            <input type="text" id="L_username" name="username" required="" lay-verify="nikename" maxlength="20" minlength="3" autocomplete="off" class="layui-input"></div>
                         <div class="layui-form-mid layui-word-aux">
                             <span class="x-red">*</span>将会成为您唯一的登入名（无法更改）</div>
                     </div>
@@ -60,13 +60,13 @@
                         <label for="L_pass" class="layui-form-label">
                             <span class="x-red">*</span>密码</label>
                         <div class="layui-input-inline">
-                            <input type="password" id="L_pass" name="pass" required="" lay-verify="pass" autocomplete="off" class="layui-input"></div>
-                        <div class="layui-form-mid layui-word-aux">6到16位</div></div>
+                            <input type="password" id="L_pass" name="pass" required="" lay-verify="pass" autocomplete="off" maxlength="20" minlength="6" class="layui-input"></div>
+                        <div class="layui-form-mid layui-word-aux">6到20位</div></div>
                     <div class="layui-form-item">
                         <label for="L_repass" class="layui-form-label">
                             <span class="x-red">*</span>确认密码</label>
                         <div class="layui-input-inline">
-                            <input type="password" id="L_repass" name="repass" required="" lay-verify="repass" autocomplete="off" class="layui-input"></div>
+                            <input type="password" id="L_repass" name="repass" required="" lay-verify="repass" autocomplete="off" maxlength="20" minlength="6" class="layui-input"></div>
                     </div>
                     <div class="layui-form-item">
                         <label for="L_repass" class="layui-form-label"></label>
@@ -83,11 +83,11 @@
                 //自定义验证规则
                 form.verify({
                     nikename: function(value) {
-                        if (value.length < 5) {
-                            return '昵称至少得5个字符啊';
+                        if (value.length < 3 || value.length > 20) {
+                            return '用户名必须3-20位';
                         }
                     },
-                    pass: [/(.+){6,16}$/, '密码必须6到16位'],
+                    pass: [/(.+){6,20}$/, '密码必须6到20位'],
                     repass: function(value) {
                         if ($('#L_pass').val() != $('#L_repass').val()) {
                             return '两次密码不一致';

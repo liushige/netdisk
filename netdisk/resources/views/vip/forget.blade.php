@@ -28,7 +28,7 @@
         {{ csrf_field() }}
         <p>
             <label for="user_login">用户名<br/>
-                <input type="text" name="username" id="user_login" required class="input" value="" size="20"/></label>
+                <input type="text" name="username" id="user_login" required class="input" value="" maxlength="20" minlength="3" size="20"/></label>
         </p>
         <p class="submit">
             <input type="submit"  id="wp-submit" class="button button-primary button-large" value="获取新密码" style="background: #8080C0; color: white"/>

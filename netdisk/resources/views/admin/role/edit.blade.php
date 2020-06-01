@@ -26,13 +26,14 @@
                             <span class="x-red">*</span>角色名</label>
                         <div class="layui-input-inline">
                             <input type="hidden" name="id" value="{{ $role->role_id }}">
-                            <input type="text" id="L_rolename" name="rolename" value="{{ $role->role_name }}" required="" lay-verify="rolename" autocomplete="off" class="layui-input"></div>
+                            <input type="text" id="L_rolename" name="rolename" value="{{ $role->role_name }}" required="" lay-verify="required|rolename" autocomplete="off" class="layui-input"></div>
                     </div>
                     <div class="layui-form-item">
                         <label for="L_roledescription" class="layui-form-label">
                             <span class="x-red">*</span>角色描述</label>
-                        <div class="layui-input-inline">
-                            <input type="text" id="L_roledescription" name="roledescription" value="{{ $role->role_description }}" required="" lay-verify="roledescription" autocomplete="off" class="layui-input"></div>
+                        <div class="layui-input-block">
+                            <textarea placeholder="最多输入100个字符" id="L_roledescription" name="roledescription" style="width: 400px" required="" lay-verify="roledescription" autocomplete="off" class="layui-textarea">{{ $role->role_description }}</textarea>
+                        </div>
                     </div>
                     <div class="layui-form-item">
                         <label for="L_repass" class="layui-form-label"></label>
@@ -49,8 +50,8 @@
                 //自定义验证规则
                 form.verify({
                     rolename: function(value) {
-                        if (value.length > 30) {
-                            return '角色名最多30个字符';
+                        if (value.length > 20 || value.length < 3) {
+                            return '角色名必须3-20位';
                         }
                     },
                     roledescription: function(value) {

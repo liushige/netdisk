@@ -34,7 +34,7 @@
         @endif
         <p>
             <label for="user_login">用户名<br>
-                <input type="text" name="username" required class="input" value="" size="20"></label>
+                <input type="text" name="username" required class="input" value="" maxlength="20" minlength="3" size="20" placeholder="3-20位字符作为唯一登录名"></label>
         </p>
         <p>
             <label for="user_login">手机号<br>
@@ -46,7 +46,7 @@
         </p>
         <p>
             <label for="user_pass">密码<br>
-                <input type="password" name="user_pass" required id="user_pass" class="input" value="" size="20"></label>
+                <input type="password" name="user_pass" required id="user_pass" class="input" value="" maxlength="20" minlength="6" size="20" placeholder="请填写6-20位"></label>
         </p>
         <p>
             <label for="user_pass">验证码<br>

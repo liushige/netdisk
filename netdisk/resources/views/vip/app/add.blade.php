@@ -41,8 +41,8 @@
                 <span class="x-red">*</span>存放到</label>
             <div class="layui-input-inline">
                 <input type="text" id="L_app_path" name="app_path" value="" required="" lay-verify="required|number|apppath" autocomplete="off" class="layui-input"></div>
-                <div class="layui-form-mid layui-word-aux">
-                    <span class="x-red">*</span>请输入文件夹ID：1-11位数字（根目录为0）</div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>请输入文件夹ID：1-11位数字（根目录为0）</div>
         </div>
 
         <div class="layui-form-item">
@@ -51,7 +51,7 @@
             </label>
             <div class="layui-input-inline" style="width: 470px">
                 {{csrf_field()}}
-                <input type="text" id="L_app_name" name="app_name" required="" lay-verify="required|appname" autocomplete="off" class="layui-input">
+                <input type="text" id="L_app_name" name="app_name" required="" lay-verify="required|appname" placeholder="请输入1-50位字符" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
@@ -59,7 +59,7 @@
                 <span class="x-red">*</span>软件链接
             </label>
             <div class="layui-input-inline" style="width: 470px">
-                <input type="text" id="L_app_url" name="app_url" required="" lay-verify="required|appurl" autocomplete="off" class="layui-input">
+                <input type="text" id="L_app_url" name="app_url" required="" lay-verify="required|appurl" placeholder="请输入1-200位字符" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
@@ -67,8 +67,9 @@
                 <span class="x-red">*</span>软件版本
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="L_app_version" name="app_version" required="" lay-verify="required|appver" autocomplete="off" class="layui-input">
-            </div>
+                <input type="text" id="L_app_version" name="app_version" required="" lay-verify="required|appver" autocomplete="off" class="layui-input"></div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>请输入版本号：1-20位字符</div>
         </div>
         <div class="layui-form-item">
             <label for="L_app_sort" class="layui-form-label">
@@ -186,8 +187,8 @@
                    }
                 },
                 appver: function(value) {
-                   if (value.length > 200) {
-                      return '软件链接长度超过最大限度';
+                   if (value.length > 20) {
+                      return '软件版本长度超过最大限度';
                    }
                 },
             });

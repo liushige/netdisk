@@ -26,19 +26,21 @@
                             <span class="x-red">*</span>权限名</label>
                         <div class="layui-input-inline">
                             <input type="hidden" name="id" value="{{ $permission->pre_id }}">
-                            <input type="text" id="L_prename" name="pre_name" value="{{ $permission->pre_name }}" required="" lay-verify="prename" autocomplete="off" class="layui-input"></div>
+                            <input type="text" id="L_prename" name="pre_name" value="{{ $permission->pre_name }}" required="" lay-verify="required|prename" autocomplete="off" class="layui-input"></div>
                     </div>
                     <div class="layui-form-item">
                         <label for="L_predescription" class="layui-form-label">
                             <span class="x-red">*</span>权限描述</label>
-                        <div class="layui-input-inline">
-                            <input type="text" id="L_predescription" name="pre_description" value="{{ $permission->pre_description }}" required="" lay-verify="roledescription" autocomplete="off" class="layui-input"></div>
+                        <div class="layui-input-block">
+                            <textarea placeholder="最多输入100个字符" id="L_predescription" name="pre_description" style="width: 400px" required="" lay-verify="required|predescription" autocomplete="off" class="layui-textarea">{{ $permission->pre_description }}</textarea>
+                        </div>
                     </div>
                     <div class="layui-form-item">
                         <label for="L_preroute" class="layui-form-label">
                             <span class="x-red">*</span>权限路由</label>
-                        <div class="layui-input-inline">
-                            <input type="text" id="L_preroute" name="pre_url" value="{{ $permission->pre_url }}" required="" lay-verify="preroute" autocomplete="off" class="layui-input"></div>
+                        <div class="layui-input-block">
+                            <textarea placeholder="最多输入100个字符" id="L_preroute" name="pre_url" style="width: 400px" required="" lay-verify="required|preroute" autocomplete="off" class="layui-textarea">{{ $permission->pre_url }}</textarea>
+                        </div>
                     </div>
                     <div class="layui-form-item">
                         <label for="L_repass" class="layui-form-label"></label>
@@ -55,18 +57,18 @@
                 //自定义验证规则
                 form.verify({
                     prename: function(value) {
-                        if (value.length > 30) {
-                            return '角色名最多30个字符';
+                        if (value.length > 20 || value.length < 3) {
+                            return '权限名必须3-20位字符';
                         }
                     },
-                    roledescription: function(value) {
+                    predescription: function(value) {
                         if (value.length > 100) {
-                            return '角色描述最多100个字符';
+                            return '权限描述最多100个字符';
                         }
                     },
                     preroute: function(value) {
                         if (value.length > 100) {
-                            return '角色名最多100个字符';
+                            return '权限路由最多100个字符';
                         }
                     }
                 });

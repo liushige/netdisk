@@ -31,7 +31,7 @@
                         <label for="L_username" class="layui-form-label">
                             <span class="x-red">*</span>角色名</label>
                         <div class="layui-input-inline"  style="width: 400px">
-                            <input type="text" id="L_rolename" name="role_name" required="" lay-verify="rolename" autocomplete="off" class="layui-input"></div>
+                            <input type="text" id="L_rolename" name="role_name" required="" lay-verify="rolename" autocomplete="off" placeholder="请输入3-20位字符" class="layui-input"></div>
                     </div>
                     <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">
@@ -55,8 +55,8 @@
                 //自定义验证规则
                 form.verify({
                     rolename: function(value) {
-                        if (value.length > 30) {
-                            return '角色名最多得50个字符';
+                        if (value.length > 20 || value.length < 3) {
+                            return '角色名必须3-20位';
                         }
                     },
                     roledescription: function(value) {

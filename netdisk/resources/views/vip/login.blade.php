@@ -43,11 +43,11 @@
 
         <p>
             <label for="user_login">用户名<br>
-                <input type="text" name="user_name" id="user_name" class="input" value="" size="20"></label>
+                <input type="text" name="user_name" id="user_name" class="input" value="" required maxlength="20" minlength="3" size="20"></label>
         </p>
         <p>
             <label for="user_pass">密码<br>
-                <input type="password" name="user_pass" id="user_pass" class="input" value="" size="20"></label>
+                <input type="password" name="user_pass" id="user_pass" class="input" value="" required maxlength="20" minlength="6" size="20"></label>
         </p>
         <p class="forgetmenot"><label for="rememberme">
                 <input name="rememberme" type="checkbox" id="rememberme" value="forever"> 记住我的登录信息</label>

@@ -31,7 +31,7 @@
                         <label for="L_prename" class="layui-form-label">
                             <span class="x-red">*</span>权限名</label>
                         <div class="layui-input-inline"  style="width: 400px">
-                            <input type="text" id="L_prename" name="pre_name" required="" lay-verify="prename" autocomplete="off" class="layui-input"></div>
+                            <input type="text" id="L_prename" name="pre_name" required="" lay-verify="prename" autocomplete="off" placeholder="请输入3-20位字符" class="layui-input"></div>
                     </div>
                     <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">
@@ -43,8 +43,9 @@
                     <div class="layui-form-item">
                         <label for="L_preroute" class="layui-form-label">
                             <span class="x-red">*</span>权限路由</label>
-                        <div class="layui-input-inline"  style="width: 400px">
-                            <input type="text" id="L_preroute" name="pre_url" required="" lay-verify="preroute" autocomplete="off" class="layui-input"></div>
+                        <div class="layui-input-block">
+                            <textarea placeholder="最多输入100个字符" id="L_preroute" name="pre_url" style="width: 400px" required="" lay-verify="preroute" autocomplete="off" class="layui-textarea"></textarea>
+                        </div>
                     </div>
                     <div class="layui-form-item">
                         <label for="L_repass" class="layui-form-label"></label>
@@ -61,18 +62,18 @@
                 //自定义验证规则
                 form.verify({
                     prename: function(value) {
-                        if (value.length > 30) {
-                            return '权限名最多得30个字符';
+                        if (value.length > 20 || value.length < 3) {
+                            return '权限名必须3-20位';
                         }
                     },
                     predescription: function(value) {
                         if (value.length > 100) {
-                            return '权限描述最多得100个字符';
+                            return '权限描述最多100个字符';
                         }
                     },
                     preroute: function(value) {
                         if (value.length > 100) {
-                            return '权限路由最多得30个字符';
+                            return '权限路由最多得100个字符';
                         }
                     }
                 });
