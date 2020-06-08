@@ -85,6 +85,23 @@ class FolderController extends Controller
 //        接收前台传来的表单数据
         $foldername = $request->input('foldername');
         $folderpid = $id;
+//        对新建文件夹做判重处理
+        $folder = DB::table('folder as a')
+            ->where(function ($q) use($folderpid){
+                $q->where('folder_parentid','=',$folderpid);
+            })
+            ->where(function ($q) use($foldername){
+                $q->where('folder_name','=',$foldername);
+            })
+            ->where(function ($q) use($currentUser){
+                $q->orwhere('folder_userid','=',$currentUser->user_id)
+                    ->orwhere('folder_userid','=',0);
+            })->get();
+//        $folder = DB::table('folder')->where('folder_name',$foldername)->get();
+        if(count($folder)!=0){
+            $data = 2;
+            return $data;
+        }
 //        dd($foldername);
 
 //        添加到数据库folder表

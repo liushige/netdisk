@@ -73,8 +73,12 @@
                                         // 可以对父窗口进行刷新
                                         xadmin.father_reload();
                                     });
-                            } else {
+                            } else if(data==1){
                                 layer.alert("创建失败", {
+                                    icon: 5
+                                });
+                            }else {
+                                layer.alert("此处文件夹名称已存在", {
                                     icon: 5
                                 });
                             }
