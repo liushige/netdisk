@@ -59,7 +59,7 @@
                     {{--</div>--}}
                     <div class="layui-form-item">
                         <label for="L_repass" class="layui-form-label"></label>
-                        <button class="layui-btn" lay-filter="auth" lay-submit="">更新授权</button></div>
+                        <button class="layui-btn" lay-filter="auth" lay-submit="">更新角色</button></div>
                 </form>
             </div>
         </div>
